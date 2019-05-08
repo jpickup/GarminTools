@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="forms_rt">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/idea/forms_rt.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
