@@ -1,314 +1,392 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="garmintools" default="all">
-  
-  
-  <property file="build.properties"/>
-  <!-- Uncomment the following property if no tests compilation is needed -->
-  <!-- 
-  <property name="skip.tests" value="true"/>
-   -->
-  
-  <!-- Compiler options -->
-  
-  <property name="compiler.debug" value="on"/>
-  <property name="compiler.generate.no.warnings" value="off"/>
-  <property name="compiler.args" value=""/>
-  <property name="compiler.max.memory" value="700m"/>
-  <patternset id="ignored.files">
-    <exclude name="**/*.hprof/**"/>
-    <exclude name="**/*.pyc/**"/>
-    <exclude name="**/*.pyo/**"/>
-    <exclude name="**/*.rbc/**"/>
-    <exclude name="**/*.yarb/**"/>
-    <exclude name="**/*~/**"/>
-    <exclude name="**/.DS_Store/**"/>
-    <exclude name="**/.git/**"/>
-    <exclude name="**/.hg/**"/>
-    <exclude name="**/.svn/**"/>
-    <exclude name="**/CVS/**"/>
-    <exclude name="**/__pycache__/**"/>
-    <exclude name="**/_svn/**"/>
-    <exclude name="**/vssver.scc/**"/>
-    <exclude name="**/vssver2.scc/**"/>
-  </patternset>
-  <patternset id="library.patterns">
-    <include name="*.war"/>
-    <include name="*.swc"/>
-    <include name="*.zip"/>
-    <include name="*.egg"/>
-    <include name="*.ane"/>
-    <include name="*.jar"/>
-    <include name="*.ear"/>
-    <include name="*.klib"/>
-  </patternset>
-  <patternset id="compiler.resources">
-    <exclude name="**/?*.java"/>
-    <exclude name="**/?*.form"/>
-    <exclude name="**/?*.class"/>
-    <exclude name="**/?*.groovy"/>
-    <exclude name="**/?*.scala"/>
-    <exclude name="**/?*.flex"/>
-    <exclude name="**/?*.kt"/>
-    <exclude name="**/?*.clj"/>
-    <exclude name="**/?*.aj"/>
-  </patternset>
-  
-  <!-- JDK definitions -->
-  
-  <property name="jdk.bin.1.8" value="${jdk.home.1.8}/bin"/>
-  <path id="jdk.classpath.1.8">
-    <fileset dir="${jdk.home.1.8}">
-      <include name="jre/lib/charsets.jar"/>
-      <include name="jre/lib/deploy.jar"/>
-      <include name="jre/lib/ext/cldrdata.jar"/>
-      <include name="jre/lib/ext/dnsns.jar"/>
-      <include name="jre/lib/ext/jaccess.jar"/>
-      <include name="jre/lib/ext/jfxrt.jar"/>
-      <include name="jre/lib/ext/localedata.jar"/>
-      <include name="jre/lib/ext/nashorn.jar"/>
-      <include name="jre/lib/ext/sunec.jar"/>
-      <include name="jre/lib/ext/sunjce_provider.jar"/>
-      <include name="jre/lib/ext/sunpkcs11.jar"/>
-      <include name="jre/lib/ext/zipfs.jar"/>
-      <include name="jre/lib/javaws.jar"/>
-      <include name="jre/lib/jce.jar"/>
-      <include name="jre/lib/jfr.jar"/>
-      <include name="jre/lib/jfxswt.jar"/>
-      <include name="jre/lib/jsse.jar"/>
-      <include name="jre/lib/management-agent.jar"/>
-      <include name="jre/lib/plugin.jar"/>
-      <include name="jre/lib/resources.jar"/>
-      <include name="jre/lib/rt.jar"/>
-      <include name="lib/ant-javafx.jar"/>
-      <include name="lib/dt.jar"/>
-      <include name="lib/javafx-mx.jar"/>
-      <include name="lib/jconsole.jar"/>
-      <include name="lib/packager.jar"/>
-      <include name="lib/sa-jdi.jar"/>
-      <include name="lib/tools.jar"/>
-    </fileset>
-  </path>
-  
-  <property name="project.jdk.home" value="${jdk.home.1.8}"/>
-  <property name="project.jdk.bin" value="${jdk.bin.1.8}"/>
-  <property name="project.jdk.classpath" value="jdk.classpath.1.8"/>
-  
-  
-  <!-- Project Libraries -->
-  
-  <path id="library.forms_rt.classpath">
-    <pathelement location="${basedir}/lib/idea/forms_rt.jar"/>
-  </path>
-  
-  <path id="library.lib.classpath">
-    <pathelement location="${basedir}/lib/antlr-4.7.1-complete.jar"/>
-    <pathelement location="${basedir}/lib/appbundler-1.0.jar"/>
-    <pathelement location="${basedir}/lib/biweekly-0.6.3-SNAPSHOT.jar"/>
-    <pathelement location="${basedir}/lib/commons-io-2.6.jar"/>
-    <pathelement location="${basedir}/lib/fit.jar"/>
-    <pathelement location="${basedir}/lib/hamcrest-core-1.3.jar"/>
-    <pathelement location="${basedir}/lib/jackson-annotations-2.6.0.jar"/>
-    <pathelement location="${basedir}/lib/jackson-core-2.6.1.jar"/>
-    <pathelement location="${basedir}/lib/jackson-databind-2.6.1.jar"/>
-    <pathelement location="${basedir}/lib/junit-4.12.jar"/>
-    <pathelement location="${basedir}/lib/log4j-1.2.13.jar"/>
-    <pathelement location="${basedir}/lib/lombok.jar"/>
-    <pathelement location="${basedir}/lib/poi-4.0.0.jar"/>
-    <pathelement location="${basedir}/lib/poi-ooxml-4.0.0.jar"/>
-    <pathelement location="${basedir}/lib/poi-ooxml-schemas-4.0.0.jar"/>
-    <pathelement location="${basedir}/lib/resolver.jar"/>
-    <pathelement location="${basedir}/lib/slf4j-api-1.7.22.jar"/>
-    <pathelement location="${basedir}/lib/slf4j-log4j12-1.7.22.jar"/>
-    <pathelement location="${basedir}/lib/vinnie-2.0.2.jar"/>
-    <pathelement location="${basedir}/lib/xbean.jar"/>
-    <pathelement location="${basedir}/lib/xbean_xpath.jar"/>
-    <pathelement location="${basedir}/lib/xmlpublic.jar"/>
-  </path>
-  <!-- Register Custom Compiler Taskdefs -->
-  <property name="javac2.home" value="${idea.home}/lib"/>
-  <path id="javac2.classpath">
-    <fileset dir="${javac2.home}">
-      <include name="javac2.jar"/>
-      <include name="jdom.jar"/>
-      <include name="asm-all*.jar"/>
-      <include name="forms-*.jar"/>
-    </fileset>
-  </path>
-  <target name="register.custom.compilers">
-    <taskdef name="javac2" classname="com.intellij.ant.Javac2" classpathref="javac2.classpath"/>
-    <taskdef name="instrumentIdeaExtensions" classname="com.intellij.ant.InstrumentIdeaExtensions" classpathref="javac2.classpath"/>
-  </target>
-  
-  <!-- Modules -->
-  
-  
-  <!-- Module GarminTools -->
-  
-  <dirname property="module.garmintools.basedir" file="${ant.file}"/>
-  
-  
-  <property name="module.jdk.home.garmintools" value="${project.jdk.home}"/>
-  <property name="module.jdk.bin.garmintools" value="${project.jdk.bin}"/>
-  <property name="module.jdk.classpath.garmintools" value="${project.jdk.classpath}"/>
-  
-  <property name="compiler.args.garmintools" value="-encoding UTF-8 -source 8 -target 8 ${compiler.args} -XDignore.symbol.file"/>
-  
-  <property name="garmintools.output.dir" value="${module.garmintools.basedir}/out/production/GarminTools"/>
-  <property name="garmintools.testoutput.dir" value="${module.garmintools.basedir}/out/test/GarminTools"/>
-
-  <property name="garmintools.antlr.dir" value="${module.garmintools.basedir}/grammar"/>
-  <property name="garmintools.jaxb.dir" value="${module.garmintools.basedir}/xsd"/>
-  <property name="garmintools.generated.dir" value="${module.garmintools.basedir}/gen"/>
-
-  <path id="garmintools.module.bootclasspath">
-    <!-- Paths to be included in compilation bootclasspath -->
-  </path>
-  
-  <path id="garmintools.module.production.classpath">
-    <path refid="${module.jdk.classpath.garmintools}"/>
-    <path refid="library.lib.classpath"/>
-    <path refid="library.forms_rt.classpath"/>
-  </path>
-  
-  <path id="garmintools.runtime.production.module.classpath">
-    <pathelement location="${garmintools.output.dir}"/>
-    <path refid="library.lib.classpath"/>
-    <path refid="library.forms_rt.classpath"/>
-  </path>
-  
-  <path id="garmintools.module.classpath">
-    <path refid="${module.jdk.classpath.garmintools}"/>
-    <pathelement location="${garmintools.output.dir}"/>
-    <path refid="library.lib.classpath"/>
-    <path refid="library.forms_rt.classpath"/>
-  </path>
-  
-  <path id="garmintools.runtime.module.classpath">
-    <pathelement location="${garmintools.testoutput.dir}"/>
-    <pathelement location="${garmintools.output.dir}"/>
-    <path refid="library.lib.classpath"/>
-    <path refid="library.forms_rt.classpath"/>
-  </path>
-  
-  
-  <patternset id="excluded.from.module.garmintools">
-    <patternset refid="ignored.files"/>
-  </patternset>
-  
-  <patternset id="excluded.from.compilation.garmintools">
-    <patternset refid="excluded.from.module.garmintools"/>
-  </patternset>
-  
-  <path id="garmintools.module.sourcepath">
-    <dirset dir="${module.garmintools.basedir}">
-      <include name="src"/>
-      <include name="resources"/>
-      <include name="gen"/>
-    </dirset>
-  </path>
-  
-  <path id="garmintools.module.test.sourcepath">
-    <dirset dir="${module.garmintools.basedir}">
-      <include name="test"/>
-      <include name="test-resources"/>
-    </dirset>
-  </path>
-  
-  
-  <target name="compile.module.garmintools" depends="compile.module.garmintools.production,compile.module.garmintools.tests" description="Compile module GarminTools"/>
-  
-  <target name="compile.module.garmintools.production" depends="register.custom.compilers" description="Compile module GarminTools; production classes">
-    <mkdir dir="${garmintools.output.dir}"/>
-    <javac2 destdir="${garmintools.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.garmintools}/javac">
-      <compilerarg line="${compiler.args.garmintools}"/>
-      <bootclasspath refid="garmintools.module.bootclasspath"/>
-      <classpath refid="garmintools.module.production.classpath"/>
-      <src refid="garmintools.module.sourcepath"/>
-      <patternset refid="excluded.from.compilation.garmintools"/>
-    </javac2>
-    
-    <copy todir="${garmintools.output.dir}">
-      <fileset dir="${module.garmintools.basedir}/src">
-        <patternset refid="compiler.resources"/>
-        <type type="file"/>
-      </fileset>
-      <fileset dir="${module.garmintools.basedir}/resources">
-        <patternset refid="compiler.resources"/>
-        <type type="file"/>
-      </fileset>
-      <fileset dir="${module.garmintools.basedir}/gen">
-        <patternset refid="compiler.resources"/>
-        <type type="file"/>
-      </fileset>
-    </copy>
-  </target>
-  
-  <target name="compile.module.garmintools.tests" depends="register.custom.compilers,compile.module.garmintools.production" description="compile module GarminTools; test classes" unless="skip.tests">
-    <mkdir dir="${garmintools.testoutput.dir}"/>
-    <javac2 destdir="${garmintools.testoutput.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.garmintools}/javac">
-      <compilerarg line="${compiler.args.garmintools}"/>
-      <bootclasspath refid="garmintools.module.bootclasspath"/>
-      <classpath refid="garmintools.module.classpath"/>
-      <src refid="garmintools.module.test.sourcepath"/>
-      <patternset refid="excluded.from.compilation.garmintools"/>
-    </javac2>
-    
-    <copy todir="${garmintools.testoutput.dir}">
-      <fileset dir="${module.garmintools.basedir}/test">
-        <patternset refid="compiler.resources"/>
-        <type type="file"/>
-      </fileset>
-      <fileset dir="${module.garmintools.basedir}/test-resources">
-        <patternset refid="compiler.resources"/>
-        <type type="file"/>
-      </fileset>
-    </copy>
-  </target>
-  
-  <target name="clean.module.garmintools" description="cleanup module">
-    <delete dir="${garmintools.output.dir}"/>
-    <delete dir="${garmintools.testoutput.dir}"/>
-    <delete dir="${garmintools.generated.dir}"/>
-  </target>
-  
-  <target name="init" description="Build initialization">
-    <!-- Perform any build initialization in this target -->
-  </target>
-  
-  <target name="clean" depends="clean.module.garmintools" description="cleanup all"/>
-
-  <target name="generate.jaxb">
-    <mkdir dir="${garmintools.generated.dir}"/>
-    <java classname="com.sun.tools.internal.xjc.XJCFacade">
-        <arg value="-d" />
-        <arg value="gen" />
-        <arg value="-p" />
-        <arg value="com.johnpickup.gpx" />
-        <arg value="${garmintools.jaxb.dir}/gpx.xsd" />
-      </java>
-  </target>
-
-  <!-- antlr4 -o /Users/john/Development/GarminTools/gen/com/johnpickup/parser -package com.johnpickup.parser -listener -no-visitor -lib /Users/john/Development/GarminTools/grammar /Users/john/Development/GarminTools/grammar/Workout.g4 -->
-  <target name="generate.antlr">
-    <echo>Generating the ANTLR lexer and parser...</echo>
-    <mkdir dir="${garmintools.generated.dir}"/>
-    <java classname="org.antlr.v4.Tool" fork="true" failonerror="true">
-      <arg value="-o"/>
-      <arg value="${garmintools.generated.dir}/com/johnpickup/parser"/>
-      <arg value="-package"/>
-      <arg value="com.johnpickup.parser"/>
-      <arg value="-listener"/>
-      <arg value="-no-visitor"/>
-      <arg value="${garmintools.antlr.dir}/Workout.g4"/>
-      <classpath refid="library.lib.classpath"/>
-    </java>
-
-  </target>
-
-  <target name="generate" depends="generate.jaxb, generate.antlr"/>
 
 
-  <target name="build.modules" depends="init, clean, generate, compile.module.garmintools" description="build all modules"/>
-  
-  <target name="all" depends="build.modules" description="build all"/>
+    <property file="build.properties"/>
+    <!-- Uncomment the following property if no tests compilation is needed -->
+    <!--
+    <property name="skip.tests" value="true"/>
+     -->
+
+    <!-- Compiler options -->
+
+    <property name="compiler.debug" value="on"/>
+    <property name="compiler.generate.no.warnings" value="off"/>
+    <property name="compiler.args" value=""/>
+    <property name="compiler.max.memory" value="700m"/>
+    <patternset id="ignored.files">
+        <exclude name="**/*.hprof/**"/>
+        <exclude name="**/*.pyc/**"/>
+        <exclude name="**/*.pyo/**"/>
+        <exclude name="**/*.rbc/**"/>
+        <exclude name="**/*.yarb/**"/>
+        <exclude name="**/*~/**"/>
+        <exclude name="**/.DS_Store/**"/>
+        <exclude name="**/.git/**"/>
+        <exclude name="**/.hg/**"/>
+        <exclude name="**/.svn/**"/>
+        <exclude name="**/CVS/**"/>
+        <exclude name="**/__pycache__/**"/>
+        <exclude name="**/_svn/**"/>
+        <exclude name="**/vssver.scc/**"/>
+        <exclude name="**/vssver2.scc/**"/>
+    </patternset>
+    <patternset id="library.patterns">
+        <include name="*.war"/>
+        <include name="*.swc"/>
+        <include name="*.zip"/>
+        <include name="*.egg"/>
+        <include name="*.ane"/>
+        <include name="*.jar"/>
+        <include name="*.ear"/>
+        <include name="*.klib"/>
+    </patternset>
+    <patternset id="compiler.resources">
+        <exclude name="**/?*.java"/>
+        <exclude name="**/?*.form"/>
+        <exclude name="**/?*.class"/>
+        <exclude name="**/?*.groovy"/>
+        <exclude name="**/?*.scala"/>
+        <exclude name="**/?*.flex"/>
+        <exclude name="**/?*.kt"/>
+        <exclude name="**/?*.clj"/>
+        <exclude name="**/?*.aj"/>
+    </patternset>
+
+    <!-- JDK definitions -->
+
+    <property name="jdk.bin.1.8" value="${jdk.home.1.8}/bin"/>
+    <path id="jdk.classpath.1.8">
+        <fileset dir="${jdk.home.1.8}">
+            <include name="jre/lib/charsets.jar"/>
+            <include name="jre/lib/deploy.jar"/>
+            <include name="jre/lib/ext/cldrdata.jar"/>
+            <include name="jre/lib/ext/dnsns.jar"/>
+            <include name="jre/lib/ext/jaccess.jar"/>
+            <include name="jre/lib/ext/jfxrt.jar"/>
+            <include name="jre/lib/ext/localedata.jar"/>
+            <include name="jre/lib/ext/nashorn.jar"/>
+            <include name="jre/lib/ext/sunec.jar"/>
+            <include name="jre/lib/ext/sunjce_provider.jar"/>
+            <include name="jre/lib/ext/sunpkcs11.jar"/>
+            <include name="jre/lib/ext/zipfs.jar"/>
+            <include name="jre/lib/javaws.jar"/>
+            <include name="jre/lib/jce.jar"/>
+            <include name="jre/lib/jfr.jar"/>
+            <include name="jre/lib/jfxswt.jar"/>
+            <include name="jre/lib/jsse.jar"/>
+            <include name="jre/lib/management-agent.jar"/>
+            <include name="jre/lib/plugin.jar"/>
+            <include name="jre/lib/resources.jar"/>
+            <include name="jre/lib/rt.jar"/>
+            <include name="lib/ant-javafx.jar"/>
+            <include name="lib/dt.jar"/>
+            <include name="lib/javafx-mx.jar"/>
+            <include name="lib/jconsole.jar"/>
+            <include name="lib/packager.jar"/>
+            <include name="lib/sa-jdi.jar"/>
+            <include name="lib/tools.jar"/>
+        </fileset>
+    </path>
+
+    <property name="project.jdk.home" value="${jdk.home.1.8}"/>
+    <property name="project.jdk.bin" value="${jdk.bin.1.8}"/>
+    <property name="project.jdk.classpath" value="jdk.classpath.1.8"/>
+
+
+    <!-- Project Libraries -->
+
+    <path id="library.forms_rt.classpath">
+        <pathelement location="${basedir}/lib/idea/forms_rt.jar"/>
+    </path>
+
+    <path id="library.lib.classpath">
+        <pathelement location="${basedir}/lib/antlr-4.7.1-complete.jar"/>
+        <pathelement location="${basedir}/lib/appbundler-1.0.jar"/>
+        <pathelement location="${basedir}/lib/biweekly-0.6.3-SNAPSHOT.jar"/>
+        <pathelement location="${basedir}/lib/commons-io-2.6.jar"/>
+        <pathelement location="${basedir}/lib/fit.jar"/>
+        <pathelement location="${basedir}/lib/hamcrest-core-1.3.jar"/>
+        <pathelement location="${basedir}/lib/jackson-annotations-2.6.0.jar"/>
+        <pathelement location="${basedir}/lib/jackson-core-2.6.1.jar"/>
+        <pathelement location="${basedir}/lib/jackson-databind-2.6.1.jar"/>
+        <pathelement location="${basedir}/lib/junit-4.12.jar"/>
+        <pathelement location="${basedir}/lib/log4j-1.2.13.jar"/>
+        <pathelement location="${basedir}/lib/lombok.jar"/>
+        <pathelement location="${basedir}/lib/poi-4.0.0.jar"/>
+        <pathelement location="${basedir}/lib/poi-ooxml-4.0.0.jar"/>
+        <pathelement location="${basedir}/lib/poi-ooxml-schemas-4.0.0.jar"/>
+        <pathelement location="${basedir}/lib/resolver.jar"/>
+        <pathelement location="${basedir}/lib/slf4j-api-1.7.22.jar"/>
+        <pathelement location="${basedir}/lib/slf4j-log4j12-1.7.22.jar"/>
+        <pathelement location="${basedir}/lib/vinnie-2.0.2.jar"/>
+        <pathelement location="${basedir}/lib/xbean.jar"/>
+        <pathelement location="${basedir}/lib/xbean_xpath.jar"/>
+        <pathelement location="${basedir}/lib/xmlpublic.jar"/>
+    </path>
+    <!-- Register Custom Compiler Taskdefs -->
+    <property name="javac2.home" value="${idea.home}/lib"/>
+    <path id="javac2.classpath">
+        <fileset dir="${javac2.home}">
+            <include name="javac2.jar"/>
+            <include name="jdom.jar"/>
+            <include name="asm-all*.jar"/>
+            <include name="forms-*.jar"/>
+        </fileset>
+    </path>
+    <target name="register.custom.compilers">
+        <taskdef name="javac2" classname="com.intellij.ant.Javac2" classpathref="javac2.classpath"/>
+        <taskdef name="instrumentIdeaExtensions" classname="com.intellij.ant.InstrumentIdeaExtensions"
+                 classpathref="javac2.classpath"/>
+    </target>
+
+    <!-- Modules -->
+
+
+    <!-- Module GarminTools -->
+
+    <dirname property="module.garmintools.basedir" file="${ant.file}"/>
+
+
+    <property name="module.jdk.home.garmintools" value="${project.jdk.home}"/>
+    <property name="module.jdk.bin.garmintools" value="${project.jdk.bin}"/>
+    <property name="module.jdk.classpath.garmintools" value="${project.jdk.classpath}"/>
+
+    <property name="compiler.args.garmintools"
+              value="-encoding UTF-8 -source 8 -target 8 ${compiler.args} -XDignore.symbol.file"/>
+
+    <property name="garmintools.output.dir" value="${module.garmintools.basedir}/out/production/GarminTools"/>
+    <property name="garmintools.testoutput.dir" value="${module.garmintools.basedir}/out/test/GarminTools"/>
+
+    <property name="garmintools.antlr.dir" value="${module.garmintools.basedir}/grammar"/>
+    <property name="garmintools.jaxb.dir" value="${module.garmintools.basedir}/xsd"/>
+    <property name="garmintools.generated.dir" value="${module.garmintools.basedir}/gen"/>
+    <property name="garmintools.jar.dir" value="${module.garmintools.basedir}/jar"/>
+    <property name="garmintools.release.dir" value="release"/>
+
+
+    <path id="garmintools.module.bootclasspath">
+        <!-- Paths to be included in compilation bootclasspath -->
+    </path>
+
+    <path id="garmintools.module.production.classpath">
+        <path refid="${module.jdk.classpath.garmintools}"/>
+        <path refid="library.lib.classpath"/>
+        <path refid="library.forms_rt.classpath"/>
+    </path>
+
+    <path id="garmintools.runtime.production.module.classpath">
+        <pathelement location="${garmintools.output.dir}"/>
+        <path refid="library.lib.classpath"/>
+        <path refid="library.forms_rt.classpath"/>
+    </path>
+
+    <path id="garmintools.module.classpath">
+        <path refid="${module.jdk.classpath.garmintools}"/>
+        <pathelement location="${garmintools.output.dir}"/>
+        <path refid="library.lib.classpath"/>
+        <path refid="library.forms_rt.classpath"/>
+    </path>
+
+    <path id="garmintools.runtime.module.classpath">
+        <pathelement location="${garmintools.testoutput.dir}"/>
+        <pathelement location="${garmintools.output.dir}"/>
+        <path refid="library.lib.classpath"/>
+        <path refid="library.forms_rt.classpath"/>
+    </path>
+
+
+    <patternset id="excluded.from.module.garmintools">
+        <patternset refid="ignored.files"/>
+    </patternset>
+
+    <patternset id="excluded.from.compilation.garmintools">
+        <patternset refid="excluded.from.module.garmintools"/>
+    </patternset>
+
+    <path id="garmintools.module.sourcepath">
+        <dirset dir="${module.garmintools.basedir}">
+            <include name="src"/>
+            <include name="resources"/>
+            <include name="gen"/>
+        </dirset>
+    </path>
+
+    <path id="garmintools.module.test.sourcepath">
+        <dirset dir="${module.garmintools.basedir}">
+            <include name="test"/>
+            <include name="test-resources"/>
+        </dirset>
+    </path>
+
+
+    <target name="compile.module.garmintools"
+            depends="compile.module.garmintools.production,compile.module.garmintools.tests"
+            description="Compile module GarminTools"/>
+
+    <target name="compile.module.garmintools.production" depends="register.custom.compilers"
+            description="Compile module GarminTools; production classes">
+        <mkdir dir="${garmintools.output.dir}"/>
+        <javac2 destdir="${garmintools.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}"
+                memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.garmintools}/javac">
+            <compilerarg line="${compiler.args.garmintools}"/>
+            <bootclasspath refid="garmintools.module.bootclasspath"/>
+            <classpath refid="garmintools.module.production.classpath"/>
+            <src refid="garmintools.module.sourcepath"/>
+            <patternset refid="excluded.from.compilation.garmintools"/>
+        </javac2>
+
+        <copy todir="${garmintools.output.dir}">
+            <fileset dir="${module.garmintools.basedir}/src">
+                <patternset refid="compiler.resources"/>
+                <type type="file"/>
+            </fileset>
+            <fileset dir="${module.garmintools.basedir}/resources">
+                <patternset refid="compiler.resources"/>
+                <type type="file"/>
+            </fileset>
+            <fileset dir="${module.garmintools.basedir}/gen">
+                <patternset refid="compiler.resources"/>
+                <type type="file"/>
+            </fileset>
+        </copy>
+    </target>
+
+    <target name="compile.module.garmintools.tests"
+            depends="register.custom.compilers,compile.module.garmintools.production"
+            description="compile module GarminTools; test classes" unless="skip.tests">
+        <mkdir dir="${garmintools.testoutput.dir}"/>
+        <javac2 destdir="${garmintools.testoutput.dir}" debug="${compiler.debug}"
+                nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true"
+                executable="${module.jdk.bin.garmintools}/javac">
+            <compilerarg line="${compiler.args.garmintools}"/>
+            <bootclasspath refid="garmintools.module.bootclasspath"/>
+            <classpath refid="garmintools.module.classpath"/>
+            <src refid="garmintools.module.test.sourcepath"/>
+            <patternset refid="excluded.from.compilation.garmintools"/>
+        </javac2>
+
+        <copy todir="${garmintools.testoutput.dir}">
+            <fileset dir="${module.garmintools.basedir}/test">
+                <patternset refid="compiler.resources"/>
+                <type type="file"/>
+            </fileset>
+            <fileset dir="${module.garmintools.basedir}/test-resources">
+                <patternset refid="compiler.resources"/>
+                <type type="file"/>
+            </fileset>
+        </copy>
+    </target>
+
+    <target name="clean.module.garmintools" description="cleanup module">
+        <delete dir="${garmintools.output.dir}"/>
+        <delete dir="${garmintools.testoutput.dir}"/>
+        <delete dir="${garmintools.generated.dir}"/>
+    </target>
+
+    <target name="init" description="Build initialization">
+        <!-- Perform any build initialization in this target -->
+    </target>
+
+    <target name="clean" depends="clean.module.garmintools" description="cleanup all">
+        <mkdir dir="${garmintools.release.dir}"/>
+        <!-- remove the old version of the app -->
+        <delete dir="${garmintools.release.dir}/GarminTools.app"/>
+        <delete dir="${garmintools.jar.dir}"/>
+    </target>
+
+    <target name="generate.jaxb">
+        <mkdir dir="${garmintools.generated.dir}"/>
+        <java classname="com.sun.tools.internal.xjc.XJCFacade">
+            <arg value="-d"/>
+            <arg value="gen"/>
+            <arg value="-p"/>
+            <arg value="com.johnpickup.gpx"/>
+            <arg value="${garmintools.jaxb.dir}/gpx.xsd"/>
+        </java>
+    </target>
+
+    <!-- antlr4 -o /Users/john/Development/GarminTools/gen/com/johnpickup/parser -package com.johnpickup.parser -listener -no-visitor -lib /Users/john/Development/GarminTools/grammar /Users/john/Development/GarminTools/grammar/Workout.g4 -->
+    <target name="generate.antlr">
+        <echo>Generating the ANTLR lexer and parser...</echo>
+        <mkdir dir="${garmintools.generated.dir}"/>
+        <java classname="org.antlr.v4.Tool" fork="true" failonerror="true">
+            <arg value="-o"/>
+            <arg value="${garmintools.generated.dir}/com/johnpickup/parser"/>
+            <arg value="-package"/>
+            <arg value="com.johnpickup.parser"/>
+            <arg value="-listener"/>
+            <arg value="-no-visitor"/>
+            <arg value="${garmintools.antlr.dir}/Workout.g4"/>
+            <classpath refid="library.lib.classpath"/>
+        </java>
+    </target>
+
+    <target name="generate" depends="generate.jaxb, generate.antlr"/>
+
+    <target name="build.modules" depends="init, clean, generate, compile.module.garmintools"
+            description="build all modules"/>
+
+    <target name="jar" depends="build.modules" description="Create a jar of the compiled classes">
+        <mkdir dir="${garmintools.jar.dir}"/>
+        <jar destfile="${garmintools.jar.dir}/GarminTools.jar" basedir="${garmintools.output.dir}">
+            <manifest>
+                <attribute name="Main-Class"
+                           value="com.johnpickup.gui.MainMenuForm"/>
+            </manifest>
+        </jar>
+    </target>
+
+    <property name="one-jar.dist.dir" value="${basedir}/one-jar-ant/"/>
+    <import file="${one-jar.dist.dir}/one-jar-ant-task.xml" optional="true"/>
+
+    <target name="fatjar" depends="jar" description="Create a fat jar with all 3rd party jars included">
+        <mkdir dir="${garmintools.jar.dir}"/>
+        <one-jar destfile="${garmintools.jar.dir}/GarminToolsFull.jar" onejarmainclass="com.johnpickup.gui.MainMenuForm">
+            <main>
+                <fileset dir="${garmintools.output.dir}"/>
+                <!--fileset dir="${garmintools.jar.dir}">
+                    <include name="**/GarminTools.jar"/>
+                </fileset-->
+            </main>
+            <lib>
+                <fileset dir="${basedir}/lib"/>
+            </lib>
+            <fileset dir="${garmintools.output.dir}">
+                <exclude name="**/*.class"/>
+            </fileset>
+        </one-jar>
+    </target>
+
+    <target name="all" depends="build.modules" description="build all"/>
+
+
+    <!-- macOS bundle -->
+    <!--
+      <taskdef name="bundleapp" classname="com.oracle.appbundler.AppBundlerTask"/>
+
+      <target name="create-bundle" depends="clean">
+        <bundleapp outputdirectory="${release.dir}"
+                   name="WikiReader"
+                   displayname="WikiReader"
+                   identifier="com.alvinalexander.wikireader.client.Client"
+                   shortversion="0.1"
+                   icon="WikiReader.icns"
+                   copyright="Alvin J. Alexander"
+                   applicationCategory="public.app-category.utilities"
+                   mainclassname="com/alvinalexander/wikireader/client/Client">
+
+          <runtime dir="${env.JAVA_HOME}" />
+          <classpath file="../target/scala-2.10/WikiReaderClient-assembly-0.1.jar" />
+
+          <option value="-Xdock:icon=Contents/Resources/WikiReader.icns"/>
+          <option value="-Dapple.laf.useScreenMenuBar=true"/>
+          <option value="-Dcom.apple.macos.use-file-dialog-packages=true"/>
+          <option value="-Dcom.apple.macos.useScreenMenuBar=true"/>
+          <option value="-Dapple.awt.application.name=WikiReader"/>
+          <option value="-Dcom.apple.smallTabs=true"/>
+
+        </bundleapp>
+      </target>
+    -->
 </project>

@@ -29,7 +29,7 @@ public class MainMenuForm {
     }
 
     private static void display() throws IOException {
-        JFrame frame = new JFrame("Garmin Workout Converter");
+        JFrame frame = new JFrame("Garmin Tools");
         MainMenuForm form = new MainMenuForm();
         form.init();
         frame.setContentPane(form.panel1);
