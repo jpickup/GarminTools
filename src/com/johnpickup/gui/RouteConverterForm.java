@@ -21,6 +21,7 @@ public class RouteConverterForm {
     private JPanel outputDirPanel;
     private JPanel bottomPanel;
     private JScrollPane logPane;
+    private JCheckBox chkReverse;
 
     private final GarminRouteGenerator routeGenerator = new GarminRouteGenerator();
 
@@ -85,7 +86,7 @@ public class RouteConverterForm {
                 if (worker != null) {
                     worker.cancel(true);
                 }
-                    worker = new RouteConversionWorker(routeGenerator, inputFile, outputDir);
+                    worker = new RouteConversionWorker(routeGenerator, inputFile, outputDir, chkReverse.isSelected());
                     worker.execute();
 
             } catch (Exception e1) {

@@ -16,11 +16,12 @@ class RouteConversionWorker extends SwingWorker<Object, Object> {
     private final GarminRouteGenerator generator;
     private final File inputFile;
     private final File outputDir;
+    private final boolean reverse;
 
     @Override
     protected Object doInBackground() {
         try {
-            generator.convert(inputFile, outputDir);
+            generator.convert(inputFile, outputDir, reverse);
         } catch (Exception e) {
             log.error("Failed to convert {}", inputFile.getName(), e);
         }

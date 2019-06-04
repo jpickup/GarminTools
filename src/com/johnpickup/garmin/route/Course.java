@@ -6,6 +6,7 @@ import com.johnpickup.util.Haversine;
 import lombok.RequiredArgsConstructor;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -17,6 +18,10 @@ public class Course implements FitGenerator {
 
     private Long timestamp;
     private static int instanceIndex = 0;
+
+    public void reverse() {
+        Collections.reverse(coursePoints);
+    }
 
     @Override
     public List<Mesg> generate() {

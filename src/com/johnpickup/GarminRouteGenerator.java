@@ -26,7 +26,7 @@ public class GarminRouteGenerator {
         try {
             GarminRouteGenerator garminRouteGenerator = new GarminRouteGenerator();
             for (String arg : args) {
-                garminRouteGenerator.convert(arg);
+                garminRouteGenerator.convert(arg, false);
             }
         }
         catch (Exception ex) {
@@ -39,12 +39,12 @@ public class GarminRouteGenerator {
         RouteConverterForm.display();
     }
 
-    private void convert(String inputFilename) throws JAXBException, FileNotFoundException {
+    private void convert(String inputFilename, boolean reverse) throws JAXBException, FileNotFoundException {
         String outputDir = FilenameUtils.getPath(inputFilename);
-        convert(new File(inputFilename), new File(outputDir));
+        convert(new File(inputFilename), new File(outputDir), reverse);
     }
 
-    public void convert(File inputFile, File outputFile) throws JAXBException, FileNotFoundException {
+    public void convert(File inputFile, File outputFile, boolean reverse) throws JAXBException, FileNotFoundException {
         if (outputFile.isDirectory()) {
             outputFile = new File(outputFile, FilenameUtils.getBaseName(inputFile.getName()) + ".fit");
         }
@@ -52,6 +52,11 @@ public class GarminRouteGenerator {
         log.info("Converting {} to {}", inputFile, outputFile);
         GpxType gpxType = gpxReader.readGpxFile(inputFile);
         Course convertedCourse = courseConverter.convert(gpxType);
+        if (reverse) {
+            log.info("Reversing route");
+            convertedCourse.reverse();
+        }
+        log.info("Saving route");
         FitSaver.save(convertedCourse, outputFile);
         log.info("Converted {} to {}", inputFile, outputFile);
     }
