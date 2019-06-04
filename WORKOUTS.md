@@ -55,14 +55,3 @@ sheets or columns are ignored.
 | Workout | Description | The workout language definition, may include named paces defined in the pace sheet |
 | Schedule | Date | The date for a specific workout |
 | Schedule | Workout | Either defined in the workout language or the name a named workout from the Workout sheet |
-
- 
-
-## Building
-The ant build script is `garminworkoutcreator.xml`. This creates a macOS bundle with a JRE included meaning that it runs 
-without the need for a Java installation on the target machine
-
-## Running 
-The app runs as a very simple UI allowing you to select the source Excel workbook and a output target directory for 
-the FIT files. The default output directory is `/Volumes/GARMIN/GARMIN/NEWFILES/`, which is the destination when the 
-watch is connected to a Mac via USB. 
