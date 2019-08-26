@@ -3,6 +3,7 @@ package com.johnpickup.garmin.route;
 import com.garmin.fit.*;
 import com.johnpickup.garmin.fit.FitGenerator;
 import com.johnpickup.util.Haversine;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class Course implements FitGenerator {
     private static final double RADIAN_SEMICIRCLE = Math.pow(2, 31) / Math.PI;
+    @Getter
     private final String name;
     private final List<CoursePoint> coursePoints;
 
@@ -109,5 +111,9 @@ public class Course implements FitGenerator {
             timestamp = ((new Date()).getTime() - 631065600000L) / 1000L + instanceIndex++;
         }
         return timestamp;
+    }
+
+    public int size() {
+        return coursePoints.size();
     }
 }

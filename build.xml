@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="garmintools" default="all">
-
+<project name="GarminTools" default="all">
+    <property name="version" value="1.0"/>
+    <property name="copyright" value="(c)2019 johnpickup.com"/>
 
     <property file="build.properties"/>
     <!-- Uncomment the following property if no tests compilation is needed -->
@@ -93,7 +94,6 @@
     <property name="project.jdk.bin" value="${jdk.bin.1.8}"/>
     <property name="project.jdk.classpath" value="jdk.classpath.1.8"/>
 
-
     <!-- Project Libraries -->
 
     <path id="library.forms_rt.classpath">
@@ -140,10 +140,15 @@
                  classpathref="javac2.classpath"/>
     </target>
 
+    <!-- java packager -->
+    <property name="javapackager" value="${jdk.bin.1.8}/javapackager"/>
+
+
     <!-- Modules -->
 
 
     <!-- Module GarminTools -->
+
 
     <dirname property="module.garmintools.basedir" file="${ant.file}"/>
 
@@ -163,6 +168,7 @@
     <property name="garmintools.generated.dir" value="${module.garmintools.basedir}/gen"/>
     <property name="garmintools.jar.dir" value="${module.garmintools.basedir}/jar"/>
     <property name="garmintools.release.dir" value="release"/>
+    <property name="garmintools.main.class" value="com.johnpickup.gui.MainMenuForm"/>
 
 
     <path id="garmintools.module.bootclasspath">
@@ -342,7 +348,7 @@
 
     <target name="fatjar" depends="jar" description="Create a fat jar with all 3rd party jars included">
         <mkdir dir="${garmintools.jar.dir}"/>
-        <one-jar destfile="${garmintools.jar.dir}/GarminToolsFull.jar" onejarmainclass="com.johnpickup.gui.MainMenuForm">
+        <one-jar destfile="${garmintools.jar.dir}/GarminToolsFull.jar" onejarmainclass="${garmintools.main.class}">
             <main>
                 <fileset dir="${garmintools.output.dir}"/>
                 <!--fileset dir="${garmintools.jar.dir}">
@@ -358,35 +364,29 @@
         </one-jar>
     </target>
 
-    <target name="all" depends="build.modules" description="build all"/>
-
+    <target name="group.jars">
+        <mkdir dir="package/jars"/>
+        <copy todir="package/jars">
+            <fileset dir="${basedir}/lib"/>
+            <fileset dir="${garmintools.jar.dir}"/>
+        </copy>
+    </target>
 
     <!-- macOS bundle -->
-    <!--
-      <taskdef name="bundleapp" classname="com.oracle.appbundler.AppBundlerTask"/>
+    <target name="bundle" depends="" description="Create a macOS bundle">
+        <mkdir dir="package/macos"/>
+        <copy file="macos/icons/GarminTools.icns" todir="package/macos"/>
+        <echo message="${javapackager} -deploy -native pkg -name ${ant.project.name} -BappVersion=${version} -Bicon=package/macos/GarminTools.icns -srcdir ${garmintools.jar.dir} -srcfiles GarminToolsFull.jar -appclass ${garmintools.main.class} -outdir package -v"/>
+        <exec command="${javapackager} -deploy -native pkg -name ${ant.project.name} -BappVersion=${version}
+                        -Bicon=package/macos/GarminTools.icns -srcdir ${garmintools.jar.dir}
+                        -srcdir package/jars -appclass ${garmintools.main.class}
+                        -BmainJar=GarminTools.jar
+                        -Bruntime=${jdk.home.1.8}
+                        -outdir package
+                        -outfile ${ant.project.name}.pkg
+                        -v"/>
+    </target>
 
-      <target name="create-bundle" depends="clean">
-        <bundleapp outputdirectory="${release.dir}"
-                   name="WikiReader"
-                   displayname="WikiReader"
-                   identifier="com.alvinalexander.wikireader.client.Client"
-                   shortversion="0.1"
-                   icon="WikiReader.icns"
-                   copyright="Alvin J. Alexander"
-                   applicationCategory="public.app-category.utilities"
-                   mainclassname="com/alvinalexander/wikireader/client/Client">
+    <target name="all" depends="bundle" description="build all"/>
 
-          <runtime dir="${env.JAVA_HOME}" />
-          <classpath file="../target/scala-2.10/WikiReaderClient-assembly-0.1.jar" />
-
-          <option value="-Xdock:icon=Contents/Resources/WikiReader.icns"/>
-          <option value="-Dapple.laf.useScreenMenuBar=true"/>
-          <option value="-Dcom.apple.macos.use-file-dialog-packages=true"/>
-          <option value="-Dcom.apple.macos.useScreenMenuBar=true"/>
-          <option value="-Dapple.awt.application.name=WikiReader"/>
-          <option value="-Dcom.apple.smallTabs=true"/>
-
-        </bundleapp>
-      </target>
-    -->
 </project>

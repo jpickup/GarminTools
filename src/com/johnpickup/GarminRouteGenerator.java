@@ -52,11 +52,12 @@ public class GarminRouteGenerator {
         log.info("Converting {} to {}", inputFile, outputFile);
         GpxType gpxType = gpxReader.readGpxFile(inputFile);
         Course convertedCourse = courseConverter.convert(gpxType);
+        log.info("Converted GPX '{}' to a course containing {} points", convertedCourse.getName(), convertedCourse.size());
         if (reverse) {
             log.info("Reversing route");
             convertedCourse.reverse();
         }
-        log.info("Saving route");
+        log.info("Saving route to {}", outputFile);
         FitSaver.save(convertedCourse, outputFile);
         log.info("Converted {} to {}", inputFile, outputFile);
     }
