@@ -3,6 +3,8 @@ A suite of tools for creating Garmin FIT files for workouts, schedules and cours
 
 [Workouts and Schedules](./WORKOUTS.md)
 
+[Routes](./ROUTS.md)
+
 ## Building
 The ant build script is `build.xml`. 
 
