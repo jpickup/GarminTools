@@ -1,0 +1,28 @@
+--- The Following Works! ---
+Taken from https://centerkey.com/mac/java/
+
+Using the fatjar, that already works when started with java -jar GarminToolsFull.jar
+
+
+cp ./resources/garmin128.png ./GarminTools.png
+sips -z 100 100 -p 150 150 GarminTools.png --out GarminTools-background.png
+mkdir GarminTools.iconset
+sips -z 128 128 GarminTools.png --out GarminTools.iconset/icon_128x128.png
+iconutil --convert icns GarminTools.iconset
+
+cp -v *.png *.icns package/macosx
+jdk=$(/usr/libexec/java_home)
+
+$jdk/bin/javapackager -deploy -native pkg -name GarminTools  \
+           -BappVersion=1.0.0 -Bicon=package/macosx/GarminTools.icns \
+           -srcdir . -srcfiles GarminToolsFull.jar -appclass com.simontuffs.onejar.Boot  \
+           -outdir out -v -outfile GarminTools.pkg
+
+
+Problems: The main menu shows the name as "About Boot". That is true with the fatjar, so not the fault of the installer
+
+Fatjar is currently failing to load the icon file (needed to add File.canRead() to get it to start) - a fatjar problem
+
+
+Maybe need to experiment with not using the fatjar, but just a normal jar
+

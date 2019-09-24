@@ -372,16 +372,30 @@
         </copy>
     </target>
 
+    <target name="icons">
+        <mkdir dir="GarminTools.iconset"/>
+        <exec executable="sips">
+            <arg line="-z 100 100 -p 150 150 resources/garmin128.png --out GarminTools-background.png"/>
+        </exec>
+        <exec executable="sips">
+            <arg line="-z 128 128 resources/garmin128.png --out GarminTools.iconset/icon_128x128.png"/>
+        </exec>
+        <exec executable="iconutil">
+            <arg line="--convert icns GarminTools.iconset"/>
+        </exec>
+    </target>
+
     <!-- macOS bundle -->
-    <target name="bundle" depends="" description="Create a macOS bundle">
+    <target name="bundle" depends="fatjar,icons" description="Create a macOS bundle">
         <mkdir dir="package/macos"/>
-        <copy file="macos/icons/GarminTools.icns" todir="package/macos"/>
+        <copy file="resources/garmin128.png" tofile="package/macos/GarminTools.png"/>
+        <copy file="GarminTools-background.png" todir="package/macos"/>
+        <copy file="GarminTools.icns" todir="package/macos"/>
         <echo message="${javapackager} -deploy -native pkg -name ${ant.project.name} -BappVersion=${version} -Bicon=package/macos/GarminTools.icns -srcdir ${garmintools.jar.dir} -srcfiles GarminToolsFull.jar -appclass ${garmintools.main.class} -outdir package -v"/>
         <exec command="${javapackager} -deploy -native pkg -name ${ant.project.name} -BappVersion=${version}
                         -Bicon=package/macos/GarminTools.icns -srcdir ${garmintools.jar.dir}
-                        -srcdir package/jars -appclass ${garmintools.main.class}
-                        -BmainJar=GarminTools.jar
-                        -Bruntime=${jdk.home.1.8}
+                        -srcfiles GarminToolsFull.jar
+                        -appclass com.simontuffs.onejar.Boot
                         -outdir package
                         -outfile ${ant.project.name}.pkg
                         -v"/>

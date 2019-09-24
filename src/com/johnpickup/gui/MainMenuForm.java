@@ -34,9 +34,13 @@ public class MainMenuForm {
         form.init();
         frame.setContentPane(form.panel1);
         frame.setBackground(Color.DARK_GRAY);
-        BufferedImage image = ImageIO.read(new File("resources/GarminWorkoutCreator.png"));
-        frame.setIconImage(image);
-        com.apple.eawt.Application.getApplication().setDockIconImage(image);
+
+        File iconFile = new File("resources/GarminWorkoutCreator.png");
+        if (iconFile.canRead()) {
+            BufferedImage image = ImageIO.read(iconFile);
+            frame.setIconImage(image);
+            com.apple.eawt.Application.getApplication().setDockIconImage(image);
+        }
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.pack();

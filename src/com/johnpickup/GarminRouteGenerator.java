@@ -49,7 +49,7 @@ public class GarminRouteGenerator {
             outputFile = new File(outputFile, FilenameUtils.getBaseName(inputFile.getName()) + ".fit");
         }
 
-        log.info("Converting {} to {}", inputFile, outputFile);
+        log.info("Converting {}", inputFile);
         GpxType gpxType = gpxReader.readGpxFile(inputFile);
         Course convertedCourse = courseConverter.convert(gpxType);
         log.info("Converted GPX '{}' to a course containing {} points", convertedCourse.getName(), convertedCourse.size());
@@ -59,6 +59,6 @@ public class GarminRouteGenerator {
         }
         log.info("Saving route to {}", outputFile);
         FitSaver.save(convertedCourse, outputFile);
-        log.info("Converted {} to {}", inputFile, outputFile);
+        log.info("Saved to {}", outputFile);
     }
 }

@@ -31,7 +31,7 @@ public class RouteConverterForm {
         SwingMessageAppender appender = new SwingMessageAppender(loggingOutput);
         LogManager.getRootLogger().addAppender(appender);
 
-        inputFileField.setText(System.getProperty("user.dir"));
+        inputFileField.setText(System.getProperty("user.home"));
 
         fileChooserButton.addActionListener(e -> {
             final JFileChooser fc = new JFileChooser();
