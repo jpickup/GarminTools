@@ -8,4 +8,4 @@ A suite of tools for creating Garmin FIT files for workouts, schedules and cours
 ## Building
 The ant build script is `build.xml`. 
 
-The target bundle creates a macOS installer package.
+The target "bundle" creates a macOS installer package.
