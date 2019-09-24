@@ -3,7 +3,7 @@
   <grid id="27dc6" binding="panel1" default-binding="true" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="20" y="20" width="680" height="614"/>
+      <xy x="20" y="20" width="723" height="614"/>
     </constraints>
     <properties>
       <foreground color="-12961222"/>
@@ -24,25 +24,38 @@
           <component id="b82dd" class="javax.swing.JButton" binding="gpxButton">
             <constraints/>
             <properties>
-              <foreground color="-12698050"/>
+              <foreground color="-8355712"/>
+              <hideActionText value="false"/>
+              <horizontalTextPosition value="0"/>
               <icon value="GPX128.png"/>
-              <text value=""/>
+              <text value="GPX to FIT course"/>
+              <toolTipText value="Convert a GPX route or track into a FIT course file for use on the watch"/>
+              <verticalAlignment value="3"/>
+              <verticalTextPosition value="3"/>
             </properties>
           </component>
           <component id="75284" class="javax.swing.JButton" binding="garminButton">
             <constraints/>
             <properties>
-              <foreground color="-12698050"/>
+              <foreground color="-8355712"/>
+              <horizontalTextPosition value="0"/>
               <icon value="garmin128.png"/>
-              <text value=""/>
+              <text value="Workout schedule to FIT "/>
+              <toolTipText value="Convert a worksout schedule into the FIT files for the Garmin watch"/>
+              <verticalAlignment value="3"/>
+              <verticalTextPosition value="3"/>
             </properties>
           </component>
           <component id="37ca0" class="javax.swing.JButton" binding="icalButton">
             <constraints/>
             <properties>
-              <foreground color="-12698050"/>
+              <foreground color="-8289919"/>
+              <horizontalTextPosition value="0"/>
               <icon value="ical128.png"/>
-              <text value=""/>
+              <text value="Workout schedule to iCal"/>
+              <toolTipText value="Export a workout schedule to an ICal file for loading into a calendar"/>
+              <verticalAlignment value="3"/>
+              <verticalTextPosition value="3"/>
             </properties>
           </component>
         </children>
