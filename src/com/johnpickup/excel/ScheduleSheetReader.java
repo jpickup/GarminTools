@@ -9,16 +9,13 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by john on 10/01/2017.
  */
 public class ScheduleSheetReader {
-    private int dateIndeex =0;
+    private int dateIndex =0;
     private int workoutIndex =1;
     private WorkoutTextParser parser = new WorkoutTextParser();
 
@@ -32,7 +29,7 @@ public class ScheduleSheetReader {
                 readHeaderRow(row);
             }
             else {
-                result.add(readScheduledWorkout(row, workouts));
+                Optional.ofNullable(readScheduledWorkout(row, workouts)).ifPresent(result::add);
             }
         }
 
@@ -40,25 +37,32 @@ public class ScheduleSheetReader {
     }
 
     private ScheduledWorkout readScheduledWorkout(Row row, Map<String, Workout> workouts) throws IOException {
-        Date date = row.getCell(dateIndeex).getDateCellValue();
-        String value = row.getCell(workoutIndex).getStringCellValue();
-        Workout workout;
-        if (workouts.containsKey(value)) {
-            workout = workouts.get(value);
+        Cell dateCell = row.getCell(dateIndex);
+        Cell workoutCell = row.getCell(workoutIndex);
+        if (dateCell != null && workoutCell != null) {
+            Date date = dateCell.getDateCellValue();
+            String value = workoutCell.getStringCellValue();
+            Workout workout;
+            if (workouts.containsKey(value)) {
+                workout = workouts.get(value);
+            } else {
+                workout = parser.parse(value);
+                workouts.put(value, workout);
+            }
+
+            return new ScheduledWorkout(date, workout, value, workout.toString());
         }
         else {
-            workout = parser.parse(value);
-            workouts.put(value, workout);
+            return null;
         }
 
-        return new ScheduledWorkout(date, workout, value, workout.toString());
     }
 
     private void readHeaderRow(Row row) {
         for (Cell cell : row) {
             if (cell.getCellType() != CellType.STRING) continue;
 
-            if ("Date".equals(cell.getStringCellValue())) dateIndeex = cell.getColumnIndex();
+            if ("Date".equals(cell.getStringCellValue())) dateIndex = cell.getColumnIndex();
             if ("Workout".equals(cell.getStringCellValue())) workoutIndex = cell.getColumnIndex();
         }
     }
