@@ -8,7 +8,7 @@ import java.util.Collections;
 import java.util.List;
 
 import static com.johnpickup.parser.HeartRateZone.Z3;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Created by john on 03/01/2017.

@@ -2,7 +2,7 @@ package com.johnpickup.garmin.unit;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Created by john on 30/12/2016.

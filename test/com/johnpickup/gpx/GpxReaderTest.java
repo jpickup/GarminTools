@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import java.io.File;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
 
 @Slf4j
 public class GpxReaderTest {

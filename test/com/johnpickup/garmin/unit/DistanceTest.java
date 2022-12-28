@@ -1,6 +1,6 @@
 package com.johnpickup.garmin.unit;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class DistanceTest {
     @org.junit.Test

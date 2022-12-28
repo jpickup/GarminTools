@@ -2,7 +2,7 @@ package com.johnpickup.parser;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Test time string parsing and toString
