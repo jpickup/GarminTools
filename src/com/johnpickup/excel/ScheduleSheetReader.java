@@ -17,10 +17,12 @@ import java.util.*;
 public class ScheduleSheetReader {
     private int dateIndex =0;
     private int workoutIndex =1;
-    private WorkoutTextParser parser = new WorkoutTextParser();
+    private final WorkoutTextParser parser = new WorkoutTextParser();
 
 
     public List<ScheduledWorkout> readSchedule(Sheet sheet, Map<String, Workout> workouts) throws IOException {
+        if (sheet == null) return Collections.emptyList();
+
         List<ScheduledWorkout> result = new ArrayList<>();
 
         int rowIdx=0;

@@ -8,6 +8,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,9 +18,10 @@ import java.util.Map;
 public class PaceSheetReader {
     private int nameIndex=0;
     private int valueIndex=1;
-    private PaceRangeTextParser parser = new PaceRangeTextParser();
+    private final PaceRangeTextParser parser = new PaceRangeTextParser();
 
     public Map<String, Pace> readPaces(Sheet sheet) throws IOException {
+        if (sheet == null) return Collections.emptyMap();
         Map<String, Pace> result = new HashMap<>();
 
         int rowIdx=0;

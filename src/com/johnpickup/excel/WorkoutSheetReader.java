@@ -8,6 +8,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,11 +16,13 @@ import java.util.Map;
  * Created by john on 10/01/2017.
  */
 public class WorkoutSheetReader {
-    private int nameIndex=0;
-    private int descriptionIndex =1;
-    private WorkoutTextParser parser = new WorkoutTextParser();
+    private int nameIndex = 0;
+    private int descriptionIndex = 1;
+    private final WorkoutTextParser parser = new WorkoutTextParser();
 
     public Map<String, Workout> readWorkouts(Sheet sheet) throws IOException {
+        if (sheet == null) return Collections.emptyMap();
+
         Map<String, Workout> result = new HashMap<>();
 
         int rowIdx=0;
