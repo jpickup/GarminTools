@@ -1,6 +1,8 @@
 package com.johnpickup.converter;
 
-import com.johnpickup.parser.*;
+import com.johnpickup.parser.HeartRate;
+import com.johnpickup.parser.HeartRateRange;
+import com.johnpickup.parser.HeartRateZone;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -7,12 +7,15 @@ import org.apache.log4j.LogManager;
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import java.io.File;
+import java.util.Locale;
 
 /**
  * Simple GUI to drive the conversion
  */
 @Slf4j
 public class ScheduleConverterForm {
+    private static final String MACOS_DEFAULT = "/Volumes/GARMIN/GARMIN/NEWFILES";
+    private static final String WINDOWS_DEFAULT = "e:\\GARMIN\\NEWFILES";
     private JButton convertButton;
     private JTextField inputFileField;
     private JTextArea loggingOutput;
@@ -34,6 +37,14 @@ public class ScheduleConverterForm {
         LogManager.getRootLogger().addAppender(appender);
 
         inputFileField.setText(System.getProperty("user.home"));
+
+        String osName = System.getProperty("os.name");
+        if (osName.toLowerCase(Locale.ROOT).contains("windows")) {
+            outputDirField.setText(WINDOWS_DEFAULT);
+        }
+        else {
+            outputDirField.setText(MACOS_DEFAULT);
+        }
 
         fileChooserButton.addActionListener(e -> {
             final JFileChooser fc = new JFileChooser();

@@ -16,9 +16,9 @@ import java.util.List;
  * Class to read all the content of a Workout Schedule Excel workbook
  */
 public class ExcelWorkoutScheduleReader {
-    private PaceSheetReader paceReader = new PaceSheetReader();
-    private WorkoutSheetReader workoutReader = new WorkoutSheetReader();
-    private ScheduleSheetReader scheduleReader = new ScheduleSheetReader();
+    private final PaceSheetReader paceReader = new PaceSheetReader();
+    private final WorkoutSheetReader workoutReader = new WorkoutSheetReader();
+    private final ScheduleSheetReader scheduleReader = new ScheduleSheetReader();
 
     public WorkoutSchedule read(File file) throws IOException {
         WorkoutSchedule result = new WorkoutSchedule();

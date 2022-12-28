@@ -1,6 +1,6 @@
 package com.johnpickup.garmin.workout;
 
-import com.garmin.fit.*;
+import com.garmin.fit.WorkoutStepMesg;
 
 import java.util.List;
 

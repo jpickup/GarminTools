@@ -1,9 +1,8 @@
 package com.johnpickup.converter;
 
-import com.johnpickup.garmin.schedule.*;
+import com.johnpickup.garmin.schedule.TrainingSchedule;
 import com.johnpickup.garmin.unit.PaceTarget;
 import com.johnpickup.parser.*;
-import com.johnpickup.parser.ScheduledWorkout;
 import lombok.Getter;
 
 import java.util.ArrayList;

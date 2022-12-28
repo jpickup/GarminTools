@@ -1,6 +1,9 @@
 package com.johnpickup.parser;
 
-import org.antlr.v4.runtime.*;
+import org.antlr.v4.runtime.CharStream;
+import org.antlr.v4.runtime.CharStreams;
+import org.antlr.v4.runtime.CommonTokenStream;
+import org.antlr.v4.runtime.TokenStream;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
