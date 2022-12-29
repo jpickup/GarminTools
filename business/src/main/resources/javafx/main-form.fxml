@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.johnpickup.app.javafx.MainFormController">
+   <children>
+      <Label layoutX="22.0" layoutY="14.0" text="Input File" />
+      <TextField fx:id="inputFileName" layoutX="173.0" layoutY="10.0" prefHeight="25.0" prefWidth="255.0" />
+      <Button fx:id="inputFileChooser" layoutX="440.0" layoutY="10.0" mnemonicParsing="false" onAction="#inputFileChooserClick" text="..." />
+      <Label layoutX="22.0" layoutY="50.0" text="Output Directory" />
+      <TextField fx:id="outputDirName" layoutX="173.0" layoutY="46.0" prefHeight="25.0" prefWidth="255.0" />
+      <Button id="outputDirChooser" layoutX="440.0" layoutY="46.0" mnemonicParsing="false" onAction="#outputDirChooserClick" text="..." />
+      <Label layoutX="22.0" layoutY="88.0" text="Conversion" />
+      <ComboBox fx:id="conversionCombo" layoutX="173.0" layoutY="84.0" prefHeight="25.0" prefWidth="255.0"/>
+      <Label layoutX="25.0" layoutY="134.0" text="Options" />
+      <CheckBox fx:id="reverseRouteCheckbox" layoutX="169.0" layoutY="134.0" mnemonicParsing="false" text="Reverse route" />
+      <Button id="runButton" layoutX="173.0" layoutY="175.0" mnemonicParsing="false" onAction="#runButtonClick" prefHeight="25.0" prefWidth="91.0" text="Run" />
+      <TextArea fx:id="outputText" layoutX="22.0" layoutY="232.0" prefHeight="154.0" prefWidth="563.0" />
+      <Label layoutX="22.0" layoutY="215.0" text="Output" />
+   </children>
+</AnchorPane>

@@ -17,6 +17,7 @@ module com.johnpickup.business {
     requires org.apache.poi.ooxml;
     requires org.apache.commons.io;
 
-    opens com.johnpickup.app to javafx.fxml;
-    exports com.johnpickup.app;
+    opens com.johnpickup.app.javafx;
+    //opens com.johnpickup.app.javafx to javafx.graphics, javafx.fxml;
+    exports com.johnpickup.app.javafx;
 }
