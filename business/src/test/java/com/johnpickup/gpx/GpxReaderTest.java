@@ -19,7 +19,7 @@ public class GpxReaderTest {
 
     @Test
     public void readGpxFile() throws Exception {
-        GpxType gpxType = gpxReader.readGpxFile(new File("test-resources/com.johnpickup.gpx/BedgeburyBlue.gpx"));
+        GpxType gpxType = gpxReader.readGpxFile(new File("src/test/resources/com.johnpickup.gpx/BedgeburyBlue.gpx"));
         assertNotNull(gpxType);
         log.info("{}", gpxType.getRte());
     }

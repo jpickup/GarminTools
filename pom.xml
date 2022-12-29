@@ -21,6 +21,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <junit.version>4.12</junit.version>
         <jaxb.version>2.3.0</jaxb.version>
+        <jaxb.api.version>2.3.1</jaxb.api.version>
+        <jaxb.runtime.version>2.3.1</jaxb.runtime.version>
         <antlr4.version>4.7.1</antlr4.version>
     </properties>
 
@@ -55,11 +57,21 @@
             <version>1.0.1</version>
         </dependency>
 
+        <!-- JAXB API v3.0.1 -->
         <dependency>
-            <groupId>javax.xml.bind</groupId>
-            <artifactId>jaxb-api</artifactId>
-            <version>${jaxb.version}</version>
+            <groupId>jakarta.xml.bind</groupId>
+            <artifactId>jakarta.xml.bind-api</artifactId>
+            <version>3.0.1</version>
         </dependency>
+
+        <!-- JAXB v3.0.2 reference implementation (curiously with com.sun coordinates) -->
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-impl</artifactId>
+            <version>3.0.2</version>
+            <scope>runtime</scope>
+        </dependency>
+
 
         <dependency>
             <groupId>junit</groupId>

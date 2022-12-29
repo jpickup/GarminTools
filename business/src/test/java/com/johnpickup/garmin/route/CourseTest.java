@@ -25,7 +25,7 @@ public class CourseTest {
     private String inputFilename;
     private String outputFilename;
     private String expectedFilename;
-    private static Map<Integer, Set<Integer>> ignorable = new HashMap<>();
+    private static final Map<Integer, Set<Integer>> ignorable = new HashMap<>();
     static {
         ignorable.put(0, new HashSet<>());
         ignorable.get(0).add(1);
@@ -46,9 +46,9 @@ public class CourseTest {
     public void setUp() {
         gpxReader = new GpxReader();
         courseConverter = new CourseConverter();
-        inputFilename = "test-resources/com.johnpickup.gpx/SimpleTest.gpx";
+        inputFilename = "src/test/resources/com.johnpickup.gpx/SimpleTest.gpx";
         outputFilename = "SimpleTest.fit";
-        expectedFilename = "test-resources/com.johnpickup.gpx/SimpleTest.fit";
+        expectedFilename = "src/test/resources/com.johnpickup.gpx/SimpleTest.fit";
     }
 
 
