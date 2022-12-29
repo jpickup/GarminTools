@@ -11,19 +11,23 @@
     <name>GarminTools</name>
     <modules>
         <module>common</module>
-        <module>domain</module>
+        <module>parser</module>
+        <module>gpx</module>
         <module>business</module>
     </modules>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
+        <maven.compiler.release>17</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <junit.version>4.12</junit.version>
         <jaxb.version>2.3.0</jaxb.version>
         <jaxb.api.version>2.3.1</jaxb.api.version>
         <jaxb.runtime.version>2.3.1</jaxb.runtime.version>
         <antlr4.version>4.7.1</antlr4.version>
+        <apache.poi.version>5.2.2</apache.poi.version>
+        <lombok.version>1.18.24</lombok.version>
     </properties>
 
     <dependencyManagement>
@@ -42,7 +46,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.24</version>
+            <version>${lombok.version}</version>
             <scope>provided</scope>
         </dependency>
 

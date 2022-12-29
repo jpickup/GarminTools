@@ -5,8 +5,10 @@
     <file url="file://$PROJECT_DIR$/business/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/common/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/common/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/domain/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/domain/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gpx/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gpx/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/parser/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/parser/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
   </component>
