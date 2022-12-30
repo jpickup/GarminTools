@@ -1,4 +1,4 @@
-module com.johnpickup.business {
+module com.johnpickup.app {
     requires javafx.controls;
     requires javafx.fxml;
 
@@ -11,14 +11,15 @@ module com.johnpickup.business {
     requires fit;
     requires org.apache.poi.poi;
     requires biweekly;
-    requires com.johnpickup.common;
-    requires com.johnpickup.gpx;
-    requires com.johnpickup.parser;
     requires jakarta.xml.bind;
     requires org.apache.poi.ooxml;
     requires org.apache.commons.io;
     requires ch.qos.logback.classic;
     requires ch.qos.logback.core;
+
+    requires com.johnpickup.common;
+    requires com.johnpickup.gpx;
+    requires com.johnpickup.parser;
 
     opens com.johnpickup.app.javafx;
     exports com.johnpickup.app.javafx;
