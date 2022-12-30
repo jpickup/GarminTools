@@ -1,15 +1,12 @@
 package com.johnpickup.app.calendar;
 
-import lombok.extern.slf4j.Slf4j;
-
 import java.io.File;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-@Slf4j
 public class TrainingCalendarExport {
-
-    private static DateTimeFormatter ddmmyyyy = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(TrainingCalendarExport.class);
+    private static final DateTimeFormatter ddmmyyyy = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     public static void main(String[] args) {
         try {
@@ -19,7 +16,7 @@ public class TrainingCalendarExport {
             ProgrammeReader reader = new ProgrammeReader(inputFilename);
             Programme programme = reader.read();
             Schedule schedule = ScheduleGenerator.generate(programme, raceDate);
-            System.out.println(schedule.toString());
+            System.out.println(schedule);
 
             ScheduleWriter writer;
             if (outputFilename.endsWith(".xls")) {
@@ -32,7 +29,7 @@ public class TrainingCalendarExport {
 
             writer.write(schedule);
         } catch (Exception e) {
-            log.error("{}", e);
+            log.error("ERROR", e);
             throw new RuntimeException(e);
         }
     }

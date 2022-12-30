@@ -1,19 +1,14 @@
 package com.johnpickup.garmin.common.unit;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
+import java.util.Objects;
 
 /**
  * Pace target - a minimum and maximum pace; doesn't really care about which is which (min/max pace vs min/max speed)
  * and so returns the appropriate one in the Garmin Low and High methods
  */
-@EqualsAndHashCode
 public class PaceTarget {
-    @Getter
     private final String name;
-    @Getter
     private final Pace maxPace;
-    @Getter
     private final Pace minPace;
 
     public PaceTarget(double min, double max, PaceUnit unit) {
@@ -28,12 +23,7 @@ public class PaceTarget {
 
     @Override
     public String toString() {
-        if (name == null) {
-            return minPace.toValueString() + "-" + maxPace.toString();
-        }
-        else {
-            return name;
-        }
+        return Objects.requireNonNullElseGet(name, () -> minPace.toValueString() + "-" + maxPace.toString());
     }
 
     public Long getGarminLow() {
@@ -48,5 +38,34 @@ public class PaceTarget {
             return maxPace.toGarminPace();
         else
             return minPace.toGarminPace();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PaceTarget that = (PaceTarget) o;
+        return Objects.equals(name, that.name) && Objects.equals(maxPace, that.maxPace) && Objects.equals(minPace, that.minPace);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, maxPace, minPace);
+    }
+
+    protected boolean canEqual(final Object other) {
+        return other instanceof PaceTarget;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public Pace getMaxPace() {
+        return this.maxPace;
+    }
+
+    public Pace getMinPace() {
+        return this.minPace;
     }
 }

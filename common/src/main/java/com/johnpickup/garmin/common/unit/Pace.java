@@ -1,16 +1,18 @@
 package com.johnpickup.garmin.common.unit;
 
-import lombok.EqualsAndHashCode;
-import lombok.RequiredArgsConstructor;
+import java.util.Objects;
 
 /**
  * Encapsulation of various pace/speed standards with human-readable toString plus a conversion to Garmin units
  */
-@RequiredArgsConstructor
-@EqualsAndHashCode
 public class Pace {
     private final double value;
     private final PaceUnit unit;
+
+    public Pace(double value, PaceUnit unit) {
+        this.value = value;
+        this.unit = unit;
+    }
 
     @Override
     public String toString() {
@@ -19,13 +21,12 @@ public class Pace {
 
     public Long toGarminPace() {
         // Garmin pace units are in millimetres per second
-        switch (unit) {
-            case KILOMETRE_PER_HOUR: return (long)(value / 3.6 * 1000);
-            case MILE_PER_HOUR: return (long)(value / 3.6 * 1609);
-            case MIN_PER_MILE: return (long)(60 / value / 3.6 * 1609);
-            case MIN_PER_KILOMETRE: return (long)(60 / value / 3.6 * 1000);
-        }
-        return null;
+        return switch (unit) {
+            case KILOMETRE_PER_HOUR -> (long) (value / 3.6 * 1000);
+            case MILE_PER_HOUR -> (long) (value / 3.6 * 1609);
+            case MIN_PER_MILE -> (long) (60 / value / 3.6 * 1609);
+            case MIN_PER_KILOMETRE -> (long) (60 / value / 3.6 * 1000);
+        };
     }
 
     public String toValueString() {
@@ -43,4 +44,22 @@ public class Pace {
         }
         return null;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Pace pace = (Pace) o;
+        return Double.compare(pace.value, value) == 0 && unit == pace.unit;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value, unit);
+    }
+
+    protected boolean canEqual(final Object other) {
+        return other instanceof Pace;
+    }
+
 }

@@ -1,21 +1,49 @@
 package com.johnpickup.garmin.parser;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import java.util.Objects;
 
-@RequiredArgsConstructor
-@EqualsAndHashCode
 public class HeartRateRange implements HeartRate {
-    @Getter
     private final int minimum;
-    @Getter
     private final int maximum;
-    @Getter
     private final HeartRateUnit unit;
+
+    public HeartRateRange(int minimum, int maximum, HeartRateUnit unit) {
+        this.minimum = minimum;
+        this.maximum = maximum;
+        this.unit = unit;
+    }
 
     @Override
     public String toString() {
         return String.format("%s-%s%s", minimum, maximum, unit);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        HeartRateRange that = (HeartRateRange) o;
+        return minimum == that.minimum && maximum == that.maximum && unit == that.unit;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(minimum, maximum, unit);
+    }
+
+    protected boolean canEqual(final Object other) {
+        return other instanceof HeartRateRange;
+    }
+
+    public int getMinimum() {
+        return this.minimum;
+    }
+
+    public int getMaximum() {
+        return this.maximum;
+    }
+
+    public HeartRateUnit getUnit() {
+        return this.unit;
     }
 }

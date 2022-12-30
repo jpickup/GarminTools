@@ -1,24 +1,45 @@
 package com.johnpickup.garmin.parser;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Class that contains all the elements required to build a series of workouts and schedule them
  */
-@EqualsAndHashCode
-@ToString
 public class WorkoutSchedule {
-    @Getter
-    private Map<String, Workout> workouts = new HashMap<>();
-    @Getter
-    private Map<String, Pace> paces = new HashMap<>();
-    @Getter
-    private List<ScheduledWorkout> schedule = new ArrayList<>();
+    private final Map<String, Workout> workouts = new HashMap<>();
+    private final Map<String, Pace> paces = new HashMap<>();
+    private final List<ScheduledWorkout> schedule = new ArrayList<>();
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        WorkoutSchedule that = (WorkoutSchedule) o;
+        return workouts.equals(that.workouts) && paces.equals(that.paces) && schedule.equals(that.schedule);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(workouts, paces, schedule);
+    }
+
+    protected boolean canEqual(final Object other) {
+        return other instanceof WorkoutSchedule;
+    }
+
+    public String toString() {
+        return "WorkoutSchedule(workouts=" + this.workouts + ", paces=" + this.paces + ", schedule=" + this.schedule + ")";
+    }
+
+    public Map<String, Workout> getWorkouts() {
+        return this.workouts;
+    }
+
+    public Map<String, Pace> getPaces() {
+        return this.paces;
+    }
+
+    public List<ScheduledWorkout> getSchedule() {
+        return this.schedule;
+    }
 }

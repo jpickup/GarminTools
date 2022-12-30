@@ -4,20 +4,22 @@ import com.garmin.fit.Intensity;
 import com.garmin.fit.WktStepDuration;
 import com.garmin.fit.WktStepTarget;
 import com.garmin.fit.WorkoutStepMesg;
-import lombok.EqualsAndHashCode;
-import lombok.RequiredArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Workout that repeats the component steps a specific number of times
  */
-@RequiredArgsConstructor
-@EqualsAndHashCode(callSuper = false)
 public class RepeatingStepsWorkoutStep extends WorkoutStep {
     private final int intervalCount;
     private final List<WorkoutStep> steps;
+
+    public RepeatingStepsWorkoutStep(int intervalCount, List<WorkoutStep> steps) {
+        this.intervalCount = intervalCount;
+        this.steps = steps;
+    }
 
     @Override
     public String getName() {
@@ -51,4 +53,22 @@ public class RepeatingStepsWorkoutStep extends WorkoutStep {
 
         return result;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        RepeatingStepsWorkoutStep that = (RepeatingStepsWorkoutStep) o;
+        return intervalCount == that.intervalCount && Objects.equals(steps, that.steps);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(intervalCount, steps);
+    }
+
+    protected boolean canEqual(final Object other) {
+        return other instanceof RepeatingStepsWorkoutStep;
+    }
+
 }

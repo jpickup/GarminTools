@@ -5,7 +5,6 @@ module com.johnpickup.app {
     requires org.controlsfx.controls;
     requires com.dlsc.formsfx;
     requires org.kordamp.bootstrapfx.core;
-    requires lombok;
     requires org.slf4j;
     requires antlr4.runtime;
     requires fit;

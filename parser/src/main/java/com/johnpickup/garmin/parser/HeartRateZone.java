@@ -1,12 +1,9 @@
 package com.johnpickup.garmin.parser;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
+import java.util.Objects;
 
-@EqualsAndHashCode
 public class HeartRateZone implements HeartRate {
     private final Zone zone;
-    @Getter
     private final long zoneNumber;
     private HeartRateZone(Zone zone, long zoneNumber) {
         this.zone = zone;
@@ -22,6 +19,27 @@ public class HeartRateZone implements HeartRate {
     @Override
     public String toString() {
         return zone.name();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        HeartRateZone that = (HeartRateZone) o;
+        return zoneNumber == that.zoneNumber && zone == that.zone;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(zone, zoneNumber);
+    }
+
+    protected boolean canEqual(final Object other) {
+        return other instanceof HeartRateZone;
+    }
+
+    public long getZoneNumber() {
+        return this.zoneNumber;
     }
 
     enum Zone {

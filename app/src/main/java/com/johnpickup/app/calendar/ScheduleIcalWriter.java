@@ -4,7 +4,6 @@ import biweekly.Biweekly;
 import biweekly.ICalendar;
 import biweekly.component.VEvent;
 import biweekly.property.Summary;
-import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -14,9 +13,9 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-@Slf4j
 public class ScheduleIcalWriter implements ScheduleWriter {
-    private File outputFile;
+    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(ScheduleIcalWriter.class);
+    private final File outputFile;
     private ICalendar iCalendar;
 
     public ScheduleIcalWriter(File outputFile) {

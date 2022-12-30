@@ -1,11 +1,8 @@
 package com.johnpickup.garmin.parser;
 
-import lombok.EqualsAndHashCode;
-
 /**
  * Created by john on 03/01/2017.
  */
-@EqualsAndHashCode(callSuper = true)
 public class MinimumPace extends PaceLimit {
     public MinimumPace(Time time, PaceUnit unit) {
         super(time, unit);

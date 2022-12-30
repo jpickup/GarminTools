@@ -2,21 +2,21 @@ package com.johnpickup.app.garmin.workout;
 
 import com.garmin.fit.*;
 import com.johnpickup.app.garmin.fit.FitGenerator;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@RequiredArgsConstructor
 public  class Workout implements FitGenerator {
     private static int instanceIndex = 0;
     private Long timestamp;
     private final List<WorkoutStep> steps;
 
-    @Setter
     private String name;
+
+    public Workout(List<WorkoutStep> steps) {
+        this.steps = steps;
+    }
 
     public String getName() {
         if (name != null && !name.isEmpty()) {
@@ -80,5 +80,9 @@ public  class Workout implements FitGenerator {
         messages.addAll(allWorkoutStepMesgs);
         workout.setNumValidSteps(allWorkoutStepMesgs.size());
         return messages;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

@@ -3,7 +3,6 @@ package com.johnpickup.app.converter;
 import com.johnpickup.app.garmin.schedule.TrainingSchedule;
 import com.johnpickup.garmin.common.unit.PaceTarget;
 import com.johnpickup.garmin.parser.*;
-import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,12 +13,10 @@ import java.util.Map;
  * Created by john on 12/01/2017.
  */
 public class WorkoutScheduleConverter {
-    private Map<String, PaceTarget> namedPaces = new HashMap<>();
-    @Getter
-    private List<com.johnpickup.app.garmin.workout.Workout> garminWorkouts = new ArrayList<>();
-    @Getter
-    private TrainingSchedule trainingSchedule = new TrainingSchedule();
-    private Map<Workout, com.johnpickup.app.garmin.workout.Workout> workoutMap = new HashMap<>();
+    private final Map<String, PaceTarget> namedPaces = new HashMap<>();
+    private final List<com.johnpickup.app.garmin.workout.Workout> garminWorkouts = new ArrayList<>();
+    private final TrainingSchedule trainingSchedule = new TrainingSchedule();
+    private final Map<Workout, com.johnpickup.app.garmin.workout.Workout> workoutMap = new HashMap<>();
 
     public WorkoutScheduleConverter() {
         PaceNameConverter namedPaceConverter = new PaceNameConverter(namedPaces);
@@ -57,5 +54,13 @@ public class WorkoutScheduleConverter {
         garminWorkouts.clear();
         workoutMap.clear();
         trainingSchedule.clear();
+    }
+
+    public List<com.johnpickup.app.garmin.workout.Workout> getGarminWorkouts() {
+        return this.garminWorkouts;
+    }
+
+    public TrainingSchedule getTrainingSchedule() {
+        return this.trainingSchedule;
     }
 }

@@ -3,23 +3,24 @@ package com.johnpickup.app.garmin.route;
 import com.garmin.fit.*;
 import com.johnpickup.app.garmin.fit.FitGenerator;
 import com.johnpickup.app.util.Haversine;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-@RequiredArgsConstructor
 public class Course implements FitGenerator {
     private static final double RADIAN_SEMICIRCLE = Math.pow(2, 31) / Math.PI;
-    @Getter
     private final String name;
     private final List<CoursePoint> coursePoints;
 
     private Long timestamp;
     private static int instanceIndex = 0;
+
+    public Course(String name, List<CoursePoint> coursePoints) {
+        this.name = name;
+        this.coursePoints = coursePoints;
+    }
 
     public void reverse() {
         Collections.reverse(coursePoints);
@@ -68,7 +69,7 @@ public class Course implements FitGenerator {
         EventMesg eventMesg = new EventMesg();
         eventMesg.setTimestamp(new DateTime(getTimestamp()));
         eventMesg.setEvent(Event.TIMER);
-        eventMesg.setEventGroup(new Short("0"));
+        eventMesg.setEventGroup(Short.parseShort("0"));
         eventMesg.setEventType(EventType.START);
         messages.add(eventMesg);
 
@@ -93,7 +94,7 @@ public class Course implements FitGenerator {
         eventMesg = new EventMesg();
         eventMesg.setTimestamp(new DateTime(getTimestamp()));
         eventMesg.setEvent(Event.TIMER);
-        eventMesg.setEventGroup(new Short("0"));
+        eventMesg.setEventGroup(Short.parseShort("0"));
         eventMesg.setEventType(EventType.STOP_DISABLE_ALL);
         messages.add(eventMesg);
 
@@ -115,5 +116,9 @@ public class Course implements FitGenerator {
 
     public int size() {
         return coursePoints.size();
+    }
+
+    public String getName() {
+        return this.name;
     }
 }

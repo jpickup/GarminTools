@@ -1,10 +1,11 @@
 package com.johnpickup.garmin.common.unit;
 
-import lombok.RequiredArgsConstructor;
-
-@RequiredArgsConstructor
 public class ZoneHeartRateTarget extends HeartRateTarget {
     private final Long zone;
+
+    public ZoneHeartRateTarget(Long zone) {
+        this.zone = zone;
+    }
 
     @Override
     public Long getGarminLow() {

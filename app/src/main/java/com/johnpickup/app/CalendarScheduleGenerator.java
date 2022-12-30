@@ -5,7 +5,6 @@ import com.johnpickup.app.calendar.ScheduleIcalWriter;
 import com.johnpickup.app.calendar.WorkoutScheduleConverter;
 import com.johnpickup.app.excel.ExcelWorkoutScheduleReader;
 import com.johnpickup.garmin.parser.WorkoutSchedule;
-import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
 
@@ -14,8 +13,9 @@ import java.io.File;
  * Simple class with command-line interface that takes an Excel definition of a workout schedule and produces
  * in iCal file that can be imported into a calendar application
  */
-@Slf4j
 public class CalendarScheduleGenerator {
+    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(CalendarScheduleGenerator.class);
+
     public static void main(String[] args) {
         try {
             CalendarScheduleGenerator instance = new CalendarScheduleGenerator();

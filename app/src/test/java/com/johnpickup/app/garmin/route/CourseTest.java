@@ -7,7 +7,6 @@ import com.johnpickup.app.garmin.fit.FitReader;
 import com.johnpickup.app.garmin.fit.FitSaver;
 import com.johnpickup.app.gpx.GpxReader;
 import com.johnpickup.gpx.GpxType;
-import lombok.extern.slf4j.Slf4j;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -17,9 +16,8 @@ import java.util.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-@Slf4j
 public class CourseTest {
-
+    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(CourseTest.class);
     private GpxReader gpxReader;
     private CourseConverter courseConverter;
     private String inputFilename;

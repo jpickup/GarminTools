@@ -4,7 +4,6 @@ import com.johnpickup.garmin.parser.AntlrErrorHandler;
 import com.johnpickup.garmin.parser.Workout;
 import com.johnpickup.garmin.parser.WorkoutLexer;
 import com.johnpickup.garmin.parser.WorkoutParser;
-import lombok.extern.slf4j.Slf4j;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -18,8 +17,8 @@ import java.io.InputStream;
 /**
  * Created by john on 03/01/2017.
  */
-@Slf4j
 public class WorkoutTextParser {
+    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(WorkoutTextParser.class);
     public Workout parse(String workoutInput) throws IOException {
         InputStream input = new ByteArrayInputStream(workoutInput.getBytes());
         CharStream charStream = CharStreams.fromStream(input);

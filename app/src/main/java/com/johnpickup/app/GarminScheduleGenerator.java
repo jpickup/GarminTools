@@ -5,18 +5,16 @@ import com.johnpickup.app.excel.ExcelWorkoutScheduleReader;
 import com.johnpickup.app.garmin.WorkoutSaver;
 import com.johnpickup.app.garmin.workout.Workout;
 import com.johnpickup.garmin.parser.WorkoutSchedule;
-import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
 import java.io.IOException;
-
 
 /**
  * Simple class with command-line interface that takes an Excel definition of a workout schedule and produces a set
  * of FIT files for loading onto the Garmin device
  */
-@Slf4j
 public class GarminScheduleGenerator {
+    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(GarminScheduleGenerator.class);
     public static void main(String[] args) {
         try {
             GarminScheduleGenerator instance = new GarminScheduleGenerator();

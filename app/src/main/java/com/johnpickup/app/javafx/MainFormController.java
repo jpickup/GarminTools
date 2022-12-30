@@ -8,14 +8,14 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
-import lombok.extern.slf4j.Slf4j;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.util.Collections;
 
-@Slf4j
 public class MainFormController {
+    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(MainFormController.class);
+
     UiAppender uiAppender;
     @FXML
     TextField inputFileName;
@@ -75,13 +75,13 @@ public class MainFormController {
     public void runButtonClick(ActionEvent actionEvent) {
         ConversionType selected = (ConversionType)conversionCombo.getValue();
         try {
-            if (selected.task != null) {
+            if (selected.getTask() != null) {
                 TaskArguments args = TaskArguments.builder()
                         .inputFile(new File(inputFileName.getText()))
                         .outputDir(new File(outputDirName.getText()))
                         .options(Collections.singletonMap("reverse", reverseRouteCheckbox.isSelected()))
                         .build();
-                UiTask task = (UiTask) selected.task.getDeclaredConstructor(TaskArguments.class).newInstance(args);
+                UiTask task = (UiTask) selected.getTask().getDeclaredConstructor(TaskArguments.class).newInstance(args);
                 task.messageProperty().addListener((w, o, n) -> log.info(n));
                 new Thread(task).start();
             }

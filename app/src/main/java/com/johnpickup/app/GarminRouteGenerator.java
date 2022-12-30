@@ -6,14 +6,14 @@ import com.johnpickup.app.garmin.route.Course;
 import com.johnpickup.app.gpx.GpxReader;
 import com.johnpickup.gpx.GpxType;
 import jakarta.xml.bind.JAXBException;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FilenameUtils;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 
-@Slf4j
 public class GarminRouteGenerator {
+    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(GarminRouteGenerator.class);
+
     private final GpxReader gpxReader = new GpxReader();
     private final CourseConverter courseConverter = new CourseConverter();
 

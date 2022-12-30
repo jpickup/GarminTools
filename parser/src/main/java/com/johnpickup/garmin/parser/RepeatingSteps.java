@@ -1,27 +1,21 @@
 package com.johnpickup.garmin.parser;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by john on 03/01/2017.
  */
-@RequiredArgsConstructor
-@EqualsAndHashCode(callSuper = false)
 public class RepeatingSteps extends Step {
-    @Getter
     private final List<Step> steps = new ArrayList<>();
-    @Getter
-    @Setter
     private int repetitions = 1;
 
     public RepeatingSteps(Step firstStep) {
         steps.add(firstStep);
+    }
+
+    public RepeatingSteps() {
     }
 
     public void addStep(Step step) {
@@ -39,8 +33,37 @@ public class RepeatingSteps extends Step {
                 result.append(" + ").append(step.toString());
             }
         }
-        result.append(") * ").append(Integer.toString(repetitions));
+        result.append(") * ").append(repetitions);
 
         return result.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        RepeatingSteps that = (RepeatingSteps) o;
+        return repetitions == that.repetitions && Objects.equals(steps, that.steps);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(steps, repetitions);
+    }
+
+    protected boolean canEqual(final Object other) {
+        return other instanceof RepeatingSteps;
+    }
+
+    public List<Step> getSteps() {
+        return this.steps;
+    }
+
+    public int getRepetitions() {
+        return this.repetitions;
+    }
+
+    public void setRepetitions(int repetitions) {
+        this.repetitions = repetitions;
     }
 }

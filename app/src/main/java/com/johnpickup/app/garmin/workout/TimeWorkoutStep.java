@@ -5,19 +5,20 @@ import com.garmin.fit.WktStepDuration;
 import com.garmin.fit.WktStepTarget;
 import com.garmin.fit.WorkoutStepMesg;
 import com.johnpickup.garmin.common.unit.Time;
-import lombok.EqualsAndHashCode;
-import lombok.RequiredArgsConstructor;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Simple workout the lasts a specific distance, no pace targets
  */
-@RequiredArgsConstructor
-@EqualsAndHashCode(callSuper = false)
 public class TimeWorkoutStep extends WorkoutStep {
     private final Time time;
+
+    public TimeWorkoutStep(Time time) {
+        this.time = time;
+    }
 
     @Override
     public String getName() {
@@ -36,4 +37,22 @@ public class TimeWorkoutStep extends WorkoutStep {
 
         return Collections.singletonList(step);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TimeWorkoutStep that = (TimeWorkoutStep) o;
+        return Objects.equals(time, that.time);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(time);
+    }
+
+    protected boolean canEqual(final Object other) {
+        return other instanceof TimeWorkoutStep;
+    }
+
 }

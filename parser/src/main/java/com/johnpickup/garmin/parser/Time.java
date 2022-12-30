@@ -1,16 +1,18 @@
 package com.johnpickup.garmin.parser;
 
-import lombok.EqualsAndHashCode;
-import lombok.RequiredArgsConstructor;
+import java.util.Objects;
 
 /**
  * Created by john on 03/01/2017.
  */
-@EqualsAndHashCode
-@RequiredArgsConstructor
 public class Time {
     private final Integer minutes;
     private final Integer seconds;
+
+    public Time(Integer minutes, Integer seconds) {
+        this.minutes = minutes;
+        this.seconds = seconds;
+    }
 
     public static Time parseTime(String text) {
         String[] parts = text.split(":");
@@ -37,4 +39,22 @@ public class Time {
     public String toString() {
         return String.format("%d:%02d", minutes, seconds);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Time time = (Time) o;
+        return Objects.equals(minutes, time.minutes) && Objects.equals(seconds, time.seconds);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(minutes, seconds);
+    }
+
+    protected boolean canEqual(final Object other) {
+        return other instanceof Time;
+    }
+
 }
