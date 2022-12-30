@@ -11,8 +11,9 @@ module com.johnpickup.business {
     requires fit;
     requires org.apache.poi.poi;
     requires biweekly;
-    requires com.johnpickup.domain;
     requires com.johnpickup.common;
+    requires com.johnpickup.gpx;
+    requires com.johnpickup.parser;
     requires jakarta.xml.bind;
     requires org.apache.poi.ooxml;
     requires org.apache.commons.io;
@@ -20,7 +21,6 @@ module com.johnpickup.business {
     requires ch.qos.logback.core;
 
     opens com.johnpickup.app.javafx;
-    //opens com.johnpickup.app.javafx to javafx.graphics, javafx.fxml;
     exports com.johnpickup.app.javafx;
     exports com.johnpickup.app.task;
     opens com.johnpickup.app.task;

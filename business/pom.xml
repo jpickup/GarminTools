@@ -19,7 +19,12 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>domain</artifactId>
+            <artifactId>gpx</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>parser</artifactId>
             <version>${project.version}</version>
         </dependency>
 

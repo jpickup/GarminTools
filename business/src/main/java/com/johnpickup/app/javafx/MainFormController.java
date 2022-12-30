@@ -72,8 +72,6 @@ public class MainFormController {
     }
 
     public void runButtonClick(ActionEvent actionEvent) {
-        log.info("Run clicked");
-        log.info("{}", conversionCombo.getValue());
         ConversionType selected = (ConversionType)conversionCombo.getValue();
         try {
             if (selected.task != null) {
@@ -86,7 +84,7 @@ public class MainFormController {
                 new Thread(task).start();
             }
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            log.error("Unexpected error", e);
         }
     }
 
@@ -105,5 +103,9 @@ public class MainFormController {
         Logger root = (Logger) (LoggerFactory.getLogger("root"));
         root.addAppender(uiAppender);
         uiAppender.start();
+
+        Thread.setDefaultUncaughtExceptionHandler((thread, throwable) -> {
+            log.error(throwable.getMessage());
+        });
     }
 }
