@@ -12,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
+import java.util.Collections;
 
 @Slf4j
 public class MainFormController {
@@ -78,6 +79,7 @@ public class MainFormController {
                 TaskArguments args = TaskArguments.builder()
                         .inputFile(new File(inputFileName.getText()))
                         .outputDir(new File(outputDirName.getText()))
+                        .options(Collections.singletonMap("reverse", reverseRouteCheckbox.isSelected()))
                         .build();
                 UiTask task = (UiTask) selected.task.getDeclaredConstructor(TaskArguments.class).newInstance(args);
                 task.messageProperty().addListener((w, o, n) -> log.info(n));
@@ -90,10 +92,9 @@ public class MainFormController {
 
     public void onConversionComboAction(ActionEvent actionEvent) {
         ConversionType selected = (ConversionType)conversionCombo.getSelectionModel().getSelectedItem();
-        log.info("Selected {}", selected);
         fileChooser.getExtensionFilters().clear();
         fileChooser.getExtensionFilters().addAll(selected.getFilePattern());
-
+        reverseRouteCheckbox.setDisable(selected != ConversionType.GPX_TO_FIT);
     }
 
     public void init() {
