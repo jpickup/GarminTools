@@ -32,8 +32,6 @@
             <groupId>com.garmin</groupId>
             <artifactId>fit</artifactId>
             <version>1.0</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/../lib/fit.jar</systemPath>
         </dependency>
 
         <dependency>
@@ -190,29 +188,37 @@
                 </executions>
             </plugin>
 
-            <!-- Maven Shade Plugin -->
+            <!-- create a local repo with the Garmin fit jar -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-                <version>3.4.1</version>
+                <artifactId>maven-install-plugin</artifactId>
                 <executions>
-                    <!-- Run shade goal on package phase -->
                     <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>shade</goal>
-                        </goals>
+                        <id>create-local-repo</id>
+                        <phase>validate</phase>
                         <configuration>
-                            <transformers>
-                                <!-- add Main-Class to manifest file -->
-                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>com.johnpickup.app.javafx.MainForm</mainClass>
-                                </transformer>
-                            </transformers>
+                            <file>${basedir}/../lib/fit.jar</file>
+                            <repositoryLayout>default</repositoryLayout>
+                            <groupId>com.garmin</groupId>
+                            <artifactId>fit</artifactId>
+                            <version>1.0</version>
+                            <packaging>jar</packaging>
+                            <generatePom>true</generatePom>
                         </configuration>
+                        <goals>
+                            <goal>install-file</goal>
+                        </goals>
                     </execution>
                 </executions>
             </plugin>
+
         </plugins>
     </build>
+
+    <repositories>
+        <repository>
+            <id>local-repo</id>
+            <url>file://${basedir}/../local-repo</url>
+        </repository>
+    </repositories>
 </project>
