@@ -15,8 +15,8 @@
         <processorPath useClasspath="false">
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.24/lombok-1.18.24.jar" />
         </processorPath>
-        <module name="business" />
         <module name="common" />
+        <module name="business" />
         <module name="parser" />
         <module name="gpx" />
       </profile>

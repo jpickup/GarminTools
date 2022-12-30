@@ -7,6 +7,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 public class MainForm extends Application {
+
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(MainForm.class.getResource("/javafx/main-form.fxml"));

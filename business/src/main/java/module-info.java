@@ -16,8 +16,12 @@ module com.johnpickup.business {
     requires jakarta.xml.bind;
     requires org.apache.poi.ooxml;
     requires org.apache.commons.io;
+    requires ch.qos.logback.classic;
+    requires ch.qos.logback.core;
 
     opens com.johnpickup.app.javafx;
     //opens com.johnpickup.app.javafx to javafx.graphics, javafx.fxml;
     exports com.johnpickup.app.javafx;
+    exports com.johnpickup.app.task;
+    opens com.johnpickup.app.task;
 }
