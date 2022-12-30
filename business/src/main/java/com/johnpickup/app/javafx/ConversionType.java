@@ -17,7 +17,7 @@ public enum ConversionType {
     SCHEDULE_TO_FIT("Excel Schedule to FIT", ScheduleFitTask.class,
             List.of(new FileChooser.ExtensionFilter("Excel Workbook", "*.xlsx", "*.xls"))),
     SCHEDULE_TO_ICAL("Excel Schedule to iCal", ScheduleIcalTask.class,
-            List.of(new FileChooser.ExtensionFilter("Excel Workbook", "*.xls")));
+            List.of(new FileChooser.ExtensionFilter("Excel Workbook", "*.xlsx", "*.xls")));
     final String description;
     final Class task;
     final List<FileChooser.ExtensionFilter> filePattern;

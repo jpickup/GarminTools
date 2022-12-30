@@ -98,6 +98,7 @@ public class MainFormController {
     }
 
     public void init() {
+        outputDirName.setText(System.getProperty("user.home"));
         conversionCombo.getItems().addAll(ConversionType.GPX_TO_FIT, ConversionType.SCHEDULE_TO_FIT, ConversionType.SCHEDULE_TO_ICAL);
         uiAppender = new UiAppender((s) ->
                 Platform.runLater(() -> outputText.appendText(s + "\n")));
