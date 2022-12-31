@@ -89,7 +89,7 @@ call "%JAVA_HOME%\bin\jpackage" ^
   --main-jar %MAIN_JAR% ^
   --java-options -Xmx2048m ^
   --runtime-image target/java-runtime ^
-  --icon src/main/logo/windows/duke.ico ^
+  --icon src/main/logo/windows/GarminTools.ico ^
   --app-version %APP_VERSION% ^
   --vendor "John Pickup" ^
   --copyright "Copyright © 2022 John Pickup" ^
