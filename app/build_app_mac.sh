@@ -79,6 +79,7 @@ echo "creating java runtime image"
 $JAVA_HOME/bin/jlink \
   --strip-native-commands \
   --no-header-files \
+  --bind-services \
   --no-man-pages  \
   --compress=2  \
   --strip-debug \

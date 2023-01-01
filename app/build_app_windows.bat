@@ -70,6 +70,7 @@ call "%JAVA_HOME%\bin\jlink" ^
   --strip-native-commands ^
   --no-header-files ^
   --no-man-pages ^
+  --bind-services ^
   --compress=2 ^
   --strip-debug ^
   --add-modules %detected_modules%%manual_modules% ^
