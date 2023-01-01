@@ -192,7 +192,7 @@
                 <executions>
                     <execution>
                         <id>create-local-repo</id>
-                        <phase>validate</phase>
+                        <phase>verify</phase>
                         <configuration>
                             <file>${basedir}/../lib/fit.jar</file>
                             <repositoryLayout>default</repositoryLayout>
@@ -200,6 +200,7 @@
                             <artifactId>fit</artifactId>
                             <version>1.0</version>
                             <packaging>jar</packaging>
+                            <createChecksum>true</createChecksum>
                             <generatePom>true</generatePom>
                         </configuration>
                         <goals>
