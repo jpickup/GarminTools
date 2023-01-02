@@ -25,17 +25,46 @@ Steps are written as text, for example:
 | 800m@Z3 | 800 metres in heart rate Zone 3 |
 | 400m@160-180bpm | 400 metres wth a heart rate between 160 and 180 beats per minute |
 
-
 Steps can also be strung together with a `+` character, repeated using `*n` and grouped using brackets, for example:
 
 | Workout | Description |
 | ------- | ----------- |
 | `1mi + (400m@7:00-8:30/mi + 200m@10:00-12:00/mi) * 4 + 1mi` | An interval session comprising 4 repeats of 400m with 200m recoveries plus a mile of warm-up and cool-down |
- 
-More examples can be found in `ExampleWorkoutSchedule.xls` 
 
-The grammar for the language is defined in `grammar/Workout.g4`, which is an ANTLR4 grammar that is used to generate 
-Java code.
+More examples can be found in `ExampleWorkoutSchedule.xls`
+
+## Units
+### Distance
+| Unit | Description | Example |
+| ---- | ----------- |---------|
+| m | Metre | 400m    |
+| km | Kilometre | 5km     |
+| mi | Mile | 26.2mi  |
+
+### Pace
+A pace is just the time, in minutes and seconds per distance unit, e.g. 9:00/mi is a 9 minute mile; 4:30/km is a 4:30 minute kilometre.
+
+### Pace Range
+These are more useful and are used to set a target range for a workout with a minimum and maximum time per distance unit. 
+During a workout the watch alerts you if you are too fast or too slow. Examples:
+
+| Pace range | Description |
+| ---------- | ----------- |
+| 8:00-9:00/mi | between 8 and 9 minutes / mile |
+| 4:00-5:00/km | between 4 and 5 minutes per kilometre |
+
+Paces can be given names in the Pace sheet of the workbook. This is optional but can be useful for two reasons:
+1. less to type if you regularly use a term like "TEMPO" or "FAST" in your workouts
+2. less to update if you want to change the pace for all workouts (e.g. you are getting faster through training and want to increase the pace on all workouts)
+
+### Heart rate ranges
+There are two ways to express this, either as beats per minute (bpm) or as a zone (Z1 - Z5). The HR zones are defined inside the watch based on measurements it has made. 
+Examples:
+
+| HR range | Description |
+| ---------- | ----------- |
+| 120-130bpm | between 120 and 130 beats per minute |
+| Z3 | Zone 3 |
 
 ## Excel workbook
 The app expects the input workbook to have specific named sheets and specific column headers within these. Any additional 
@@ -55,3 +84,8 @@ sheets or columns are ignored.
 | Workout | Description | The workout language definition, may include named paces defined in the pace sheet |
 | Schedule | Date | The date for a specific workout |
 | Schedule | Workout | Either defined in the workout language or the name a named workout from the Workout sheet |
+
+## ANTLR4 Grammar
+The grammar for the language is defined in `grammar/Workout.g4`, which is an ANTLR4 grammar that is used to generate
+Java code.
+
