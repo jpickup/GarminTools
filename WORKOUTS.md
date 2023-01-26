@@ -16,20 +16,23 @@ Workouts are defined as a series of steps, where a step is either a period of ti
 For example 10 minutes or 400 metres. A step can also have a target such as a pace or a heart rate. 
 Steps are written as text, for example:
 
-| Workout | Description |
-| ------- | ----------- |
-| `1mi` | A step of 1 mile |
-| `400m` | A step of 400 metres |
+| Workout            | Description                                                                   |
+|--------------------|-------------------------------------------------------------------------------|
+| `1mi`              | A step of 1 mile                                                              |
+| `400m`             | A step of 400 metres                                                          |
+| `Open`             | An open step - ends when lap button pressed                                   |
 | `100m@4:00-5:00/km` | A step of 100 metres with a target pace between 4 and 5 minutes per kilometre |
-| `1mi>6mph` | 1 mile at a pace faster than 6 miles per hour |
-| 800m@Z3 | 800 metres in heart rate Zone 3 |
-| 400m@160-180bpm | 400 metres wth a heart rate between 160 and 180 beats per minute |
+| `1mi>6mph`         | 1 mile at a pace faster than 6 miles per hour                                 |
+| `Open@8:00-9:00/mi` | An open step with a pace target                                               |
+| `800m@Z3`            | 800 metres in heart rate Zone 3                                               |
+| `400m@160-180bpm`    | 400 metres wth a heart rate between 160 and 180 beats per minute              |
 
 Steps can also be strung together with a `+` character, repeated using `*n` and grouped using brackets, for example:
 
-| Workout | Description |
-| ------- | ----------- |
-| `1mi + (400m@7:00-8:30/mi + 200m@10:00-12:00/mi) * 4 + 1mi` | An interval session comprising 4 repeats of 400m with 200m recoveries plus a mile of warm-up and cool-down |
+| Workout                                                       | Description                                                                                                 |
+|---------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------|
+| `1mi + (400m@7:00-8:30/mi + 200m@10:00-12:00/mi) * 4 + 1mi`   | An interval session comprising 4 repeats of 400m with 200m recoveries plus a mile of warm-up and cool-down  |
+| `Open + (400m@7:00-8:30/mi + 200m@10:00-12:00/mi) * 4 + Open` | An interval session comprising 4 repeats of 400m with 200m recoveries with open warm-up and cool-down steps |
 
 More examples can be found in `ExampleWorkoutSchedule.xls`
 
