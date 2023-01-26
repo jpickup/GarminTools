@@ -5,35 +5,31 @@ import com.garmin.fit.WktStepDuration;
 import com.garmin.fit.WktStepTarget;
 import com.garmin.fit.WorkoutStepMesg;
 import com.johnpickup.garmin.common.unit.HeartRateTarget;
-import com.johnpickup.garmin.common.unit.Time;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
 /**
- * Simple workout that lasts a specific distance with a pace target
+ * Simple workout step that's open with a heart rate target
  */
-public class TimeHeartRateWorkoutStep extends WorkoutStep {
-    private final Time time;
+public class OpenHeartRateWorkoutStep extends WorkoutStep {
     private final HeartRateTarget heartRateTarget;
 
-    public TimeHeartRateWorkoutStep(Time time, HeartRateTarget heartRateTarget) {
-        this.time = time;
+    public OpenHeartRateWorkoutStep(HeartRateTarget heartRateTarget) {
         this.heartRateTarget = heartRateTarget;
     }
 
     @Override
     public String getName() {
-        return time.toString() + " " + heartRateTarget.toString();
+        return "Open " + heartRateTarget.toString();
     }
 
     @Override
     public List<WorkoutStepMesg> generateWorkoutSteps() {
         WorkoutStepMesg step = new WorkoutStepMesg();
         step.setIntensity(Intensity.ACTIVE);
-        step.setDurationType(WktStepDuration.TIME);
-        step.setDurationDistance(time.toGarminTime());
+        step.setDurationType(WktStepDuration.OPEN);
         step.setTargetType(WktStepTarget.HEART_RATE);
         step.setTargetValue(heartRateTarget.getTargetValue());
         step.setMessageIndex(generateWorkoutStepIndex());
@@ -47,17 +43,17 @@ public class TimeHeartRateWorkoutStep extends WorkoutStep {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        TimeHeartRateWorkoutStep that = (TimeHeartRateWorkoutStep) o;
-        return Objects.equals(time, that.time) && Objects.equals(heartRateTarget, that.heartRateTarget);
+        OpenHeartRateWorkoutStep that = (OpenHeartRateWorkoutStep) o;
+        return Objects.equals(heartRateTarget, that.heartRateTarget);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(time, heartRateTarget);
+        return Objects.hash(heartRateTarget);
     }
 
     protected boolean canEqual(final Object other) {
-        return other instanceof TimeHeartRateWorkoutStep;
+        return other instanceof OpenHeartRateWorkoutStep;
     }
 
 }

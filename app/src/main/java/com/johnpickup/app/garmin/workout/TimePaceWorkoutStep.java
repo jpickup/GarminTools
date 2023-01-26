@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Simple workout the lasts a specific distance with a pace target
+ * Simple workout that lasts a specific distance with a pace target
  */
 public class TimePaceWorkoutStep extends WorkoutStep {
     private final Time time;

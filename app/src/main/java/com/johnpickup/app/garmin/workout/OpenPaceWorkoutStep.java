@@ -4,36 +4,37 @@ import com.garmin.fit.Intensity;
 import com.garmin.fit.WktStepDuration;
 import com.garmin.fit.WktStepTarget;
 import com.garmin.fit.WorkoutStepMesg;
-import com.johnpickup.garmin.common.unit.Distance;
+import com.johnpickup.garmin.common.unit.PaceTarget;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
 /**
- * Simple workout that lasts a specific distance, no pace targets
+ * Simple workout the lasts a specific distance with a pace target
  */
-public class DistanceWorkoutStep extends WorkoutStep {
-    private final Distance distance;
+public class OpenPaceWorkoutStep extends WorkoutStep {
+    private final PaceTarget paceTarget;
 
-    public DistanceWorkoutStep(Distance distance) {
-        this.distance = distance;
+    public OpenPaceWorkoutStep(PaceTarget paceTarget) {
+        this.paceTarget = paceTarget;
     }
 
     @Override
     public String getName() {
-        return distance.toString();
+        return "Open " + paceTarget.toString();
     }
 
     @Override
     public List<WorkoutStepMesg> generateWorkoutSteps() {
         WorkoutStepMesg step = new WorkoutStepMesg();
         step.setIntensity(Intensity.ACTIVE);
-        step.setDurationType(WktStepDuration.DISTANCE);
-        step.setDurationDistance(distance.toGarminDistance());
-        step.setTargetType(WktStepTarget.OPEN);
-        step.setMessageIndex(generateWorkoutStepIndex());
+        step.setDurationType(WktStepDuration.OPEN);
+        step.setTargetType(WktStepTarget.SPEED);
         step.setTargetValue(0L);
+        step.setMessageIndex(generateWorkoutStepIndex());
+        step.setCustomTargetValueLow(paceTarget.getGarminLow());
+        step.setCustomTargetValueHigh(paceTarget.getGarminHigh());
 
         return Collections.singletonList(step);
     }
@@ -42,17 +43,17 @@ public class DistanceWorkoutStep extends WorkoutStep {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        DistanceWorkoutStep that = (DistanceWorkoutStep) o;
-        return Objects.equals(distance, that.distance);
+        OpenPaceWorkoutStep that = (OpenPaceWorkoutStep) o;
+        return Objects.equals(paceTarget, that.paceTarget);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(distance);
+        return Objects.hash(paceTarget);
     }
 
     protected boolean canEqual(final Object other) {
-        return other instanceof DistanceWorkoutStep;
+        return other instanceof OpenPaceWorkoutStep;
     }
 
 }
