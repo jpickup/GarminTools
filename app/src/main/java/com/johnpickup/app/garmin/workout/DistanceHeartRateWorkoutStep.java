@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Simple workout the lasts a specific distance with a heart rate target
+ * Simple workout that lasts a specific distance with a heart rate target
  */
 public class DistanceHeartRateWorkoutStep extends WorkoutStep {
     private final Distance distance;

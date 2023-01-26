@@ -33,6 +33,9 @@ step returns [Step value]
    | time_step          {$value = $time_step.value;}
    | time_pace_step     {$value = $time_pace_step.value;}
    | time_hr_step       {$value = $time_hr_step.value;}
+   | open_step          {$value = $open_step.value;}
+   | open_pace_step     {$value = $open_pace_step.value;}
+   | open_hr_step       {$value = $open_hr_step.value;}
    | repeating_steps    {$value = $repeating_steps.value;}
    ;
    
@@ -62,8 +65,23 @@ time_pace_step returns [TimePaceStep value]
    ;
 
 time_hr_step returns [TimeHeartRateStep value]
-   : time '@' hr_range    {$value = new TimeHeartRateStep($time.value, $hr_range.value);}
-   | time '@' hr_zone     {$value = new TimeHeartRateStep($time.value, $hr_zone.value);}
+   : time '@' hr_range      {$value = new TimeHeartRateStep($time.value, $hr_range.value);}
+   | time '@' hr_zone       {$value = new TimeHeartRateStep($time.value, $hr_zone.value);}
+   ;
+
+open_step returns [OpenStep value]
+   : open                   {$value = new OpenStep();}
+   ;
+
+open_pace_step returns [OpenPaceStep value]
+   : open '<' pace          {$value = new OpenPaceStep(new MaximumPace($pace.value));}
+   | open '>' pace          {$value = new OpenPaceStep(new MinimumPace($pace.value));}
+   | open '@' pace_range    {$value = new OpenPaceStep($pace_range.value);}
+   ;
+
+open_hr_step returns [OpenHeartRateStep value]
+   : open '@' hr_range      {$value = new OpenHeartRateStep($hr_range.value);}
+   | open '@' hr_zone       {$value = new OpenHeartRateStep($hr_zone.value);}
    ;
 
 repeating_steps returns [RepeatingSteps value]
@@ -112,7 +130,10 @@ hr_zone returns [HeartRateZone value]
 time returns [Time value]
    : DIGIT + COLON DIGIT DIGIT {$value = Time.parseTime($text);}
    ;
-     
+
+open
+   : 'Open'
+   ;
 
 number returns [double value]
    : DIGIT + (POINT DIGIT +)?   {$value = Double.parseDouble($text);}
