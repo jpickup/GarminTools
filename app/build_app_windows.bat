@@ -93,7 +93,7 @@ call "%JAVA_HOME%\bin\jpackage" ^
   --icon src/main/logo/windows/GarminTools.ico ^
   --app-version %APP_VERSION% ^
   --vendor "John Pickup" ^
-  --copyright "Copyright © 2022 John Pickup" ^
+  --copyright "Copyright © 2023 John Pickup" ^
   --win-dir-chooser ^
   --win-shortcut ^
   --win-per-user-install ^
