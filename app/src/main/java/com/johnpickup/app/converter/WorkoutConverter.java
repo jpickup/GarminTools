@@ -11,10 +11,11 @@ import java.util.List;
  * Convert an entire independent workout into a Garmin workout with matching steps
  */
 public class WorkoutConverter {
+    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(WorkoutConverter.class);
     public com.johnpickup.app.garmin.workout.Workout convert(Workout workout) {
+        log.info("Converting parsed workout '{}' to garmin format", workout);
         List<WorkoutStep> garminWorkoutSteps = convertStepsToGarmin(workout.getSteps());
-        com.johnpickup.app.garmin.workout.Workout result = new com.johnpickup.app.garmin.workout.Workout(garminWorkoutSteps);
-        return result;
+        return new com.johnpickup.app.garmin.workout.Workout(garminWorkoutSteps);
     }
 
     private List<WorkoutStep> convertStepsToGarmin(List<? extends Step> steps) {

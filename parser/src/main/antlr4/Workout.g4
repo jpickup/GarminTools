@@ -23,7 +23,7 @@ workout returns [Workout w]
 
 stepList returns [List<Step> steps]
    : s0=step {$steps = new ArrayList<>(); $steps.add($s0.value);}
-     ('+' s1=step       {$steps.add($s1.value);})*
+     ('+' s=stepList       {$steps.addAll($s.steps);})?
    ;
     
 step returns [Step value]
@@ -86,12 +86,11 @@ open_hr_step returns [OpenHeartRateStep value]
 
 repeating_steps returns [RepeatingSteps value]
    : '('
-     s1=step            {$value = new RepeatingSteps($s1.value);}
-     ('+' s2=step )*    {$value.addStep($s2.value);}
+     s=stepList         {$value = new RepeatingSteps($s.steps);}
      ')'
      '*' cardinal       {$value.setRepetitions($cardinal.value);}
    ;
-    
+
 distance returns [Distance value]
    : number distance_unit   {$value = new Distance($number.value, $distance_unit.value);}
    ;
