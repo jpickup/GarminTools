@@ -18,12 +18,17 @@ public class RepeatingSteps extends Step {
     public RepeatingSteps() {
     }
 
+    public RepeatingSteps(List<Step> steps) {
+        this.steps.addAll(steps);
+    }
+
     public void addStep(Step step) {
         steps.add(step);
     }
 
     @Override
     public String toString() {
+        if (steps.isEmpty()) return "";
         StringBuilder result = null;
         for (Step step : steps) {
             if (result == null) {
