@@ -21,7 +21,8 @@ public class PaceIntervalWorkoutStep extends WorkoutStep {
     private final PaceTarget intervalPaceTarget;
     private final PaceTarget recoveryPaceTarget;
 
-    public PaceIntervalWorkoutStep(int intervalCount, Distance intervalDistance, Distance recoveryDistance, PaceTarget intervalPaceTarget, PaceTarget recoveryPaceTarget) {
+    public PaceIntervalWorkoutStep(Intensity intensity, int intervalCount, Distance intervalDistance, Distance recoveryDistance, PaceTarget intervalPaceTarget, PaceTarget recoveryPaceTarget) {
+        super(intensity);
         this.intervalCount = intervalCount;
         this.intervalDistance = intervalDistance;
         this.recoveryDistance = recoveryDistance;
@@ -39,7 +40,7 @@ public class PaceIntervalWorkoutStep extends WorkoutStep {
         List<WorkoutStepMesg> result = new ArrayList<>();
 
         WorkoutStepMesg intervalStep = new WorkoutStepMesg();
-        intervalStep.setIntensity(Intensity.ACTIVE);
+        intervalStep.setIntensity(intensity);
         intervalStep.setDurationType(WktStepDuration.DISTANCE);
         intervalStep.setDurationDistance(intervalDistance.toGarminDistance());
         intervalStep.setTargetType(WktStepTarget.SPEED);
@@ -50,7 +51,7 @@ public class PaceIntervalWorkoutStep extends WorkoutStep {
         result.add(intervalStep);
 
         WorkoutStepMesg recoveryStep = new WorkoutStepMesg();
-        recoveryStep.setIntensity(Intensity.ACTIVE);
+        recoveryStep.setIntensity(intensity);
         recoveryStep.setDurationType(WktStepDuration.DISTANCE);
         recoveryStep.setDurationDistance(recoveryDistance.toGarminDistance());
         recoveryStep.setTargetType(WktStepTarget.SPEED);

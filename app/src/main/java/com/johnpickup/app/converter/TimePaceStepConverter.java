@@ -17,7 +17,7 @@ public class TimePaceStepConverter implements StepConverter {
 
         Time t = new Time(timePaceStep.getTime().asDouble() * 60);
         PaceTarget p = PaceConverterFactory.getInstance().getPaceConverter(timePaceStep.getPace()).convert(timePaceStep.getPace());
-        TimePaceWorkoutStep timePaceWorkoutStep = new TimePaceWorkoutStep(t, p);
+        TimePaceWorkoutStep timePaceWorkoutStep = new TimePaceWorkoutStep(StepIntensityConverter.convert(step.getStepIntensity()), t, p);
         return timePaceWorkoutStep;
     }
 }

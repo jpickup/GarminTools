@@ -15,7 +15,7 @@ public class TimeStepConverter implements StepConverter {
         TimeStep timeStep = (TimeStep)step;
 
         Time t = new Time(timeStep.getTime().asDouble() * 60);
-        TimeWorkoutStep timeWorkoutStep = new TimeWorkoutStep(t);
+        TimeWorkoutStep timeWorkoutStep = new TimeWorkoutStep(StepIntensityConverter.convert(step.getStepIntensity()), t);
         return timeWorkoutStep;
     }
 }

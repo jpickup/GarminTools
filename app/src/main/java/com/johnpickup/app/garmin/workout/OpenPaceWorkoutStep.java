@@ -16,7 +16,8 @@ import java.util.Objects;
 public class OpenPaceWorkoutStep extends WorkoutStep {
     private final PaceTarget paceTarget;
 
-    public OpenPaceWorkoutStep(PaceTarget paceTarget) {
+    public OpenPaceWorkoutStep(Intensity intensity, PaceTarget paceTarget) {
+        super(intensity);
         this.paceTarget = paceTarget;
     }
 
@@ -28,7 +29,7 @@ public class OpenPaceWorkoutStep extends WorkoutStep {
     @Override
     public List<WorkoutStepMesg> generateWorkoutSteps() {
         WorkoutStepMesg step = new WorkoutStepMesg();
-        step.setIntensity(Intensity.ACTIVE);
+        step.setIntensity(intensity);
         step.setDurationType(WktStepDuration.OPEN);
         step.setTargetType(WktStepTarget.SPEED);
         step.setTargetValue(0L);

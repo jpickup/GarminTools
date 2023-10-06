@@ -16,7 +16,8 @@ public class RepeatingStepsWorkoutStep extends WorkoutStep {
     private final int intervalCount;
     private final List<WorkoutStep> steps;
 
-    public RepeatingStepsWorkoutStep(int intervalCount, List<WorkoutStep> steps) {
+    public RepeatingStepsWorkoutStep(Intensity intensity, int intervalCount, List<WorkoutStep> steps) {
+        super(intensity);
         this.intervalCount = intervalCount;
         this.steps = steps;
     }

@@ -17,7 +17,8 @@ public class DistanceStepConverter implements StepConverter {
         Distance d = new Distance(
                 distanceStep.getDistance().getQuantity(),
                 DiatanceUnitConverter.convert(distanceStep.getDistance().getUnit()));
-        DistanceWorkoutStep distanceWorkoutStep = new DistanceWorkoutStep(d);
+        DistanceWorkoutStep distanceWorkoutStep =
+                new DistanceWorkoutStep(StepIntensityConverter.convert(step.getStepIntensity()), d);
         return distanceWorkoutStep;
     }
 }

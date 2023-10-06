@@ -16,7 +16,8 @@ import java.util.Objects;
 public class TimeWorkoutStep extends WorkoutStep {
     private final Time time;
 
-    public TimeWorkoutStep(Time time) {
+    public TimeWorkoutStep(Intensity intensity, Time time) {
+        super(intensity);
         this.time = time;
     }
 
@@ -28,7 +29,7 @@ public class TimeWorkoutStep extends WorkoutStep {
     @Override
     public List<WorkoutStepMesg> generateWorkoutSteps() {
         WorkoutStepMesg step = new WorkoutStepMesg();
-        step.setIntensity(Intensity.ACTIVE);
+        step.setIntensity(intensity);
         step.setDurationType(WktStepDuration.TIME);
         step.setDurationDistance(time.toGarminTime());
         step.setTargetType(WktStepTarget.OPEN);

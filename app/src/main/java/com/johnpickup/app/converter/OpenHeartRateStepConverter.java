@@ -18,7 +18,8 @@ public class OpenHeartRateStepConverter implements StepConverter {
                 .getHeartRateConverter(openHeartRateStep.getHeartRate())
                 .convert(openHeartRateStep.getHeartRate());
 
-        OpenHeartRateWorkoutStep openHeartRateWorkoutStep = new OpenHeartRateWorkoutStep(heartRateTarget);
+        OpenHeartRateWorkoutStep openHeartRateWorkoutStep =
+                new OpenHeartRateWorkoutStep(StepIntensityConverter.convert(step.getStepIntensity()), heartRateTarget);
         return openHeartRateWorkoutStep;
     }
 }

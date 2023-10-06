@@ -12,6 +12,10 @@ import java.util.List;
  * Simple workout the lasts a specific distance, no pace targets
  */
 public class OpenWorkoutStep extends WorkoutStep {
+    public OpenWorkoutStep(Intensity intensity) {
+        super(intensity);
+    }
+
     @Override
     public String getName() {
         return "Open";
@@ -20,7 +24,7 @@ public class OpenWorkoutStep extends WorkoutStep {
     @Override
     public List<WorkoutStepMesg> generateWorkoutSteps() {
         WorkoutStepMesg step = new WorkoutStepMesg();
-        step.setIntensity(Intensity.ACTIVE);
+        step.setIntensity(intensity);
         step.setDurationType(WktStepDuration.OPEN);
         step.setTargetType(WktStepTarget.OPEN);
         step.setMessageIndex(generateWorkoutStepIndex());

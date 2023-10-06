@@ -1,11 +1,18 @@
 package com.johnpickup.app.garmin.workout;
 
+import com.garmin.fit.Intensity;
 import com.garmin.fit.WorkoutStepMesg;
 
 import java.util.List;
 
 public abstract class WorkoutStep {
     private static int stepIndex = 0;
+
+    public WorkoutStep(Intensity intensity) {
+        this.intensity = intensity;
+    }
+
+    protected final Intensity intensity;
 
     public static void startNewWorkout() {
         stepIndex = 0;
