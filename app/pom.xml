@@ -36,7 +36,7 @@
         <dependency>
             <groupId>com.garmin</groupId>
             <artifactId>fit</artifactId>
-            <version>1.0</version>
+            <version>21.120.2</version>
         </dependency>
 
         <dependency>
@@ -181,31 +181,6 @@
                             <stripDebug>true</stripDebug>
                             <noHeaderFiles>true</noHeaderFiles-->
                         </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <!-- create a local repo with the Garmin fit jar -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-install-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>create-local-repo</id>
-                        <phase>verify</phase>
-                        <configuration>
-                            <file>${basedir}/../lib/fit.jar</file>
-                            <repositoryLayout>default</repositoryLayout>
-                            <groupId>com.garmin</groupId>
-                            <artifactId>fit</artifactId>
-                            <version>1.0</version>
-                            <packaging>jar</packaging>
-                            <createChecksum>true</createChecksum>
-                            <generatePom>true</generatePom>
-                        </configuration>
-                        <goals>
-                            <goal>install-file</goal>
-                        </goals>
                     </execution>
                 </executions>
             </plugin>
