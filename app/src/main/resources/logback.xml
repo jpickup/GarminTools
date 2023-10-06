@@ -5,7 +5,8 @@
         </encoder>
     </appender>
 
-    <logger name="" level="WARN"/>
+    <logger name="org.apache.poi" level="WARN"/>
+
     <root level="${root-level:INFO}">
         <appender-ref ref="CONSOLE"/>
     </root>
