@@ -4,5 +4,6 @@ public enum StepIntensity {
     ACTIVE,
     REST,
     WARMUP,
-    COOLDOWN
+    COOLDOWN,
+    RECOVERY
 }

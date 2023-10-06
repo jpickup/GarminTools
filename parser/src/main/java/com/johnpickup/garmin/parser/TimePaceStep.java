@@ -10,13 +10,20 @@ public class TimePaceStep extends Step {
     private final Pace pace;
 
     public TimePaceStep(Time time, Pace pace) {
+        super();
+        this.time = time;
+        this.pace = pace;
+    }
+
+    public TimePaceStep(StepIntensity stepIntensity, Time time, Pace pace) {
+        super(stepIntensity);
         this.time = time;
         this.pace = pace;
     }
 
     @Override
     public String toString() {
-        return time + "@" + pace;
+        return time + "@" + pace + (stepIntensity==null?"":("|"+stepIntensity));
     }
 
     @Override
@@ -24,7 +31,8 @@ public class TimePaceStep extends Step {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TimePaceStep that = (TimePaceStep) o;
-        return Objects.equals(time, that.time) && Objects.equals(pace, that.pace);
+        return Objects.equals(time, that.time) && Objects.equals(pace, that.pace)
+                && Objects.equals(stepIntensity, that.stepIntensity);
     }
 
     @Override

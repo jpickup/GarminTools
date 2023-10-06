@@ -10,13 +10,19 @@ public class DistanceHeartRateStep extends Step {
     private final HeartRate heartRate;
 
     public DistanceHeartRateStep(Distance distance, HeartRate heartRate) {
+        super();
         this.distance = distance;
         this.heartRate = heartRate;
     }
 
+    public DistanceHeartRateStep(StepIntensity stepIntensity, Distance distance, HeartRate heartRate) {
+        super(stepIntensity);
+        this.distance = distance;
+        this.heartRate = heartRate;
+    }
     @Override
     public String toString() {
-        return distance + "@" + heartRate;
+        return distance + "@" + heartRate + (stepIntensity==null?"":("|"+stepIntensity));
     }
 
     @Override
@@ -24,7 +30,8 @@ public class DistanceHeartRateStep extends Step {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         DistanceHeartRateStep that = (DistanceHeartRateStep) o;
-        return Objects.equals(distance, that.distance) && Objects.equals(heartRate, that.heartRate);
+        return Objects.equals(distance, that.distance) && Objects.equals(heartRate, that.heartRate)
+                && Objects.equals(stepIntensity, that.stepIntensity);
     }
 
     @Override

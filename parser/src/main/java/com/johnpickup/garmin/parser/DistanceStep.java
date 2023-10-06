@@ -9,12 +9,17 @@ public class DistanceStep extends Step {
     private final Distance distance;
 
     public DistanceStep(Distance distance) {
+        super();
         this.distance = distance;
     }
 
+    public DistanceStep(StepIntensity stepIntensity, Distance distance) {
+        super(stepIntensity);
+        this.distance = distance;
+    }
     @Override
     public String toString() {
-        return distance.toString();
+        return distance.toString() + (stepIntensity==null?"":("|"+stepIntensity));
     }
 
     @Override
@@ -22,7 +27,8 @@ public class DistanceStep extends Step {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         DistanceStep that = (DistanceStep) o;
-        return Objects.equals(distance, that.distance);
+        return Objects.equals(distance, that.distance)
+                && Objects.equals(stepIntensity, that.stepIntensity);
     }
 
     @Override

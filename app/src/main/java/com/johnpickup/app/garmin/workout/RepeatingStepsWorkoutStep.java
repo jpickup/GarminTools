@@ -44,7 +44,7 @@ public class RepeatingStepsWorkoutStep extends WorkoutStep {
         int startIntervalIndex = result.get(0).getMessageIndex();
 
         WorkoutStepMesg repeatStep = new WorkoutStepMesg();
-        repeatStep.setIntensity(Intensity.INVALID);
+        repeatStep.setIntensity(Intensity.INTERVAL);
         repeatStep.setDurationType(WktStepDuration.REPEAT_UNTIL_STEPS_CMPLT);
         repeatStep.setDurationValue((long)startIntervalIndex);
         repeatStep.setTargetType(WktStepTarget.INVALID);

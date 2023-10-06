@@ -10,13 +10,19 @@ public class DistancePaceStep extends Step {
     private final Pace pace;
 
     public DistancePaceStep(Distance distance, Pace pace) {
+        super();
         this.distance = distance;
         this.pace = pace;
     }
 
+    public DistancePaceStep(StepIntensity stepIntensity, Distance distance, Pace pace) {
+        super(stepIntensity);
+        this.distance = distance;
+        this.pace = pace;
+    }
     @Override
     public String toString() {
-        return distance + "@" + pace;
+        return distance + "@" + pace  + (stepIntensity==null?"":("|"+stepIntensity));
     }
 
     @Override
@@ -24,7 +30,8 @@ public class DistancePaceStep extends Step {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         DistancePaceStep that = (DistancePaceStep) o;
-        return Objects.equals(distance, that.distance) && Objects.equals(pace, that.pace);
+        return Objects.equals(distance, that.distance) && Objects.equals(pace, that.pace)
+                && Objects.equals(stepIntensity, that.stepIntensity);
     }
 
     @Override

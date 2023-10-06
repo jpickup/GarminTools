@@ -8,9 +8,13 @@ public abstract class Step {
         return stepIntensity;
     }
 
-    public void setStepIntensity(StepIntensity stepIntensity) {
+    public Step() {
+        this.stepIntensity = null;
+    }
+
+    public Step(StepIntensity stepIntensity) {
         this.stepIntensity = stepIntensity;
     }
 
-    private StepIntensity stepIntensity;
+    protected final StepIntensity stepIntensity;
 }

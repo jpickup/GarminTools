@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Simple workout that lasts a specific distance with a pace target
+ * No longer used - remove
  */
 public class PaceIntervalWorkoutStep extends WorkoutStep {
     private final int intervalCount;
@@ -62,7 +62,7 @@ public class PaceIntervalWorkoutStep extends WorkoutStep {
         result.add(recoveryStep);
 
         WorkoutStepMesg repeatStep = new WorkoutStepMesg();
-        repeatStep.setIntensity(Intensity.INVALID);
+        repeatStep.setIntensity(Intensity.INTERVAL);
         repeatStep.setDurationType(WktStepDuration.REPEAT_UNTIL_STEPS_CMPLT);
         repeatStep.setDurationValue((long)intervalStep.getMessageIndex());
         repeatStep.setTargetType(WktStepTarget.INVALID);
