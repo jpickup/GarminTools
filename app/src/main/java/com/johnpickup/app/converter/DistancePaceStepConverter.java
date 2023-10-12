@@ -19,7 +19,8 @@ public class DistancePaceStepConverter implements StepConverter {
                 distancePaceStep.getDistance().getQuantity(),
                 DiatanceUnitConverter.convert(distancePaceStep.getDistance().getUnit()));
         PaceTarget p = PaceConverterFactory.getInstance().getPaceConverter(distancePaceStep.getPace()).convert(distancePaceStep.getPace());
-        DistancePaceWorkoutStep distancePaceWorkoutStep = new DistancePaceWorkoutStep(d, p);
+        DistancePaceWorkoutStep distancePaceWorkoutStep =
+                new DistancePaceWorkoutStep(StepIntensityConverter.convert(step.getStepIntensity()), d, p);
         return distancePaceWorkoutStep;
     }
 }

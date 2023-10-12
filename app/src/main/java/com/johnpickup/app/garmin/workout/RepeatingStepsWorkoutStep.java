@@ -16,7 +16,8 @@ public class RepeatingStepsWorkoutStep extends WorkoutStep {
     private final int intervalCount;
     private final List<WorkoutStep> steps;
 
-    public RepeatingStepsWorkoutStep(int intervalCount, List<WorkoutStep> steps) {
+    public RepeatingStepsWorkoutStep(Intensity intensity, int intervalCount, List<WorkoutStep> steps) {
+        super(intensity);
         this.intervalCount = intervalCount;
         this.steps = steps;
     }
@@ -43,7 +44,7 @@ public class RepeatingStepsWorkoutStep extends WorkoutStep {
         int startIntervalIndex = result.get(0).getMessageIndex();
 
         WorkoutStepMesg repeatStep = new WorkoutStepMesg();
-        repeatStep.setIntensity(Intensity.INVALID);
+        repeatStep.setIntensity(Intensity.INTERVAL);
         repeatStep.setDurationType(WktStepDuration.REPEAT_UNTIL_STEPS_CMPLT);
         repeatStep.setDurationValue((long)startIntervalIndex);
         repeatStep.setTargetType(WktStepTarget.INVALID);

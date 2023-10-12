@@ -18,7 +18,8 @@ public class DistanceHeartRateWorkoutStep extends WorkoutStep {
     private final Distance distance;
     private final HeartRateTarget heartRateTarget;
 
-    public DistanceHeartRateWorkoutStep(Distance distance, HeartRateTarget heartRateTarget) {
+    public DistanceHeartRateWorkoutStep(Intensity intensity, Distance distance, HeartRateTarget heartRateTarget) {
+        super(intensity);
         this.distance = distance;
         this.heartRateTarget = heartRateTarget;
     }
@@ -31,7 +32,7 @@ public class DistanceHeartRateWorkoutStep extends WorkoutStep {
     @Override
     public List<WorkoutStepMesg> generateWorkoutSteps() {
         WorkoutStepMesg step = new WorkoutStepMesg();
-        step.setIntensity(Intensity.ACTIVE);
+        step.setIntensity(intensity);
         step.setDurationType(WktStepDuration.DISTANCE);
         step.setDurationDistance(distance.toGarminDistance());
         step.setTargetType(WktStepTarget.HEART_RATE);

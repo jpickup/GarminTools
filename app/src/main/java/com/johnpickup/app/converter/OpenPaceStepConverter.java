@@ -15,7 +15,8 @@ public class OpenPaceStepConverter implements StepConverter {
         OpenPaceStep distancePaceStep = (OpenPaceStep)step;
 
         PaceTarget p = PaceConverterFactory.getInstance().getPaceConverter(distancePaceStep.getPace()).convert(distancePaceStep.getPace());
-        OpenPaceWorkoutStep openPaceWorkoutStep = new OpenPaceWorkoutStep(p);
+        OpenPaceWorkoutStep openPaceWorkoutStep =
+                new OpenPaceWorkoutStep(StepIntensityConverter.convert(step.getStepIntensity()), p);
         return openPaceWorkoutStep;
     }
 }

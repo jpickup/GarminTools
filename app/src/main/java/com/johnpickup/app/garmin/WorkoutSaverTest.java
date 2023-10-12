@@ -1,5 +1,6 @@
 package com.johnpickup.app.garmin;
 
+import com.garmin.fit.Intensity;
 import com.johnpickup.app.converter.WorkoutConverter;
 import com.johnpickup.app.garmin.schedule.ScheduledWorkout;
 import com.johnpickup.app.garmin.schedule.TrainingSchedule;
@@ -32,15 +33,16 @@ public class WorkoutSaverTest {
         Workout garminInterval = converter.convert(interval);
         saver.save(garminInterval, "parsed_interval.fit");
 
-        WorkoutStep testDistance = new DistanceWorkoutStep(new Distance(2, DistanceUnit.MILE));
+        WorkoutStep testDistance = new DistanceWorkoutStep(Intensity.ACTIVE, new Distance(2, DistanceUnit.MILE));
         Workout testDistanceWorkout = new Workout(Collections.singletonList(testDistance));
         saver.save(testDistanceWorkout, "testDist.fit");
 
-        WorkoutStep testPace = new DistancePaceWorkoutStep(new Distance(2, DistanceUnit.MILE), new PaceTarget(null, 5, 6, PaceUnit.MIN_PER_MILE));
+        WorkoutStep testPace = new DistancePaceWorkoutStep(Intensity.ACTIVE, new Distance(2, DistanceUnit.MILE), new PaceTarget(null, 5, 6, PaceUnit.MIN_PER_MILE));
         Workout testPaceWorkout = new Workout(Collections.singletonList(testPace));
         saver.save(testPaceWorkout, "testPace.fit");
 
         WorkoutStep testInterval = new PaceIntervalWorkoutStep(
+                Intensity.ACTIVE,
                 4,
                 new Distance(1, DistanceUnit.MILE),
                 new Distance(400, DistanceUnit.METRE),
@@ -50,8 +52,9 @@ public class WorkoutSaverTest {
         testIntervalWorkout.setName("4x1mi No WU");
         saver.save(testIntervalWorkout, "testInterval1.fit");
 
-        WorkoutStep warmcool = new DistanceWorkoutStep(new Distance(1, DistanceUnit.KILOMETRE));
+        WorkoutStep warmcool = new DistanceWorkoutStep(Intensity.ACTIVE, new Distance(1, DistanceUnit.KILOMETRE));
         WorkoutStep testInterval2 = new PaceIntervalWorkoutStep(
+                Intensity.ACTIVE,
                 3,
                 new Distance(1, DistanceUnit.KILOMETRE),
                 new Distance(200, DistanceUnit.METRE),

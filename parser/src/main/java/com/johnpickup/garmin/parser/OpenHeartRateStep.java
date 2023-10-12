@@ -9,12 +9,18 @@ public class OpenHeartRateStep extends Step {
     private final HeartRate heartRate;
 
     public OpenHeartRateStep(HeartRate heartRate) {
+        super();
+        this.heartRate = heartRate;
+    }
+
+    public OpenHeartRateStep(StepIntensity stepIntensity, HeartRate heartRate) {
+        super(stepIntensity);
         this.heartRate = heartRate;
     }
 
     @Override
     public String toString() {
-        return "Open@" + heartRate;
+        return "Open@" + heartRate + (stepIntensity==null?"":("|"+stepIntensity));
     }
 
     @Override
@@ -22,7 +28,8 @@ public class OpenHeartRateStep extends Step {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         OpenHeartRateStep that = (OpenHeartRateStep) o;
-        return Objects.equals(heartRate, that.heartRate);
+        return Objects.equals(heartRate, that.heartRate)
+                && Objects.equals(stepIntensity, that.stepIntensity);
     }
 
     @Override

@@ -6,12 +6,17 @@ public class OpenPaceStep extends Step {
     private final Pace pace;
 
     public OpenPaceStep(Pace pace) {
+        super();
         this.pace = pace;
     }
 
+    public OpenPaceStep(StepIntensity stepIntensity, Pace pace) {
+        super(stepIntensity);
+        this.pace = pace;
+    }
     @Override
     public String toString() {
-        return "Open@" + pace;
+        return "Open@" + pace + (stepIntensity==null?"":("|"+stepIntensity));
     }
 
     @Override
@@ -19,7 +24,8 @@ public class OpenPaceStep extends Step {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         OpenPaceStep that = (OpenPaceStep) o;
-        return Objects.equals(pace, that.pace);
+        return Objects.equals(pace, that.pace)
+                && Objects.equals(stepIntensity, that.stepIntensity);
     }
 
     @Override

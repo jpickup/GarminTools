@@ -23,7 +23,8 @@ public class DistanceHeartRateStepConverter implements StepConverter {
                 .getHeartRateConverter(distanceHeartRateStep.getHeartRate())
                 .convert(distanceHeartRateStep.getHeartRate());
 
-        DistanceHeartRateWorkoutStep distanceHeartRateWorkoutStep = new DistanceHeartRateWorkoutStep(d, heartRateTarget);
+        DistanceHeartRateWorkoutStep distanceHeartRateWorkoutStep =
+                new DistanceHeartRateWorkoutStep(StepIntensityConverter.convert(step.getStepIntensity()), d, heartRateTarget);
         return distanceHeartRateWorkoutStep;
     }
 }

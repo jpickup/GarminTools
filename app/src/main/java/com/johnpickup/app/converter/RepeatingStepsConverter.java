@@ -20,7 +20,8 @@ public class RepeatingStepsConverter implements StepConverter {
         for (Step internalStep : repeatingSteps.getSteps()) {
             steps.add(StepConverterFactory.getInstance().createFor(internalStep).convert(internalStep));
         }
-        RepeatingStepsWorkoutStep result = new RepeatingStepsWorkoutStep(repeatCount, steps);
+        RepeatingStepsWorkoutStep result =
+                new RepeatingStepsWorkoutStep(StepIntensityConverter.convert(step.getStepIntensity()), repeatCount, steps);
         return result;
     }
 }

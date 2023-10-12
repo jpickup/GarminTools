@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -118,6 +119,26 @@ public class WorkoutTextParserTest {
         repeatingSteps.addStep(new DistancePaceStep(new Distance(800, DistanceUnit.METRE), new PaceRange(new Time(9,0), new Time(10, 0), PaceUnit.MIN_PER_MILE)));
         repeatingSteps.setRepetitions(4);
         Workout expected = new Workout(Collections.singletonList(repeatingSteps));
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void open() throws Exception {
+        Workout actual = classUnderTest.parse("Open");
+        Workout expected = new Workout(List.of(
+                new OpenStep()
+        ));
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void parseIntensity() throws Exception {
+        Workout actual = classUnderTest.parse("2mi|Warmup + 3:00|Cooldown + Open|Recovery");
+        Workout expected = new Workout(Arrays.asList(
+                new DistanceStep(StepIntensity.WARMUP, new Distance(2, DistanceUnit.MILE)),
+                new TimeStep(StepIntensity.COOLDOWN, new Time(3, 0)),
+                new OpenStep(StepIntensity.RECOVERY)
+        ));
         assertEquals(expected, actual);
     }
 }

@@ -21,7 +21,8 @@ public class TimeHeartRateStepConverter implements StepConverter {
                 .getHeartRateConverter(timeHeartRateStep.getHeartRate())
                 .convert(timeHeartRateStep.getHeartRate());
 
-        TimeHeartRateWorkoutStep timeHeartRateWorkoutStep = new TimeHeartRateWorkoutStep(t, heartRateTarget);
+        TimeHeartRateWorkoutStep timeHeartRateWorkoutStep =
+                new TimeHeartRateWorkoutStep(StepIntensityConverter.convert(step.getStepIntensity()), t, heartRateTarget);
         return timeHeartRateWorkoutStep;
     }
 }

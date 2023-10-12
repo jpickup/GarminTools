@@ -4,6 +4,9 @@
             <pattern>%msg%n</pattern>
         </encoder>
     </appender>
+
+    <logger name="org.apache.poi" level="WARN"/>
+
     <root level="${root-level:INFO}">
         <appender-ref ref="CONSOLE"/>
     </root>

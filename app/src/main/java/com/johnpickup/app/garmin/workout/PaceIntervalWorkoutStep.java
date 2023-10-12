@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Simple workout that lasts a specific distance with a pace target
+ * No longer used - remove
  */
 public class PaceIntervalWorkoutStep extends WorkoutStep {
     private final int intervalCount;
@@ -21,7 +21,8 @@ public class PaceIntervalWorkoutStep extends WorkoutStep {
     private final PaceTarget intervalPaceTarget;
     private final PaceTarget recoveryPaceTarget;
 
-    public PaceIntervalWorkoutStep(int intervalCount, Distance intervalDistance, Distance recoveryDistance, PaceTarget intervalPaceTarget, PaceTarget recoveryPaceTarget) {
+    public PaceIntervalWorkoutStep(Intensity intensity, int intervalCount, Distance intervalDistance, Distance recoveryDistance, PaceTarget intervalPaceTarget, PaceTarget recoveryPaceTarget) {
+        super(intensity);
         this.intervalCount = intervalCount;
         this.intervalDistance = intervalDistance;
         this.recoveryDistance = recoveryDistance;
@@ -39,7 +40,7 @@ public class PaceIntervalWorkoutStep extends WorkoutStep {
         List<WorkoutStepMesg> result = new ArrayList<>();
 
         WorkoutStepMesg intervalStep = new WorkoutStepMesg();
-        intervalStep.setIntensity(Intensity.ACTIVE);
+        intervalStep.setIntensity(intensity);
         intervalStep.setDurationType(WktStepDuration.DISTANCE);
         intervalStep.setDurationDistance(intervalDistance.toGarminDistance());
         intervalStep.setTargetType(WktStepTarget.SPEED);
@@ -50,7 +51,7 @@ public class PaceIntervalWorkoutStep extends WorkoutStep {
         result.add(intervalStep);
 
         WorkoutStepMesg recoveryStep = new WorkoutStepMesg();
-        recoveryStep.setIntensity(Intensity.ACTIVE);
+        recoveryStep.setIntensity(intensity);
         recoveryStep.setDurationType(WktStepDuration.DISTANCE);
         recoveryStep.setDurationDistance(recoveryDistance.toGarminDistance());
         recoveryStep.setTargetType(WktStepTarget.SPEED);
@@ -61,7 +62,7 @@ public class PaceIntervalWorkoutStep extends WorkoutStep {
         result.add(recoveryStep);
 
         WorkoutStepMesg repeatStep = new WorkoutStepMesg();
-        repeatStep.setIntensity(Intensity.INVALID);
+        repeatStep.setIntensity(Intensity.INTERVAL);
         repeatStep.setDurationType(WktStepDuration.REPEAT_UNTIL_STEPS_CMPLT);
         repeatStep.setDurationValue((long)intervalStep.getMessageIndex());
         repeatStep.setTargetType(WktStepTarget.INVALID);

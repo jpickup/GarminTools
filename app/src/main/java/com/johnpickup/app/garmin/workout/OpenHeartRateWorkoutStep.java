@@ -16,7 +16,8 @@ import java.util.Objects;
 public class OpenHeartRateWorkoutStep extends WorkoutStep {
     private final HeartRateTarget heartRateTarget;
 
-    public OpenHeartRateWorkoutStep(HeartRateTarget heartRateTarget) {
+    public OpenHeartRateWorkoutStep(Intensity intensity, HeartRateTarget heartRateTarget) {
+        super(intensity);
         this.heartRateTarget = heartRateTarget;
     }
 
@@ -28,7 +29,7 @@ public class OpenHeartRateWorkoutStep extends WorkoutStep {
     @Override
     public List<WorkoutStepMesg> generateWorkoutSteps() {
         WorkoutStepMesg step = new WorkoutStepMesg();
-        step.setIntensity(Intensity.ACTIVE);
+        step.setIntensity(intensity);
         step.setDurationType(WktStepDuration.OPEN);
         step.setTargetType(WktStepTarget.HEART_RATE);
         step.setTargetValue(heartRateTarget.getTargetValue());

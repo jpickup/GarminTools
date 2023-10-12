@@ -10,7 +10,7 @@ import com.johnpickup.garmin.parser.Step;
 public class OpenStepConverter implements StepConverter {
     @Override
     public WorkoutStep convert(Step step) {
-        OpenWorkoutStep openWorkoutStep = new OpenWorkoutStep();
+        OpenWorkoutStep openWorkoutStep = new OpenWorkoutStep(StepIntensityConverter.convert(step.getStepIntensity()));
         return openWorkoutStep;
     }
 }
