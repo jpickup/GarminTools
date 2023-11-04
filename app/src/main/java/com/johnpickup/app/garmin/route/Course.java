@@ -4,10 +4,7 @@ import com.garmin.fit.*;
 import com.johnpickup.app.garmin.fit.FitGenerator;
 import com.johnpickup.app.util.Haversine;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 public class Course implements FitGenerator {
     private static final double RADIAN_SEMICIRCLE = Math.pow(2, 31) / Math.PI;
@@ -41,7 +38,7 @@ public class Course implements FitGenerator {
         fileIdMesg.setManufacturer( Manufacturer.GARMIN );
         fileIdMesg.setType( File.COURSE );
         fileIdMesg.setProduct(PRODUCT_ID);
-        fileIdMesg.setSerialNumber(SERIAL_NO);
+        fileIdMesg.setSerialNumber(new Random().nextLong(1000000L));
         fileIdMesg.setTimeCreated(new DateTime(getTimestamp()));
         messages.add(fileIdMesg);
 

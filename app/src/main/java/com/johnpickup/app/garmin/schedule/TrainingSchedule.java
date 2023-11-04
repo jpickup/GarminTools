@@ -6,6 +6,7 @@ import com.johnpickup.app.garmin.fit.FitGenerator;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Collection of scheduled workouts that can be converted into a FIT message collection
@@ -23,7 +24,7 @@ public class TrainingSchedule implements FitGenerator {
         fileIdMesg.setManufacturer( Manufacturer.GARMIN );
         fileIdMesg.setType(File.SCHEDULES);
         fileIdMesg.setProduct(PRODUCT_ID);
-        fileIdMesg.setSerialNumber(SERIAL_NO);
+        fileIdMesg.setSerialNumber(new Random().nextLong(1000000L));
         fileIdMesg.setTimeCreated(new DateTime(new Date()));
         messages.add(fileIdMesg);
 
@@ -53,7 +54,7 @@ public class TrainingSchedule implements FitGenerator {
                 scheduleMesg.setType(Schedule.WORKOUT);
                 scheduleMesg.setTimeCreated(new DateTime(scheduledWorkout.getWorkout().getTimestamp()));
                 scheduleMesg.setScheduledTime(scheduledWorkout.getGarminTime());
-                scheduleMesg.setSerialNumber(SERIAL_NO);
+                scheduleMesg.setSerialNumber(scheduledWorkout.getWorkout().getSerialNo());
                 scheduleMesg.setCompleted(Bool.FALSE);
                 messages.add(scheduleMesg);
             }

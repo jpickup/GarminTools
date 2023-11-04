@@ -9,7 +9,6 @@ import java.util.List;
  */
 public interface FitGenerator {
     int PRODUCT_ID = 65534; //484;
-    long SERIAL_NO = 1L;
     int SOFTWARE_VERSION = 16; //16023;
     short HARDWARE_VERSION = 0;
 
