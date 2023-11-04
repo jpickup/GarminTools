@@ -6,13 +6,15 @@ import com.johnpickup.app.garmin.fit.FitGenerator;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
-public  class Workout implements FitGenerator {
+public class Workout implements FitGenerator {
     private static int instanceIndex = 0;
     private Long timestamp;
     private final List<WorkoutStep> steps;
 
     private String name;
+    private Long serialNo;
 
     public Workout(List<WorkoutStep> steps) {
         this.steps = steps;
@@ -44,13 +46,20 @@ public  class Workout implements FitGenerator {
         return timestamp;
     }
 
+    public long getSerialNo() {
+        if (serialNo == null) {
+            serialNo = UUID.randomUUID().getLeastSignificantBits();
+        }
+        return serialNo;
+    }
+
     protected List<Mesg> createMessageHeader() {
         List<Mesg> messages = new ArrayList<>();
         FileIdMesg fileIdMesg = new FileIdMesg();
-        fileIdMesg.setManufacturer( Manufacturer.GARMIN );
-        fileIdMesg.setType( File.WORKOUT );
+        fileIdMesg.setManufacturer(Manufacturer.GARMIN);
+        fileIdMesg.setType(File.WORKOUT);
         fileIdMesg.setProduct(PRODUCT_ID);
-        fileIdMesg.setSerialNumber(SERIAL_NO);
+        fileIdMesg.setSerialNumber(getSerialNo());
         fileIdMesg.setTimeCreated(new DateTime(getTimestamp()));
         messages.add(fileIdMesg);
 
