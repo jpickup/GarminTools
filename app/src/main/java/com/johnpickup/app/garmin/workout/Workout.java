@@ -6,7 +6,7 @@ import com.johnpickup.app.garmin.fit.FitGenerator;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
+import java.util.Random;
 
 public class Workout implements FitGenerator {
     private static int instanceIndex = 0;
@@ -48,7 +48,7 @@ public class Workout implements FitGenerator {
 
     public long getSerialNo() {
         if (serialNo == null) {
-            serialNo = UUID.randomUUID().getLeastSignificantBits();
+            serialNo = Math.abs(new Random().nextLong());
         }
         return serialNo;
     }
