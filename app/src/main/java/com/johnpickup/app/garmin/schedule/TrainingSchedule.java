@@ -24,7 +24,7 @@ public class TrainingSchedule implements FitGenerator {
         fileIdMesg.setManufacturer( Manufacturer.GARMIN );
         fileIdMesg.setType(File.SCHEDULES);
         fileIdMesg.setProduct(PRODUCT_ID);
-        fileIdMesg.setSerialNumber(new Random().nextLong());
+        fileIdMesg.setSerialNumber(new Random().nextLong(1000000L));
         fileIdMesg.setTimeCreated(new DateTime(new Date()));
         messages.add(fileIdMesg);
 
