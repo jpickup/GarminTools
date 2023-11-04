@@ -38,7 +38,7 @@ public class Course implements FitGenerator {
         fileIdMesg.setManufacturer( Manufacturer.GARMIN );
         fileIdMesg.setType( File.COURSE );
         fileIdMesg.setProduct(PRODUCT_ID);
-        fileIdMesg.setSerialNumber(new Random().nextLong());
+        fileIdMesg.setSerialNumber(new Random().nextLong(1000000L));
         fileIdMesg.setTimeCreated(new DateTime(getTimestamp()));
         messages.add(fileIdMesg);
 

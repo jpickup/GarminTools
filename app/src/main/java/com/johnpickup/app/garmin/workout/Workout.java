@@ -10,6 +10,7 @@ import java.util.Random;
 
 public class Workout implements FitGenerator {
     private static int instanceIndex = 0;
+    private static long baseSerial = new Random().nextLong(1000000L);
     private Long timestamp;
     private final List<WorkoutStep> steps;
 
@@ -48,7 +49,7 @@ public class Workout implements FitGenerator {
 
     public long getSerialNo() {
         if (serialNo == null) {
-            serialNo = Math.abs(new Random().nextLong());
+            serialNo = baseSerial++;
         }
         return serialNo;
     }
