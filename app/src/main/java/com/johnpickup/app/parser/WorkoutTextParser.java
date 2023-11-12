@@ -19,27 +19,30 @@ import java.io.InputStream;
  */
 public class WorkoutTextParser {
     private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(WorkoutTextParser.class);
-    public Workout parse(String workoutInput) throws IOException {
-        InputStream input = new ByteArrayInputStream(workoutInput.getBytes());
-        CharStream charStream = CharStreams.fromStream(input);
-        WorkoutLexer lexer = new WorkoutLexer(charStream);
-        TokenStream tokens = new CommonTokenStream(lexer);
-        WorkoutParser parser = new WorkoutParser(tokens);
-        AntlrErrorHandler errorHandler = new AntlrErrorHandler();
-        parser.setErrorHandler(errorHandler);
-        Workout result = parser.workout().w;
-        if (errorHandler.isHadError()) {
-            log.debug("Parser error reading {} : {}", workoutInput, errorHandler.getErrorMessage());
-            throw new RuntimeException("Error parsing " + workoutInput +
-                    (errorHandler.getErrorMessage()==null?
-                            "":
-                            (" - " + errorHandler.getErrorMessage()))
-            );
+    public Workout parse(String workoutInput) {
+        try {
+            InputStream input = new ByteArrayInputStream(workoutInput.getBytes());
+            CharStream charStream = CharStreams.fromStream(input);
+            WorkoutLexer lexer = new WorkoutLexer(charStream);
+            TokenStream tokens = new CommonTokenStream(lexer);
+            WorkoutParser parser = new WorkoutParser(tokens);
+            AntlrErrorHandler errorHandler = new AntlrErrorHandler();
+            parser.setErrorHandler(errorHandler);
+            Workout result = parser.workout().w;
+            if (errorHandler.isHadError()) {
+                log.debug("Parser error reading {} : {}", workoutInput, errorHandler.getErrorMessage());
+                throw new RuntimeException("Error parsing " + workoutInput +
+                        (errorHandler.getErrorMessage() == null ?
+                                "" :
+                                (" - " + errorHandler.getErrorMessage()))
+                );
+            } else {
+                return result;
+            }
         }
-        else {
-            return result;
+        catch (IOException ex) {
+            throw new RuntimeException(ex);
         }
-
     }
 
 }

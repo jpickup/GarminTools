@@ -17,13 +17,18 @@ import java.io.InputStream;
  * Created by john on 03/01/2017.
  */
 public class PaceRangeTextParser {
-    public Pace parse(String inputText) throws IOException {
-        InputStream input = new ByteArrayInputStream(inputText.getBytes());
-        CharStream charStream = CharStreams.fromStream(input);
-        WorkoutLexer lexer = new WorkoutLexer(charStream);
-        TokenStream tokens = new CommonTokenStream(lexer);
-        WorkoutParser parser = new WorkoutParser(tokens);
-        return parser.pace_range().value;
+    public Pace parse(String inputText) {
+        try {
+            InputStream input = new ByteArrayInputStream(inputText.getBytes());
+            CharStream charStream = CharStreams.fromStream(input);
+            WorkoutLexer lexer = new WorkoutLexer(charStream);
+            TokenStream tokens = new CommonTokenStream(lexer);
+            WorkoutParser parser = new WorkoutParser(tokens);
+            return parser.pace_range().value;
+        }
+        catch (IOException ex) {
+            throw new RuntimeException(ex);
+        }
     }
 
 }

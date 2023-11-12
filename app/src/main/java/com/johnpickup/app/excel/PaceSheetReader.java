@@ -7,10 +7,10 @@ import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 
-import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * Created by john on 10/01/2017.
@@ -20,7 +20,7 @@ public class PaceSheetReader {
     private int valueIndex=1;
     private final PaceRangeTextParser parser = new PaceRangeTextParser();
 
-    public Map<String, Pace> readPaces(Sheet sheet) throws IOException {
+    public Map<String, Pace> readPaces(Sheet sheet) {
         if (sheet == null) return Collections.emptyMap();
         Map<String, Pace> result = new HashMap<>();
 
@@ -30,7 +30,11 @@ public class PaceSheetReader {
                 readHeaderRow(row);
             }
             else {
-                result.put(readName(row), readPace(row));
+                String name = readName(row);
+                Pace pace = readPace(row);
+                if (name != null && pace != null) {
+                    result.put(name, pace);
+                }
             }
         }
 
@@ -38,12 +42,13 @@ public class PaceSheetReader {
     }
 
     private String readName(Row row) {
-        return row.getCell(nameIndex).getStringCellValue();
+        return ExcelUtils.readStringValue(row, nameIndex);
     }
 
-    private Pace readPace(Row row) throws IOException {
-        String value = row.getCell(valueIndex).getStringCellValue();
-        return parser.parse(value);
+    private Pace readPace(Row row) {
+        return Optional.ofNullable(ExcelUtils.readStringValue(row, valueIndex))
+                .map(parser::parse)
+                .orElse(null);
     }
 
     private void readHeaderRow(Row row) {

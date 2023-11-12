@@ -8,19 +8,18 @@ import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 
-import java.io.IOException;
 import java.util.*;
 
 /**
  * Created by john on 10/01/2017.
  */
 public class ScheduleSheetReader {
-    private int dateIndex =0;
-    private int workoutIndex =1;
+    private int dateIndex = 0;
+    private int workoutIndex = 1;
     private final WorkoutTextParser parser = new WorkoutTextParser();
 
 
-    public List<ScheduledWorkout> readSchedule(Sheet sheet, Map<String, Workout> workouts) throws IOException {
+    public List<ScheduledWorkout> readSchedule(Sheet sheet, Map<String, Workout> workouts) {
         if (sheet == null) return Collections.emptyList();
 
         List<ScheduledWorkout> result = new ArrayList<>();
@@ -38,7 +37,7 @@ public class ScheduleSheetReader {
         return result;
     }
 
-    private ScheduledWorkout readScheduledWorkout(Row row, Map<String, Workout> workouts) throws IOException {
+    private ScheduledWorkout readScheduledWorkout(Row row, Map<String, Workout> workouts) {
         Cell dateCell = row.getCell(dateIndex);
         Cell workoutCell = row.getCell(workoutIndex);
         if (dateCell != null && workoutCell != null) {

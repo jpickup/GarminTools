@@ -1,5 +1,6 @@
 package com.johnpickup.app.calendar;
 
+import com.johnpickup.app.excel.ExcelUtils;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
 
@@ -33,7 +34,9 @@ public class ProgrammeReader {
                 readHeader(row);
             } else {
                 PlannedWorkout workout = readWorkout(row);
-                result.addWorkout(workout);
+                if (workout != null) {
+                    result.addWorkout(workout);
+                }
             }
         }
         wb.close();
@@ -42,9 +45,10 @@ public class ProgrammeReader {
     }
 
     private PlannedWorkout readWorkout(Row row) {
-        String name = row.getCell(nameIndex).getStringCellValue();
-        String description = row.getCell(descriptionIndex).getStringCellValue();
-        int offset = (int) row.getCell(offsetIndex).getNumericCellValue();
+        String name = ExcelUtils.readStringValue(row, nameIndex);
+        String description = ExcelUtils.readStringValue(row, descriptionIndex);
+        Integer offset = ExcelUtils.readIntValue(row, offsetIndex);
+        if (name == null || description == null || offset == null) return null;
         return new PlannedWorkout(name, description, offset);
     }
 
