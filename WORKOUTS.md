@@ -12,9 +12,10 @@ which can then be transferred to a Garmin watch. This definition is created in M
 simply translates the spreadsheet into a set of Garmin FIT files that can then be copied over to the watch.
 
 ## Workout Language
-Workouts are defined as a series of steps, where a step is either a period of time or a distance. 
-For example 10 minutes or 400 metres. A step can also have a target such as a pace or a heart rate. 
-Steps are written as text, for example:
+### Steps
+Workouts are defined as a series of steps, where a step is either a period of time, a distance or "Open" which means 
+that the step end when the lap button is pressed. For example 10 minutes or 400 metres. A step can also have a target 
+such as a pace or a heart rate. Steps are written as text, for example:
 
 | Workout            | Description                                                                   |
 |--------------------|-------------------------------------------------------------------------------|
@@ -27,12 +28,20 @@ Steps are written as text, for example:
 | `800m@Z3`            | 800 metres in heart rate Zone 3                                               |
 | `400m@160-180bpm`    | 400 metres wth a heart rate between 160 and 180 beats per minute              |
 
+### Sequences of Steps
 Steps can also be strung together with a `+` character, repeated using `*n` and grouped using brackets, for example:
 
 | Workout                                                       | Description                                                                                                 |
 |---------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------|
 | `1mi + (400m@7:00-8:30/mi + 200m@10:00-12:00/mi) * 4 + 1mi`   | An interval session comprising 4 repeats of 400m with 200m recoveries plus a mile of warm-up and cool-down  |
 | `Open + (400m@7:00-8:30/mi + 200m@10:00-12:00/mi) * 4 + Open` | An interval session comprising 4 repeats of 400m with 200m recoveries with open warm-up and cool-down steps |
+
+### Step Intensity
+Steps can be marked with an intensity. This changes how the step is displayed on the watch but other than that
+has no impact. The intensity is a suffix on the step using a pipe character `|`. 
+
+For example:
+`1mi|Warmup + (400m@7:00-8:30/mi|Active + 200m@10:00-12:00/mi|Recovery) * 4 + 1mi|Cooldown`
 
 More examples can be found in `ExampleWorkoutSchedule.xls`
 
@@ -43,6 +52,14 @@ More examples can be found in `ExampleWorkoutSchedule.xls`
 | m | Metre | 400m    |
 | km | Kilometre | 5km     |
 | mi | Mile | 26.2mi  |
+
+### Intensity
+Valid values for the intensity are:
+* Active
+* Rest
+* Warmup
+* Cooldown
+* Recovery
 
 ### Pace
 A pace is just the time, in minutes and seconds per distance unit, e.g. 9:00/mi is a 9 minute mile; 4:30/km is a 4:30 minute kilometre.
