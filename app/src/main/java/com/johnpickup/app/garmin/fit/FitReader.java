@@ -1,6 +1,7 @@
 package com.johnpickup.app.garmin.fit;
 
 import com.garmin.fit.Decode;
+import com.garmin.fit.Field;
 import com.garmin.fit.Mesg;
 import com.garmin.fit.MesgBroadcaster;
 
@@ -20,7 +21,7 @@ public class FitReader {
             Decode decode = new Decode();
             MesgBroadcaster mesgBroadcaster = new MesgBroadcaster(decode);
 
-            decode.read(in, mesg -> result.add(mesg));
+            decode.read(in, result::add);
         }
         finally {
             if (in != null) {
@@ -28,5 +29,26 @@ public class FitReader {
             }
         }
         return result;
+    }
+
+    public static void main(String[] args) {
+        for (String arg : args) {
+            System.out.println(arg);
+            try {
+                List<Mesg> mesgs = read(new File(arg));
+                for (Mesg mesg : mesgs) {
+                    System.out.println("MESSAGE");
+                    for (Field field : mesg.getFields()) {
+                        System.out.println(field.getName());
+                        System.out.println(field.getLongValue());
+                    }
+
+                }
+
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
     }
 }

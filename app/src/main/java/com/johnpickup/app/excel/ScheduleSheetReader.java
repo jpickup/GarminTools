@@ -8,6 +8,8 @@ import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.*;
 
 /**
@@ -42,6 +44,7 @@ public class ScheduleSheetReader {
         Cell workoutCell = row.getCell(workoutIndex);
         if (dateCell != null && workoutCell != null) {
             Date date = dateCell.getDateCellValue();
+            LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             String value = workoutCell.getStringCellValue();
             Workout workout;
             if (workouts.containsKey(value)) {
@@ -51,7 +54,7 @@ public class ScheduleSheetReader {
                 workouts.put(value, workout);
             }
 
-            return new ScheduledWorkout(date, workout, value, workout.toString());
+            return new ScheduledWorkout(localDate, workout, value, workout.toString());
         }
         else {
             return null;

@@ -4,7 +4,6 @@ import com.johnpickup.garmin.parser.ScheduledWorkout;
 import com.johnpickup.garmin.parser.WorkoutSchedule;
 
 import java.time.LocalDate;
-import java.time.ZoneId;
 
 public class WorkoutScheduleConverter {
     public Schedule convert(WorkoutSchedule workoutSchedule) {
@@ -21,7 +20,7 @@ public class WorkoutScheduleConverter {
     private com.johnpickup.app.calendar.ScheduledWorkout toCalendarScheduledWorkout(ScheduledWorkout scheduledWorkout) {
         String name = scheduledWorkout.getName();
         String description = scheduledWorkout.getDescription();
-        LocalDate date = scheduledWorkout.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        LocalDate date = scheduledWorkout.getDate();
         return new com.johnpickup.app.calendar.ScheduledWorkout(name, description, date);
     }
 }

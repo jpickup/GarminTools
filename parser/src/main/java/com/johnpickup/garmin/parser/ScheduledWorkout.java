@@ -1,25 +1,25 @@
 package com.johnpickup.garmin.parser;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Objects;
 
 /**
  * Created by john on 11/01/2017.
  */
 public class ScheduledWorkout {
-    private final Date date;
+    private final LocalDate date;
     private final Workout workout;
     private final String name;
     private final String description;
 
-    public ScheduledWorkout(Date date, Workout workout, String name, String description) {
+    public ScheduledWorkout(LocalDate date, Workout workout, String name, String description) {
         this.date = date;
         this.workout = workout;
         this.name = name;
         this.description = description;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return this.date;
     }
 

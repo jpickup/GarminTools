@@ -3,6 +3,7 @@ package com.johnpickup.app.garmin.schedule;
 import com.garmin.fit.*;
 import com.johnpickup.app.garmin.fit.FitGenerator;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -43,11 +44,9 @@ public class TrainingSchedule implements FitGenerator {
     @Override
     public List<Mesg> generate() {
         List<Mesg> messages = createMessageHeader();
-        Date now = new Date();
-
         for (ScheduledWorkout scheduledWorkout : workouts) {
             // only include future workouts (as watch has a limit of 30 in a schedule)
-            if (scheduledWorkout.getDate().after(now)) {
+            if (!scheduledWorkout.getDate().isBefore(LocalDate.now())) {
                 ScheduleMesg scheduleMesg = new ScheduleMesg();
                 scheduleMesg.setManufacturer(Manufacturer.GARMIN);
                 scheduleMesg.setProduct(65534);

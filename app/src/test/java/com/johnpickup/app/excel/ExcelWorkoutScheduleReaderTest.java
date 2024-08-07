@@ -4,7 +4,10 @@ import com.johnpickup.garmin.parser.*;
 import org.junit.Test;
 
 import java.io.File;
-import java.util.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
@@ -62,31 +65,22 @@ public class ExcelWorkoutScheduleReaderTest {
         expected.getWorkouts().put("30min",halfHour);
         expected.getWorkouts().put("5min Fast", fiveMinFast);
 
-        expected.getSchedule().add(new ScheduledWorkout(buildDate(2017,1,10), fiveMileSlow, "5mi Slow", "5.0mi@Slow"));
-        expected.getSchedule().add(new ScheduledWorkout(buildDate(2017,1,20), intervalWorkout, "4x1mi Interval", "1.0mi + (1.0mi@Fast + 400.0m@Easy) * 4 + 1.0mi"));
-        expected.getSchedule().add(new ScheduledWorkout(buildDate(2017,1,30), sixMileSteady,"6mi Steady", "6.0mi@Steady"));
+        expected.getSchedule().add(new ScheduledWorkout(LocalDate.of(2017,1,10), fiveMileSlow, "5mi Slow", "5.0mi@Slow"));
+        expected.getSchedule().add(new ScheduledWorkout(LocalDate.of(2017,1,20), intervalWorkout, "4x1mi Interval", "1.0mi + (1.0mi@Fast + 400.0m@Easy) * 4 + 1.0mi"));
+        expected.getSchedule().add(new ScheduledWorkout(LocalDate.of(2017,1,30), sixMileSteady,"6mi Steady", "6.0mi@Steady"));
         List<Step> onePlusFourSteps = new ArrayList<>();
         onePlusFourSteps.add(new DistanceStep(new Distance(1, DistanceUnit.MILE)));
         onePlusFourSteps.add(new DistancePaceStep(new Distance(4, DistanceUnit.MILE), new PaceName("Brisk")));
         Workout onePlusFourMileBrisk = new Workout(onePlusFourSteps);
-        expected.getSchedule().add(new ScheduledWorkout(buildDate(2017,2,1), onePlusFourMileBrisk, "1mi+4mi@Brisk", "1.0mi + 4.0mi@Brisk"));
+        expected.getSchedule().add(new ScheduledWorkout(LocalDate.of(2017,2,1), onePlusFourMileBrisk, "1mi+4mi@Brisk", "1.0mi + 4.0mi@Brisk"));
         Workout threeMileExplicit = new Workout(Collections.singletonList(new DistancePaceStep(new Distance(3, DistanceUnit.MILE), new PaceRange(new Time(8,0), new Time(10,0), PaceUnit.MIN_PER_MILE))));
-        expected.getSchedule().add(new ScheduledWorkout(buildDate(2017,2,11), threeMileExplicit, "3mi@8:00-10:00/mi", "3.0mi@10:00-8:00/mi"));
+        expected.getSchedule().add(new ScheduledWorkout(LocalDate.of(2017,2,11), threeMileExplicit, "3mi@8:00-10:00/mi", "3.0mi@10:00-8:00/mi"));
 
 
         expected.getWorkouts().put("1mi+4mi@Brisk",onePlusFourMileBrisk);
         expected.getWorkouts().put("3mi@8:00-10:00/mi",threeMileExplicit);
         return expected;
     }
-
-    private Date buildDate(int year, int month, int day) {
-        Calendar calendar = GregorianCalendar.getInstance();
-        calendar.clear();
-        calendar.set(year, month-1, day, 0, 0, 0);
-
-        return calendar.getTime();
-    }
-
 }
 
 /* PACE TEST DATA

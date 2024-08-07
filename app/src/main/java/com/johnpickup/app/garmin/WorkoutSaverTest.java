@@ -11,10 +11,9 @@ import com.johnpickup.garmin.common.unit.DistanceUnit;
 import com.johnpickup.garmin.common.unit.PaceTarget;
 import com.johnpickup.garmin.common.unit.PaceUnit;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Date;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created by john on 12/01/2017.
@@ -67,8 +66,8 @@ public class WorkoutSaverTest {
         saver.save(testIntervalWorkout2, "testInterval2.fit");
 
         TrainingSchedule trainingSchedule = new TrainingSchedule();
-        trainingSchedule.addScheduledWorkout(new ScheduledWorkout(testDistanceWorkout, new Date()));
-        trainingSchedule.addScheduledWorkout(new ScheduledWorkout(testPaceWorkout, new Date(new Date().getTime() + TimeUnit.DAYS.toMillis(1))));
+        trainingSchedule.addScheduledWorkout(new ScheduledWorkout(testDistanceWorkout, LocalDate.now()));
+        trainingSchedule.addScheduledWorkout(new ScheduledWorkout(testPaceWorkout, LocalDate.now().plusDays(1)));
         //trainingSchedule.addScheduledWorkout(new ScheduledWorkout(testInterval, new Date(2017,1,3)));
         saver.save(trainingSchedule, "testSchedule.fit");
     }
