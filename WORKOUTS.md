@@ -11,6 +11,9 @@ The idea with this application is to allow the definition of workouts (using a s
 which can then be transferred to a Garmin watch. This definition is created in Microsoft Excel, so the application 
 simply translates the spreadsheet into a set of Garmin FIT files that can then be copied over to the watch.
 
+## Uploading to the watch
+The application produces a number of files in the output directory, with one FIT file per workout and another FIT file for the schedule. Copy all of these files to Garmin/NEWFILES on your watch. You can either do this by setting the output directory directly to this directory on the watch (on Windows only) or copying them (Windows or Mac). Modern Garmin watches don't appear as a mount on the Mac so you need to use something like [Android File Transfer](https://android.p2hp.com/filetransfer/index.html) or [MacDroid](https://www.macdroid.app/android-file-transfer/)
+
 ## Workout Language
 ### Steps
 Workouts are defined as a series of steps, where a step is either a period of time, a distance or "Open" which means 
