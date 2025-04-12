@@ -14,6 +14,14 @@ simply translates the spreadsheet into a set of Garmin FIT files that can then b
 ## Uploading to the watch
 The application produces a number of files in the output directory, with one FIT file per workout and another FIT file for the schedule. Copy all of these files to Garmin/NEWFILES on your watch. You can either do this by setting the output directory directly to this directory on the watch (on Windows only) or copying them (Windows or Mac). Modern Garmin watches don't appear as a mount on the Mac so you need to use something like [Android File Transfer](https://android.p2hp.com/filetransfer/index.html) or [MacDroid](https://www.macdroid.app/android-file-transfer/)
 
+NOTE: there is a Garmin limit to how many workouts can be loaded onto the watch, which I think is either 4 weeks or 20 workouts.
+If you have a schedule that's longer than this then the only workaround I've found is to re-upload the schedule
+every month as the app will not upload anything scheduled in the past, meaning you get the next 4 weeks loaded.
+
+## Uploading to a calendar application
+The app can also create an iCal file that you can load into a calendar application. This is handy for viewing a complete 
+schedule.
+
 ## Workout Language
 ### Steps
 Workouts are defined as a series of steps, where a step is either a period of time, a distance or "Open" which means 
