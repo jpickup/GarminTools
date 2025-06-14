@@ -1,6 +1,7 @@
 package com.johnpickup.app.excel;
 
 import com.johnpickup.app.parser.WorkoutTextParser;
+import com.johnpickup.garmin.parser.Sport;
 import com.johnpickup.garmin.parser.Workout;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
@@ -18,6 +19,7 @@ import java.util.Optional;
 public class WorkoutSheetReader {
     private int nameIndex = 0;
     private int descriptionIndex = 1;
+    private int sportIndex = 2;
     private final WorkoutTextParser parser = new WorkoutTextParser();
 
     public Map<String, Workout> readWorkouts(Sheet sheet) {
@@ -33,13 +35,17 @@ public class WorkoutSheetReader {
             else {
                 String name = readName(row);
                 Workout workout = readWorkout(row);
+                workout.setSport(readSport(row));
                 if (name != null && workout != null) {
                     result.put(name, workout);
                 }
             }
         }
-
         return result;
+    }
+
+    private Sport readSport(Row row) {
+        return ExcelUtils.readSportValue(row, sportIndex);
     }
 
     private String readName(Row row) {
@@ -58,6 +64,7 @@ public class WorkoutSheetReader {
 
             if ("Name".equals(cell.getStringCellValue())) nameIndex = cell.getColumnIndex();
             if ("Description".equals(cell.getStringCellValue())) descriptionIndex = cell.getColumnIndex();
+            if ("Sport".equals(cell.getStringCellValue())) sportIndex = cell.getColumnIndex();
         }
     }
 }

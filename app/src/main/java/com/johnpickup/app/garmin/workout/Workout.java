@@ -13,11 +13,13 @@ public class Workout implements FitGenerator {
     private static long baseSerial = new Random().nextLong(1000000L);
     private Long timestamp;
     private final List<WorkoutStep> steps;
+    private final Sport sport;
 
     private String name;
     private Long serialNo;
 
-    public Workout(List<WorkoutStep> steps) {
+    public Workout(Sport sport, List<WorkoutStep> steps) {
+        this.sport = sport;
         this.steps = steps;
     }
 
@@ -77,7 +79,7 @@ public class Workout implements FitGenerator {
         List<Mesg> messages = createMessageHeader();
         WorkoutMesg workout = new WorkoutMesg();
         workout.setWktName(getName());
-        workout.setSport(Sport.RUNNING);
+        workout.setSport(sport);
         workout.setCapabilities(32L);
         messages.add(workout);
 
@@ -95,4 +97,5 @@ public class Workout implements FitGenerator {
     public void setName(String name) {
         this.name = name;
     }
+
 }

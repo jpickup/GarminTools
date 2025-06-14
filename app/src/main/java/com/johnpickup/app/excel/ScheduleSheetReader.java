@@ -18,6 +18,7 @@ import java.util.*;
 public class ScheduleSheetReader {
     private int dateIndex = 0;
     private int workoutIndex = 1;
+    private int sportIndex = 2;
     private final WorkoutTextParser parser = new WorkoutTextParser();
 
 
@@ -42,6 +43,7 @@ public class ScheduleSheetReader {
     private ScheduledWorkout readScheduledWorkout(Row row, Map<String, Workout> workouts) {
         Cell dateCell = row.getCell(dateIndex);
         Cell workoutCell = row.getCell(workoutIndex);
+        Cell sportCell = row.getCell(sportIndex);
         if (dateCell != null && workoutCell != null) {
             Date date = dateCell.getDateCellValue();
             LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
@@ -51,15 +53,14 @@ public class ScheduleSheetReader {
                 workout = workouts.get(value);
             } else {
                 workout = parser.parse(value);
+                workout.setSport(ExcelUtils.readSportValue(row, sportIndex));
                 workouts.put(value, workout);
             }
-
             return new ScheduledWorkout(localDate, workout, value, workout.toString());
         }
         else {
             return null;
         }
-
     }
 
     private void readHeaderRow(Row row) {
@@ -68,6 +69,7 @@ public class ScheduleSheetReader {
 
             if ("Date".equals(cell.getStringCellValue())) dateIndex = cell.getColumnIndex();
             if ("Workout".equals(cell.getStringCellValue())) workoutIndex = cell.getColumnIndex();
+            if ("Sport".equals(cell.getStringCellValue())) sportIndex = cell.getColumnIndex();
         }
     }
 }

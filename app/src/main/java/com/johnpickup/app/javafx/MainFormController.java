@@ -30,7 +30,7 @@ public class MainFormController {
     Button outputDirChooser;
 
     @FXML
-    ComboBox conversionCombo;
+    ComboBox<ConversionType> conversionCombo;
 
     @FXML
     CheckBox reverseRouteCheckbox;

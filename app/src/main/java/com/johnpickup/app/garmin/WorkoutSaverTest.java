@@ -1,6 +1,7 @@
 package com.johnpickup.app.garmin;
 
 import com.garmin.fit.Intensity;
+import com.garmin.fit.Sport;
 import com.johnpickup.app.converter.WorkoutConverter;
 import com.johnpickup.app.garmin.schedule.ScheduledWorkout;
 import com.johnpickup.app.garmin.schedule.TrainingSchedule;
@@ -33,11 +34,11 @@ public class WorkoutSaverTest {
         saver.save(garminInterval, "parsed_interval.fit");
 
         WorkoutStep testDistance = new DistanceWorkoutStep(Intensity.ACTIVE, new Distance(2, DistanceUnit.MILE));
-        Workout testDistanceWorkout = new Workout(Collections.singletonList(testDistance));
+        Workout testDistanceWorkout = new Workout(Sport.RUNNING, Collections.singletonList(testDistance));
         saver.save(testDistanceWorkout, "testDist.fit");
 
         WorkoutStep testPace = new DistancePaceWorkoutStep(Intensity.ACTIVE, new Distance(2, DistanceUnit.MILE), new PaceTarget(null, 5, 6, PaceUnit.MIN_PER_MILE));
-        Workout testPaceWorkout = new Workout(Collections.singletonList(testPace));
+        Workout testPaceWorkout = new Workout(Sport.RUNNING, Collections.singletonList(testPace));
         saver.save(testPaceWorkout, "testPace.fit");
 
         WorkoutStep testInterval = new PaceIntervalWorkoutStep(
@@ -47,7 +48,7 @@ public class WorkoutSaverTest {
                 new Distance(400, DistanceUnit.METRE),
                 new PaceTarget("Brisk", 5, 7, PaceUnit.MIN_PER_MILE),
                 new PaceTarget(null, 9, 12, PaceUnit.MIN_PER_MILE));
-        Workout testIntervalWorkout = new Workout(Collections.singletonList(testInterval));
+        Workout testIntervalWorkout = new Workout(Sport.RUNNING, Collections.singletonList(testInterval));
         testIntervalWorkout.setName("4x1mi No WU");
         saver.save(testIntervalWorkout, "testInterval1.fit");
 
@@ -61,7 +62,7 @@ public class WorkoutSaverTest {
                 new PaceTarget(null, 9, 12, PaceUnit.MIN_PER_MILE));
         WorkoutStep[] interval2Steps = {warmcool, testInterval2, warmcool};
 
-        Workout testIntervalWorkout2 = new Workout(Arrays.asList(interval2Steps));
+        Workout testIntervalWorkout2 = new Workout(Sport.RUNNING, Arrays.asList(interval2Steps));
         testIntervalWorkout2.setName("3x1km WUCD");
         saver.save(testIntervalWorkout2, "testInterval2.fit");
 
