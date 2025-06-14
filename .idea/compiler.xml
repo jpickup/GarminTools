@@ -13,8 +13,5 @@
         <module name="gpx" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="jlink" target="17" />
-    </bytecodeTargetLevel>
   </component>
 </project>
