@@ -21,8 +21,14 @@ public class ExcelUtils {
         String sportText = ExcelUtils.readStringValue(row, index);
         return switch (Optional.ofNullable(sportText).map(String::toUpperCase).orElse("")) {
             case "RUNNING", "RUN" -> Sport.RUNNING;
+            case "ROAD RUNNING" -> Sport.ROAD_RUNNING;
+            case "TRAIL RUNNING" -> Sport.TRAIL_RUNNING;
             case "CYCLING", "CYCLE" -> Sport.CYCLING;
+            case "ROAD CYCLING" -> Sport.ROAD_CYCLING;
+            case "MTB", "MOUNTAIN BIKING" -> Sport.MTB;
             case "SWIMMING", "SWIM" -> Sport.SWIMMING;
+            case "POOL SWIMMING", "POOL" -> Sport.POOL_SWIMMING;
+            case "OPEN WATER SWIMMING", "OPEN WATER" -> Sport.OPEN_WATER_SWIMMING;
             default -> Sport.RUNNING;
         };
     }
