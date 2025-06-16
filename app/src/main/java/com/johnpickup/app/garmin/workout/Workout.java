@@ -3,10 +3,7 @@ package com.johnpickup.app.garmin.workout;
 import com.garmin.fit.*;
 import com.johnpickup.app.garmin.fit.FitGenerator;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class Workout implements FitGenerator {
     private static int instanceIndex = 0;
@@ -14,12 +11,14 @@ public class Workout implements FitGenerator {
     private Long timestamp;
     private final List<WorkoutStep> steps;
     private final Sport sport;
+    private final SubSport subSport;
 
     private String name;
     private Long serialNo;
 
-    public Workout(Sport sport, List<WorkoutStep> steps) {
+    public Workout(Sport sport, SubSport subSport, List<WorkoutStep> steps) {
         this.sport = sport;
+        this.subSport = subSport;
         this.steps = steps;
     }
 
@@ -38,7 +37,10 @@ public class Workout implements FitGenerator {
 
     @Override
     public String toString() {
-        return getName();
+        return String.format("%s|%s: %s",
+                Optional.ofNullable(sport).map(Enum::toString).orElse("Default"),
+                Optional.ofNullable(subSport).map(Enum::toString).orElse("Default"),
+                getName());
     }
 
     // Get a Garmin timestamp that is unique for the workout.
@@ -80,6 +82,7 @@ public class Workout implements FitGenerator {
         WorkoutMesg workout = new WorkoutMesg();
         workout.setWktName(getName());
         workout.setSport(sport);
+        Optional.ofNullable(subSport).ifPresent(workout::setSubSport);
         workout.setCapabilities(32L);
         messages.add(workout);
 
