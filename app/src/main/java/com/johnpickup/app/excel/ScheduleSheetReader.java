@@ -18,7 +18,8 @@ import java.util.*;
 public class ScheduleSheetReader {
     private int dateIndex = 0;
     private int workoutIndex = 1;
-    private int sportIndex = 2;
+    private Integer sportIndex = null;
+    private Integer poolLengthIndex = null;
     private final WorkoutTextParser parser = new WorkoutTextParser();
 
 
@@ -43,7 +44,6 @@ public class ScheduleSheetReader {
     private ScheduledWorkout readScheduledWorkout(Row row, Map<String, Workout> workouts) {
         Cell dateCell = row.getCell(dateIndex);
         Cell workoutCell = row.getCell(workoutIndex);
-        Cell sportCell = row.getCell(sportIndex);
         if (dateCell != null && workoutCell != null) {
             Date date = dateCell.getDateCellValue();
             LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
@@ -54,6 +54,7 @@ public class ScheduleSheetReader {
             } else {
                 workout = parser.parse(value);
                 workout.setSport(ExcelUtils.readSportValue(row, sportIndex));
+                workout.setPoolLength(ExcelUtils.readIntValue(row, poolLengthIndex));
                 workouts.put(value, workout);
             }
             return new ScheduledWorkout(localDate, workout, value, workout.toString());
@@ -67,9 +68,10 @@ public class ScheduleSheetReader {
         for (Cell cell : row) {
             if (cell.getCellType() != CellType.STRING) continue;
 
-            if ("Date".equals(cell.getStringCellValue())) dateIndex = cell.getColumnIndex();
-            if ("Workout".equals(cell.getStringCellValue())) workoutIndex = cell.getColumnIndex();
-            if ("Sport".equals(cell.getStringCellValue())) sportIndex = cell.getColumnIndex();
+            if ("Date".equalsIgnoreCase(cell.getStringCellValue())) dateIndex = cell.getColumnIndex();
+            if ("Workout".equalsIgnoreCase(cell.getStringCellValue())) workoutIndex = cell.getColumnIndex();
+            if ("Sport".equalsIgnoreCase(cell.getStringCellValue())) sportIndex = cell.getColumnIndex();
+            if ("Pool length".equalsIgnoreCase(cell.getStringCellValue())) poolLengthIndex = cell.getColumnIndex();
         }
     }
 }

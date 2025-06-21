@@ -10,6 +10,7 @@ import java.util.Optional;
 public class Workout {
     private final List<? extends Step> steps;
     private Sport sport;
+    private Integer poolLength;
 
     public Workout(List<? extends Step> steps) {
         this.steps = steps;
@@ -34,6 +35,14 @@ public class Workout {
 
     public void setSport(Sport sport) {
         this.sport = sport;
+    }
+
+    public void setPoolLength(Integer poolLength) {
+        this.poolLength = poolLength;
+    }
+
+    public Integer getPoolLength() {
+        return poolLength;
     }
 
     @Override

@@ -12,14 +12,28 @@ public class Workout implements FitGenerator {
     private final List<WorkoutStep> steps;
     private final Sport sport;
     private final SubSport subSport;
+    private final Integer poolLength;
 
     private String name;
     private Long serialNo;
 
+    public Workout(List<WorkoutStep> steps) {
+        this(Sport.RUNNING, null, null, steps);
+    }
+
+    public Workout(Sport sport, List<WorkoutStep> steps) {
+        this(sport, null, null, steps);
+    }
+
     public Workout(Sport sport, SubSport subSport, List<WorkoutStep> steps) {
+        this(sport, subSport, null, steps);
+    }
+
+    public Workout(Sport sport, SubSport subSport, Integer poolLength, List<WorkoutStep> steps) {
         this.sport = sport;
         this.subSport = subSport;
         this.steps = steps;
+        this.poolLength = poolLength;
     }
 
     public String getName() {
@@ -83,6 +97,11 @@ public class Workout implements FitGenerator {
         workout.setWktName(getName());
         workout.setSport(sport);
         Optional.ofNullable(subSport).ifPresent(workout::setSubSport);
+        Optional.ofNullable(poolLength).ifPresent(pl -> {
+                workout.setPoolLength(pl * 1.0f);
+                workout.setPoolLengthUnit(DisplayMeasure.METRIC);
+            }
+        );
         workout.setCapabilities(32L);
         messages.add(workout);
 

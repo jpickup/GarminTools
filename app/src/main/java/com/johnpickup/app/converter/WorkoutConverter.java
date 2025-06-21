@@ -45,7 +45,8 @@ public class WorkoutConverter {
         List<WorkoutStep> garminWorkoutSteps = convertStepsToGarmin(workout.getSteps());
         Sport sport = sportMap.getOrDefault(workout.getSport(), Sport.RUNNING);
         SubSport subSport = subSportMap.getOrDefault(workout.getSport(), SubSport.ALL);
-        return new com.johnpickup.app.garmin.workout.Workout(sport, subSport, garminWorkoutSteps);
+        Integer poolLength = SubSport.LAP_SWIMMING.equals(subSport) ? workout.getPoolLength() : null;
+        return new com.johnpickup.app.garmin.workout.Workout(sport, subSport, poolLength, garminWorkoutSteps);
     }
 
     private List<WorkoutStep> convertStepsToGarmin(List<? extends Step> steps) {
