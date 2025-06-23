@@ -28,6 +28,7 @@
         <jaxb.runtime.version>2.3.1</jaxb.runtime.version>
         <antlr4.version>4.7.1</antlr4.version>
         <apache.poi.version>5.2.2</apache.poi.version>
+        <logback.version>1.4.12</logback.version>
         <fit.jar.location>${project.basedir}/lib/fit.jar</fit.jar.location>
     </properties>
 
@@ -42,12 +43,12 @@
             <dependency>
                 <groupId>ch.qos.logback</groupId>
                 <artifactId>logback-core</artifactId>
-                <version>1.4.5</version>
+                <version>${logback.version}</version>
             </dependency>
             <dependency>
                 <groupId>ch.qos.logback</groupId>
                 <artifactId>logback-classic</artifactId>
-                <version>1.4.5</version>
+                <version>${logback.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.slf4j</groupId>
