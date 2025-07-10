@@ -2,12 +2,15 @@ package com.johnpickup.garmin.parser;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 /**
  * Created by john on 03/01/2017.
  */
 public class Workout {
     private final List<? extends Step> steps;
+    private Sport sport;
+    private Integer poolLength;
 
     public Workout(List<? extends Step> steps) {
         this.steps = steps;
@@ -24,6 +27,22 @@ public class Workout {
 
     public List<? extends Step> getSteps() {
         return this.steps;
+    }
+
+    public Sport getSport() {
+        return Optional.ofNullable(sport).orElse(Sport.RUNNING);
+    }
+
+    public void setSport(Sport sport) {
+        this.sport = sport;
+    }
+
+    public void setPoolLength(Integer poolLength) {
+        this.poolLength = poolLength;
+    }
+
+    public Integer getPoolLength() {
+        return poolLength;
     }
 
     @Override

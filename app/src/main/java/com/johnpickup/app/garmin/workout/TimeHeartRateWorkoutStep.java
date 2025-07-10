@@ -40,7 +40,7 @@ public class TimeHeartRateWorkoutStep extends WorkoutStep {
         step.setMessageIndex(generateWorkoutStepIndex());
         step.setCustomTargetValueLow(heartRateTarget.getGarminLow());
         step.setCustomTargetValueHigh(heartRateTarget.getGarminHigh());
-
+        step.setNotes(nameWithIntensity());
         return Collections.singletonList(step);
     }
 

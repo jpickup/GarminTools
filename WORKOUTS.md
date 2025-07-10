@@ -107,14 +107,30 @@ sheets or columns are ignored.
 | Workout | Named workouts in the workout language described above |
 | Schedule | A schedule for workouts for specific dates |
 
-| Sheet | Column | Description |
-| ---- | ------ | ----------- |
-| Pace | Name  | The name for a pace |
-| Pace | Value | The pace defined in workout language |
-| Workout | Name | The name for a workout |
-| Workout | Description | The workout language definition, may include named paces defined in the pace sheet |
-| Schedule | Date | The date for a specific workout |
-| Schedule | Workout | Either defined in the workout language or the name a named workout from the Workout sheet |
+| Sheet | Column      | Description                                                                               |
+| ---- |-------------|-------------------------------------------------------------------------------------------|
+| Pace | Name        | The name for a pace                                                                       |
+| Pace | Value       | The pace defined in workout language                                                      |
+| Workout | Name        | The name for a workout                                                                    |
+| Workout | Description | The workout language definition, may include named paces defined in the pace sheet        |
+| Workout | Sport       | The sport that this workout is for (if not present running is the default)                |
+| Schedule | Date        | The date for a specific workout                                                           |
+| Schedule | Workout     | Either defined in the workout language or the name a named workout from the Workout sheet |
+| Schedule | Sport       | The sport that this workout is for (if not present running is the default)                |
+
+## Sport types
+The sport type case be specified as a value in the spreadsheet under the Sport heading. The values supported are:
+
+| Sport | Description                   |
+| ----- | ----------------------------- |
+| Running | Running of any type         |
+| Road running | Road running           |
+| Trail running | Trail running         |
+| Cycling | Cycling of any type         |
+| Road cycling | Road cycling           |
+| MTB | Mountain biking                 |
+| Swimming | Pool swimming              |
+| Open water | Open water swimming      |
 
 ## ANTLR4 Grammar
 The grammar for the language is defined in `grammar/Workout.g4`, which is an ANTLR4 grammar that is used to generate

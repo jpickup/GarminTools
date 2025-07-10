@@ -35,6 +35,7 @@ public class DistanceWorkoutStep extends WorkoutStep {
         step.setTargetType(WktStepTarget.OPEN);
         step.setMessageIndex(generateWorkoutStepIndex());
         step.setTargetValue(0L);
+        step.setNotes(nameWithIntensity());
 
         return Collections.singletonList(step);
     }

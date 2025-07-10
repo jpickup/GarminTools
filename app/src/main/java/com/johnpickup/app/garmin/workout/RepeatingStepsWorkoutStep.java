@@ -50,6 +50,7 @@ public class RepeatingStepsWorkoutStep extends WorkoutStep {
         repeatStep.setTargetType(WktStepTarget.INVALID);
         repeatStep.setTargetValue((long)intervalCount);
         repeatStep.setMessageIndex(generateWorkoutStepIndex());
+        repeatStep.setNotes(nameWithIntensity());
         result.add(repeatStep);
 
         return result;

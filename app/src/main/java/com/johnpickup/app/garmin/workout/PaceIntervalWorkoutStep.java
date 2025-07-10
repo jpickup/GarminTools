@@ -51,7 +51,7 @@ public class PaceIntervalWorkoutStep extends WorkoutStep {
         result.add(intervalStep);
 
         WorkoutStepMesg recoveryStep = new WorkoutStepMesg();
-        recoveryStep.setIntensity(intensity);
+        recoveryStep.setIntensity(Intensity.RECOVERY);
         recoveryStep.setDurationType(WktStepDuration.DISTANCE);
         recoveryStep.setDurationDistance(recoveryDistance.toGarminDistance());
         recoveryStep.setTargetType(WktStepTarget.SPEED);
