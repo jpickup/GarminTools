@@ -21,4 +21,9 @@ public class ZoneHeartRateTarget extends HeartRateTarget {
     public Long getTargetValue() {
         return zone;
     }
+
+    @Override
+    public String toString() {
+        return "Z" + zone;
+    }
 }
