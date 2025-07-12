@@ -18,6 +18,8 @@ import java.util.*;
 public class ScheduleSheetReader {
     private int dateIndex = 0;
     private int workoutIndex = 1;
+    private Integer sportIndex = null;
+    private Integer poolLengthIndex = null;
     private final WorkoutTextParser parser = new WorkoutTextParser();
 
 
@@ -51,23 +53,25 @@ public class ScheduleSheetReader {
                 workout = workouts.get(value);
             } else {
                 workout = parser.parse(value);
+                workout.setSport(ExcelUtils.readSportValue(row, sportIndex));
+                workout.setPoolLength(ExcelUtils.readIntValue(row, poolLengthIndex));
                 workouts.put(value, workout);
             }
-
             return new ScheduledWorkout(localDate, workout, value, workout.toString());
         }
         else {
             return null;
         }
-
     }
 
     private void readHeaderRow(Row row) {
         for (Cell cell : row) {
             if (cell.getCellType() != CellType.STRING) continue;
 
-            if ("Date".equals(cell.getStringCellValue())) dateIndex = cell.getColumnIndex();
-            if ("Workout".equals(cell.getStringCellValue())) workoutIndex = cell.getColumnIndex();
+            if ("Date".equalsIgnoreCase(cell.getStringCellValue())) dateIndex = cell.getColumnIndex();
+            if ("Workout".equalsIgnoreCase(cell.getStringCellValue())) workoutIndex = cell.getColumnIndex();
+            if ("Sport".equalsIgnoreCase(cell.getStringCellValue())) sportIndex = cell.getColumnIndex();
+            if ("Pool length".equalsIgnoreCase(cell.getStringCellValue())) poolLengthIndex = cell.getColumnIndex();
         }
     }
 }

@@ -41,9 +41,9 @@ public class GarminScheduleGenerator {
             for (Workout garminWorkout : converter.getGarminWorkouts()) {
                 String workoutFilename = generateWorkoutFilename(garminWorkout);
                 File workoutFile = new File(outputDir, workoutFilename);
-                log.debug("Saving workout {} as {}", garminWorkout.getName(), workoutFile.getPath());
+                log.debug("Saving workout {} as {}", garminWorkout, workoutFile.getPath());
                 workoutSaver.save(garminWorkout, workoutFile);
-                log.info("Saved workout {} as {}", garminWorkout.getName(), workoutFile.getPath());
+                log.info("Saved workout {} as {}", garminWorkout, workoutFile.getPath());
             }
 
             String scheduleFilename = "schedule.fit";

@@ -40,6 +40,7 @@ public class DistancePaceWorkoutStep extends WorkoutStep {
         step.setMessageIndex(generateWorkoutStepIndex());
         step.setCustomTargetValueLow(paceTarget.getGarminLow());
         step.setCustomTargetValueHigh(paceTarget.getGarminHigh());
+        step.setNotes(nameWithIntensity());
 
         return Collections.singletonList(step);
     }
