@@ -34,18 +34,24 @@ step returns [Step value]
    | distance_pace_intensity_step               {$value = $distance_pace_intensity_step.value;}
    | distance_hr_step                           {$value = $distance_hr_step.value;}
    | distance_hr_intensity_step                 {$value = $distance_hr_intensity_step.value;}
+   | distance_power_step                        {$value = $distance_power_step.value;}
+   | distance_power_intensity_step              {$value = $distance_power_intensity_step.value;}
    | time_step                                  {$value = $time_step.value;}
    | time_intensity_step                        {$value = $time_intensity_step.value;}
    | time_pace_step                             {$value = $time_pace_step.value;}
    | time_pace_intensity_step                   {$value = $time_pace_intensity_step.value;}
    | time_hr_step                               {$value = $time_hr_step.value;}
    | time_hr_intensity_step                     {$value = $time_hr_intensity_step.value;}
+   | time_power_step                            {$value = $time_power_step.value;}
+   | time_power_intensity_step                  {$value = $time_power_intensity_step.value;}
    | open_step                                  {$value = $open_step.value;}
    | open_intensity_step                        {$value = $open_intensity_step.value;}
    | open_pace_step                             {$value = $open_pace_step.value;}
    | open_pace_intensity_step                   {$value = $open_pace_intensity_step.value;}
    | open_hr_step                               {$value = $open_hr_step.value;}
    | open_hr_intensity_step                     {$value = $open_hr_intensity_step.value;}
+   | open_power_step                            {$value = $open_power_step.value;}
+   | open_power_intensity_step                  {$value = $open_power_intensity_step.value;}
    | repeating_steps                            {$value = $repeating_steps.value;}
    ;
    
@@ -79,6 +85,16 @@ distance_hr_intensity_step returns [DistanceHeartRateStep value]
    | distance '@' hr_zone PIPE intensity        {$value = new DistanceHeartRateStep($intensity.value, $distance.value, $hr_zone.value);}
    ;
 
+distance_power_step returns [DistancePowerStep value]
+   : distance '@' power_range                      {$value = new DistancePowerStep($distance.value, $power_range.value);}
+   | distance '@' power_zone                       {$value = new DistancePowerStep($distance.value, $power_zone.value);}
+   ;
+
+distance_power_intensity_step returns [DistancePowerStep value]
+   : distance '@' power_range PIPE intensity       {$value = new DistancePowerStep($intensity.value, $distance.value, $power_range.value);}
+   | distance '@' power_zone PIPE intensity        {$value = new DistancePowerStep($intensity.value, $distance.value, $power_zone.value);}
+   ;
+
 time_step returns [TimeStep value]
    : time                                       {$value = new TimeStep($time.value);}
    ;
@@ -109,6 +125,16 @@ time_hr_intensity_step returns [TimeHeartRateStep value]
    | time '@' hr_zone PIPE intensity            {$value = new TimeHeartRateStep($intensity.value, $time.value, $hr_zone.value);}
    ;
 
+time_power_step returns [TimePowerStep value]
+   : time '@' power_range                          {$value = new TimePowerStep($time.value, $power_range.value);}
+   | time '@' power_zone                           {$value = new TimePowerStep($time.value, $power_zone.value);}
+   ;
+
+time_power_intensity_step returns [TimePowerStep value]
+   : time '@' power_range PIPE intensity           {$value = new TimePowerStep($intensity.value, $time.value, $power_range.value);}
+   | time '@' power_zone PIPE intensity            {$value = new TimePowerStep($intensity.value, $time.value, $power_zone.value);}
+   ;
+
 open_step returns [OpenStep value]
    : open                                       {$value = new OpenStep();}
    ;
@@ -137,6 +163,16 @@ open_hr_step returns [OpenHeartRateStep value]
 open_hr_intensity_step returns [OpenHeartRateStep value]
    : open '@' hr_range PIPE intensity           {$value = new OpenHeartRateStep($intensity.value, $hr_range.value);}
    | open '@' hr_zone PIPE intensity            {$value = new OpenHeartRateStep($intensity.value, $hr_zone.value);}
+   ;
+
+open_power_step returns [OpenPowerStep value]
+   : open '@' power_range                          {$value = new OpenPowerStep($power_range.value);}
+   | open '@' power_zone                           {$value = new OpenPowerStep($power_zone.value);}
+   ;
+
+open_power_intensity_step returns [OpenPowerStep value]
+   : open '@' power_range PIPE intensity           {$value = new OpenPowerStep($intensity.value, $power_range.value);}
+   | open '@' power_zone PIPE intensity            {$value = new OpenPowerStep($intensity.value, $power_zone.value);}
    ;
 
 repeating_steps returns [RepeatingSteps value]
@@ -175,15 +211,36 @@ hr_unit returns [HeartRateUnit value]
 
 hr_zone returns [HeartRateZone value]
    : 'Z1'                                       {$value = HeartRateZone.Z1;}
+   | 'HZ1'                                      {$value = HeartRateZone.Z1;}
    | 'z1'                                       {$value = HeartRateZone.Z1;}
    | 'Z2'                                       {$value = HeartRateZone.Z2;}
+   | 'HZ2'                                      {$value = HeartRateZone.Z2;}
    | 'z2'                                       {$value = HeartRateZone.Z2;}
    | 'Z3'                                       {$value = HeartRateZone.Z3;}
+   | 'HZ3'                                      {$value = HeartRateZone.Z3;}
    | 'z3'                                       {$value = HeartRateZone.Z3;}
    | 'Z4'                                       {$value = HeartRateZone.Z4;}
+   | 'HZ4'                                      {$value = HeartRateZone.Z4;}
    | 'z4'                                       {$value = HeartRateZone.Z4;}
    | 'Z5'                                       {$value = HeartRateZone.Z5;}
+   | 'HZ5'                                      {$value = HeartRateZone.Z5;}
    | 'z5'                                       {$value = HeartRateZone.Z5;}
+   ;
+
+power_range returns [Power value]
+   : p1=cardinal '-' p2=cardinal power_unit     {$value = new PowerRange($p1.value, $p2.value, $power_unit.value);}
+   ;
+
+power_unit returns [PowerUnit value]
+   : 'W'                                        {$value = PowerUnit.WATTS;}
+   ;
+
+power_zone returns [PowerZone value]
+   : 'PZ1'                                      {$value = PowerZone.PZ1;}
+   | 'PZ2'                                      {$value = PowerZone.PZ2;}
+   | 'PZ3'                                      {$value = PowerZone.PZ3;}
+   | 'PZ4'                                      {$value = PowerZone.PZ4;}
+   | 'PZ5'                                      {$value = PowerZone.PZ5;}
    ;
 
 time returns [Time value]
