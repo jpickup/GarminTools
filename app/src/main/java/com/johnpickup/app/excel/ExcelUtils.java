@@ -29,6 +29,9 @@ public class ExcelUtils {
             case "SWIMMING", "SWIM" -> Sport.SWIMMING;
             case "POOL SWIMMING", "POOL" -> Sport.POOL_SWIMMING;
             case "OPEN WATER SWIMMING", "OPEN WATER" -> Sport.OPEN_WATER_SWIMMING;
+            case "CARDIO" -> Sport.CARDIO;
+            case "STRENGTH" -> Sport.STRENGTH;
+            case "HIIT" -> Sport.HIIT;
             default -> Sport.RUNNING;
         };
     }
