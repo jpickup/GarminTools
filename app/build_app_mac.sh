@@ -106,4 +106,7 @@ $JAVA_HOME/bin/jpackage \
 --vendor "John Pickup" \
 --copyright "Copyright © 2023 John Pickup" \
 --mac-package-identifier com.johnpickup.garmintools.app \
---mac-package-name ACME
+--mac-package-name GarminTools
+
+cp target/installer/GarminTools*.pkg ../installer/
+
