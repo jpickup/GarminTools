@@ -1,0 +1,8 @@
+Package: garmintools
+Architecture: all
+Version: 1.0.0
+Section: misc
+Maintainer: John Pickup <garmin@johnpickup.com>
+Priority: optional
+Standards-Version: 4.7.0
+Description: Garmin Tools

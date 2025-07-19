@@ -13,7 +13,7 @@ JAVA_VERSION=23
 MAIN_JAR="app-$PROJECT_VERSION.jar"
 
 # Set desired installer type: "dmg", "pkg", "deb", "app-image".
-INSTALLER_TYPE=deb
+INSTALLER_TYPE=app-image
 
 echo "java home: $JAVA_HOME"
 echo "project version: $PROJECT_VERSION"
@@ -89,15 +89,29 @@ $JAVA_HOME/bin/jlink \
 echo "Creating installer of type $INSTALLER_TYPE"
 $JAVA_HOME/bin/jpackage \
 --type $INSTALLER_TYPE \
---dest target/installer \
+--dest target/installer/ \
 --input target/installer/input/libs \
 --name garmintools \
 --main-class com.johnpickup.app.javafx.AppLauncher \
 --main-jar ${MAIN_JAR} \
 --java-options -Xmx2048m \
+--java-options '--sun-misc-unsafe-memory-access=allow' \
 --runtime-image target/java-runtime \
 --app-version ${APP_VERSION} \
 --vendor "John Pickup" \
 --copyright "Copyright © 2025 John Pickup" \
 
-cp target/installer/garmintools*deb ../installer
+DEB_PKG_ROOT=target/deb/garmintools
+rm -rf ${DEB_PKG_ROOT}
+mkdir -p ${DEB_PKG_ROOT}/opt
+mkdir -p ${DEB_PKG_ROOT}/usr/bin
+mkdir -p ${DEB_PKG_ROOT}/DEBIAN
+cp src/main/resources/control ${DEB_PKG_ROOT}/DEBIAN/
+mv target/installer/garmintools ${DEB_PKG_ROOT}/opt/
+cd ${DEB_PKG_ROOT}/usr/bin || exit
+ln -s ../../opt/garmintools/bin/garmintools garmintools
+cd - || exit
+cd target/deb || exit
+dpkg-deb -b garmintools
+
+#cp target/installer/garmintools*deb ../installer
