@@ -32,17 +32,20 @@ public class WorkoutScheduleConverter {
             log.debug("Pace: {}", pace);
             namedPaces.put(namedPace.getKey(), PaceConverterFactory.getInstance().getPaceConverter(pace).convert(pace));
         }
+        log.debug("Done converting paces");
 
         WorkoutConverter workoutConverter = new WorkoutConverter();
 
         log.debug("Converting workouts");
         for (Map.Entry<String, Workout> workoutEntry : workoutSchedule.getWorkouts().entrySet()) {
+            log.debug("Converting {} ", workoutEntry);
             com.johnpickup.app.garmin.workout.Workout garminWorkout = workoutConverter.convert(workoutEntry.getValue());
             garminWorkout.setName(workoutEntry.getKey());
             log.debug("Workout: {}", garminWorkout);
             garminWorkouts.add(garminWorkout);
             workoutMap.put(workoutEntry.getValue(), garminWorkout);
         }
+        log.debug("Done converting workouts");
 
         log.debug("Converting schedules");
         for (ScheduledWorkout scheduledWorkout: workoutSchedule.getSchedule()) {
@@ -53,6 +56,7 @@ public class WorkoutScheduleConverter {
             log.debug("Workout schedule: {}", garminScheduledWorkout);
             trainingSchedule.addScheduledWorkout(garminScheduledWorkout);
         }
+        log.debug("Done converting schedules");
 
     }
 

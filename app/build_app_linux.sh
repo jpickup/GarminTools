@@ -113,5 +113,5 @@ ln -s ../../opt/garmintools/bin/garmintools garmintools
 cd - || exit
 cd target/deb || exit
 dpkg-deb -b garmintools
-
-#cp target/installer/garmintools*deb ../installer
+cd - || exit
+cp target/deb/garmintools*deb ../installer
