@@ -13,6 +13,7 @@ import java.util.Map;
  * Created by john on 12/01/2017.
  */
 public class WorkoutScheduleConverter {
+    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(WorkoutScheduleConverter.class);
     private final Map<String, PaceTarget> namedPaces = new HashMap<>();
     private final List<com.johnpickup.app.garmin.workout.Workout> garminWorkouts = new ArrayList<>();
     private final TrainingSchedule trainingSchedule = new TrainingSchedule();
@@ -25,25 +26,31 @@ public class WorkoutScheduleConverter {
 
     public void convert(WorkoutSchedule workoutSchedule) {
         init();
+        log.debug("Converting paces");
         for (Map.Entry<String, Pace> namedPace : workoutSchedule.getPaces().entrySet()) {
             Pace pace = namedPace.getValue();
+            log.debug("Pace: {}", pace);
             namedPaces.put(namedPace.getKey(), PaceConverterFactory.getInstance().getPaceConverter(pace).convert(pace));
         }
 
         WorkoutConverter workoutConverter = new WorkoutConverter();
 
+        log.debug("Converting workouts");
         for (Map.Entry<String, Workout> workoutEntry : workoutSchedule.getWorkouts().entrySet()) {
             com.johnpickup.app.garmin.workout.Workout garminWorkout = workoutConverter.convert(workoutEntry.getValue());
             garminWorkout.setName(workoutEntry.getKey());
+            log.debug("Workout: {}", garminWorkout);
             garminWorkouts.add(garminWorkout);
             workoutMap.put(workoutEntry.getValue(), garminWorkout);
         }
 
+        log.debug("Converting schedules");
         for (ScheduledWorkout scheduledWorkout: workoutSchedule.getSchedule()) {
             Workout workout = scheduledWorkout.getWorkout();
             com.johnpickup.app.garmin.workout.Workout garminWorkout = workoutMap.get(workout);
             com.johnpickup.app.garmin.schedule.ScheduledWorkout garminScheduledWorkout =
                     new com.johnpickup.app.garmin.schedule.ScheduledWorkout(garminWorkout, scheduledWorkout.getDate());
+            log.debug("Workout schedule: {}", garminScheduledWorkout);
             trainingSchedule.addScheduledWorkout(garminScheduledWorkout);
         }
 
