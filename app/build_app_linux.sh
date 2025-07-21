@@ -101,17 +101,17 @@ $JAVA_HOME/bin/jpackage \
 --vendor "John Pickup" \
 --copyright "Copyright © 2025 John Pickup" \
 
-DEB_PKG_ROOT=target/deb/garmintools
-rm -rf ${DEB_PKG_ROOT}
-mkdir -p ${DEB_PKG_ROOT}/opt
-mkdir -p ${DEB_PKG_ROOT}/usr/bin
-mkdir -p ${DEB_PKG_ROOT}/DEBIAN
-cp src/main/resources/control ${DEB_PKG_ROOT}/DEBIAN/
-mv target/installer/garmintools ${DEB_PKG_ROOT}/opt/
-cd ${DEB_PKG_ROOT}/usr/bin || exit
-ln -s ../../opt/garmintools/bin/garmintools garmintools
-cd - || exit
-cd target/deb || exit
-dpkg-deb -b garmintools
-cd - || exit
-cp target/deb/garmintools*deb ../installer
+#DEB_PKG_ROOT=target/deb/garmintools
+#rm -rf ${DEB_PKG_ROOT}
+#mkdir -p ${DEB_PKG_ROOT}/opt
+#mkdir -p ${DEB_PKG_ROOT}/usr/bin
+#mkdir -p ${DEB_PKG_ROOT}/DEBIAN
+#cp src/main/resources/control ${DEB_PKG_ROOT}/DEBIAN/
+#mv target/installer/garmintools ${DEB_PKG_ROOT}/opt/
+#cd ${DEB_PKG_ROOT}/usr/bin || exit
+#ln -s ../../opt/garmintools/bin/garmintools garmintools
+#cd - || exit
+#cd target/deb || exit
+#dpkg-deb -b garmintools
+#cd - || exit
+#cp target/deb/garmintools*deb ../installer
