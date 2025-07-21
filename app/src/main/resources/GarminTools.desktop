@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=garmintools
+Exec=bin/garmintools
+Comment=A suite of tools for Garmin watches
+Icon=garmintools
+Terminal=false
+Categories=Utility;
