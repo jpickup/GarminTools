@@ -15,6 +15,8 @@ public class PowerZone implements Power {
     public static PowerZone PZ3 = new PowerZone(Zone.PZ3, 3);
     public static PowerZone PZ4 = new PowerZone(Zone.PZ4, 4);
     public static PowerZone PZ5 = new PowerZone(Zone.PZ5, 5);
+    public static PowerZone PZ6 = new PowerZone(Zone.PZ6, 6);
+    public static PowerZone PZ7 = new PowerZone(Zone.PZ7, 7);
 
     @Override
     public String toString() {
@@ -47,6 +49,8 @@ public class PowerZone implements Power {
         PZ2,
         PZ3,
         PZ4,
-        PZ5
+        PZ5,
+        PZ6,
+        PZ7
     }
 }

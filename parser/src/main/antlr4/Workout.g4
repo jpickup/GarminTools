@@ -241,6 +241,8 @@ power_zone returns [PowerZone value]
    | 'PZ3'                                      {$value = PowerZone.PZ3;}
    | 'PZ4'                                      {$value = PowerZone.PZ4;}
    | 'PZ5'                                      {$value = PowerZone.PZ5;}
+   | 'PZ6'                                      {$value = PowerZone.PZ6;}
+   | 'PZ7'                                      {$value = PowerZone.PZ7;}
    ;
 
 time returns [Time value]
