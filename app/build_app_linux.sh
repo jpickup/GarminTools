@@ -19,6 +19,7 @@ echo "java home: $JAVA_HOME"
 echo "project version: $PROJECT_VERSION"
 echo "app version: $APP_VERSION"
 echo "main JAR file: $MAIN_JAR"
+echo "Java home : $JAVA_HOME"
 
 # ------ SETUP DIRECTORIES AND FILES ----------------------------------------
 # Remove previously generated java runtime and installers. Copy all required
@@ -101,17 +102,19 @@ $JAVA_HOME/bin/jpackage \
 --vendor "John Pickup" \
 --copyright "Copyright © 2025 John Pickup" \
 
-#DEB_PKG_ROOT=target/deb/garmintools
-#rm -rf ${DEB_PKG_ROOT}
-#mkdir -p ${DEB_PKG_ROOT}/opt
-#mkdir -p ${DEB_PKG_ROOT}/usr/bin
-#mkdir -p ${DEB_PKG_ROOT}/DEBIAN
-#cp src/main/resources/control ${DEB_PKG_ROOT}/DEBIAN/
-#mv target/installer/garmintools ${DEB_PKG_ROOT}/opt/
-#cd ${DEB_PKG_ROOT}/usr/bin || exit
-#ln -s ../../opt/garmintools/bin/garmintools garmintools
-#cd - || exit
-#cd target/deb || exit
-#dpkg-deb -b garmintools
-#cd - || exit
-#cp target/deb/garmintools*deb ../installer
+cd target || exit
+curl -L https://github.com/AppImage/AppImageKit/releases/download/10/appimagetool-x86_64.AppImage -o appimagetool.AppImage
+chmod +x appimagetool.AppImage
+./appimagetool.AppImage --appimage-extract
+export PATH=./squashfs-root/usr/bin/:${PATH}
+
+APP_DIR=GarminTools.AppDir/
+mkdir -p ${APP_DIR}
+cp ../src/main/resources/GarminTools.desktop ${APP_DIR}
+cp ../src/main/resources/garmintools.png ${APP_DIR}
+cp -r installer/garmintools/* ${APP_DIR}
+cd ${APP_DIR} || exit
+ln -s bin/garmintools AppRun
+cd .. || exit
+appimagetool ${APP_DIR} garmintools-x86_64.AppImage
+cp garmintools-x86_64.AppImage ../../installer/
