@@ -12,8 +12,10 @@
     <artifactId>app</artifactId>
 
     <properties>
+        <maven.deploy.skip>false</maven.deploy.skip>
         <client.version>1.0.0</client.version>
         <exec.maven.plugin.version>1.6.0</exec.maven.plugin.version>
+        <maven.assembly.plugin.version>3.7.1</maven.assembly.plugin.version>
         <javafx.version>24.0.1</javafx.version>
         <jackson.version>2.18.2</jackson.version>
         <commons-io.version>2.14.0</commons-io.version>
@@ -254,6 +256,24 @@
                             </environmentVariables>
                         </configuration>
                     </plugin>
+                    <plugin>
+                        <artifactId>maven-assembly-plugin</artifactId>
+                        <version>${maven.assembly.plugin.version}</version>
+                        <configuration>
+                            <descriptors>
+                                <descriptor>src/assembly/linux.xml</descriptor>
+                            </descriptors>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>make-linux-assembly</id>
+                                <phase>install</phase>
+                                <goals>
+                                    <goal>single</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
                 </plugins>
             </build>
         </profile>
@@ -290,6 +310,24 @@
                                 </PROJECT_VERSION>
                             </environmentVariables>
                         </configuration>
+                    </plugin>
+                    <plugin>
+                        <artifactId>maven-assembly-plugin</artifactId>
+                        <version>${maven.assembly.plugin.version}</version>
+                        <configuration>
+                            <descriptors>
+                                <descriptor>src/assembly/macos.xml</descriptor>
+                            </descriptors>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>make-macos-assembly</id>
+                                <phase>install</phase>
+                                <goals>
+                                    <goal>single</goal>
+                                </goals>
+                            </execution>
+                        </executions>
                     </plugin>
                 </plugins>
             </build>
@@ -331,7 +369,6 @@
                 </plugins>
             </build>
         </profile>
-
     </profiles>
 
     <repositories>

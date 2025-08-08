@@ -117,4 +117,5 @@ cd ${APP_DIR} || exit
 ln -s bin/garmintools AppRun
 cd .. || exit
 appimagetool ${APP_DIR} garmintools-x86_64.AppImage
+cp garmintools-x86_64.AppImage ../installer/
 cp garmintools-x86_64.AppImage ../../installer/

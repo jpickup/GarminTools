@@ -30,6 +30,7 @@
         <apache.poi.version>5.2.2</apache.poi.version>
         <logback.version>1.5.13</logback.version>
         <fit.jar.location>${project.basedir}/lib/fit.jar</fit.jar.location>
+        <maven.deploy.skip>true</maven.deploy.skip>
     </properties>
 
     <dependencyManagement>
@@ -113,4 +114,12 @@
             <url>file://${basedir}/local-repo</url>
         </repository>
     </repositories>
+
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>GitHub Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/jpickup/GarminTools</url>
+        </repository>
+    </distributionManagement>
 </project>
