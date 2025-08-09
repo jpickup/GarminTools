@@ -6,7 +6,7 @@
     </formats>
     <fileSets>
         <fileSet>
-            <directory>${project.build.directory}/installer</directory>
+            <directory>${project.basedir}/../installer</directory>
             <outputDirectory>/</outputDirectory>
             <includes>
                 <include>*.AppImage</include>
