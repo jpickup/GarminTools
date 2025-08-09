@@ -22,8 +22,10 @@ jobs:
         server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
         settings-path: ${{ github.workspace }} # location for the settings.xml file
 
+    - name: Emit some env details
+      run: echo "Github workspace = ${{ github.workspace }}
     - name: Build with Maven and publish to GitHub Packages Apache Maven
-      run: mvn deploy -s $GITHUB_WORKSPACE\settings.xml --file pom.xml
+      run: mvn deploy -s ${{ github.workspace }}\settings.xml --file pom.xml
       env:
         GITHUB_TOKEN: ${{ github.token }}
 
