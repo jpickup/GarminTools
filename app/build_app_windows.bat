@@ -97,3 +97,5 @@ rem  --win-dir-chooser ^
 rem --win-shortcut ^
 rem   --win-per-user-install ^
 rem   --win-menu
+
+xcopy /s /y /f target\installer\* ..\installer\

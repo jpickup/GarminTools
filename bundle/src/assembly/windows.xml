@@ -6,7 +6,7 @@
     </formats>
     <fileSets>
         <fileSet>
-            <directory>${project.basedir}/../app/target/installer</directory>
+            <directory>${project.basedir}/../installer</directory>
             <outputDirectory>/</outputDirectory>
             <includes>
                 <include>*</include>
