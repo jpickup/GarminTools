@@ -27,6 +27,8 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ github.token }}
 
+    # this is nasty! the publish fails as the pom already exists but we only really want to artefact published, so we try to ignore the error
+    # this is also why the full build is performed in the previous step as we do want that to fail if there are other errors in the build
     - name: Publish to GitHub Packages Apache Maven
       run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml || echo "Ignoring non-zero result"
       env:
