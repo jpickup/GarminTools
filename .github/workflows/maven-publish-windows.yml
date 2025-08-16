@@ -25,7 +25,7 @@ jobs:
     - name: Emit some env details
       run: echo "Github workspace = ${{ github.workspace }}"
     - name: Build with Maven and publish to GitHub Packages Apache Maven
-      run: mvn deploy -s ${{ github.workspace }}\settings.xml --file pom.xml
+      run: mvn deploy -s ${{ github.workspace }}\settings.xml --file pom.xml -DgeneratePom=false
       env:
         GITHUB_TOKEN: ${{ github.token }}
 
