@@ -6,10 +6,10 @@
     </formats>
     <fileSets>
         <fileSet>
-            <directory>${project.basedir}/../installer</directory>
+            <directory>${project.basedir}/../installer/GarminTools</directory>
             <outputDirectory>/</outputDirectory>
             <includes>
-                <include>*</include>
+                <include>**/*</include>
             </includes>
         </fileSet>
     </fileSets>
