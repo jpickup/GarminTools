@@ -18,7 +18,7 @@ here: https://github.com/jpickup/GarminTools/packages/
 Click on `com.johnpickup.garmin.bundle` and search for "windows.zip", "linux.zip" or "macos.zip", download and unpack. 
 I need to figure out a better way to link to these.
 
-Previously the were installers are checked directly into GitHub but once the size exceeded the limit this was no longer
+Previously the installers were checked directly into GitHub but once the size exceeded the GitHub limit this was no longer
 suitable.
 
 NOTE: 
