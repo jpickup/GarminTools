@@ -97,3 +97,11 @@ rem  --win-dir-chooser ^
 rem --win-shortcut ^
 rem   --win-per-user-install ^
 rem   --win-menu
+echo Current dir
+cd
+echo Listing output
+dir target\installer\
+echo Copying installer output
+xcopy /S /Y /F target\installer\* ..\installer\
+echo Listing of copied files
+dir  ..\installer\

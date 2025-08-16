@@ -27,6 +27,9 @@ public class WorkoutConverter {
         sportMap.put(com.johnpickup.garmin.parser.Sport.SWIMMING, Sport.SWIMMING);
         sportMap.put(com.johnpickup.garmin.parser.Sport.POOL_SWIMMING, Sport.SWIMMING);
         sportMap.put(com.johnpickup.garmin.parser.Sport.OPEN_WATER_SWIMMING, Sport.SWIMMING);
+        sportMap.put(com.johnpickup.garmin.parser.Sport.CARDIO, Sport.TRAINING);
+        sportMap.put(com.johnpickup.garmin.parser.Sport.STRENGTH, Sport.TRAINING);
+        sportMap.put(com.johnpickup.garmin.parser.Sport.HIIT, Sport.HIIT);
     }
 
     private static final Map<com.johnpickup.garmin.parser.Sport, SubSport> subSportMap = new HashMap<>();
@@ -38,6 +41,9 @@ public class WorkoutConverter {
         subSportMap.put(com.johnpickup.garmin.parser.Sport.SWIMMING, SubSport.LAP_SWIMMING);
         subSportMap.put(com.johnpickup.garmin.parser.Sport.POOL_SWIMMING, SubSport.LAP_SWIMMING);
         subSportMap.put(com.johnpickup.garmin.parser.Sport.OPEN_WATER_SWIMMING, SubSport.OPEN_WATER);
+        subSportMap.put(com.johnpickup.garmin.parser.Sport.CARDIO, SubSport.CARDIO_TRAINING);
+        subSportMap.put(com.johnpickup.garmin.parser.Sport.STRENGTH, SubSport.STRENGTH_TRAINING);
+        subSportMap.put(com.johnpickup.garmin.parser.Sport.HIIT, SubSport.HIIT);
     }
 
     public com.johnpickup.app.garmin.workout.Workout convert(Workout workout) {

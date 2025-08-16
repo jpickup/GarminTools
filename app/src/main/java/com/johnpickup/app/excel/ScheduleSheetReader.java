@@ -44,7 +44,7 @@ public class ScheduleSheetReader {
     private ScheduledWorkout readScheduledWorkout(Row row, Map<String, Workout> workouts) {
         Cell dateCell = row.getCell(dateIndex);
         Cell workoutCell = row.getCell(workoutIndex);
-        if (dateCell != null && workoutCell != null) {
+        if (dateCell != null && workoutCell != null && dateCell.getDateCellValue() != null) {
             Date date = dateCell.getDateCellValue();
             LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             String value = workoutCell.getStringCellValue();

@@ -10,6 +10,7 @@
         <module name="app" />
         <module name="common" />
         <module name="parser" />
+        <module name="bundle" />
         <module name="gpx" />
       </profile>
     </annotationProcessing>

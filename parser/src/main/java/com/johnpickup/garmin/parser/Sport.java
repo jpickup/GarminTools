@@ -9,5 +9,8 @@ public enum Sport {
     MTB,
     SWIMMING,
     POOL_SWIMMING,
-    OPEN_WATER_SWIMMING
+    OPEN_WATER_SWIMMING,
+    CARDIO,
+    STRENGTH,
+    HIIT
 }

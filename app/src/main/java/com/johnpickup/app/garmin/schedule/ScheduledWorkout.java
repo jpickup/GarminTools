@@ -35,4 +35,12 @@ public class ScheduledWorkout {
     public LocalDate getDate() {
         return this.date;
     }
+
+    @Override
+    public String toString() {
+        return "ScheduledWorkout{" +
+                "workout=" + workout +
+                ", date=" + date +
+                '}';
+    }
 }

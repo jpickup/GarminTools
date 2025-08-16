@@ -52,7 +52,7 @@ public class GarminScheduleGenerator {
             workoutSaver.save(converter.getTrainingSchedule(), scheduleFile);
             log.info("Saved workout schedule as {}", scheduleFile.getPath());
         }
-        catch (RuntimeException e) {
+        catch (Exception e) {
             log.error("Error converting {}", inputFile.getPath());
             log.error(e.getMessage());
         }

@@ -10,18 +10,21 @@ import java.util.Map;
  */
 public class StepConverterFactory {
     private static StepConverterFactory instance;
-    private Map<Class, StepConverter> converters = new HashMap<>();
+    private final Map<Class, StepConverter> converters = new HashMap<>();
 
     private StepConverterFactory() {
         register(new DistanceStepConverter(), DistanceStep.class);
         register(new DistancePaceStepConverter(), DistancePaceStep.class);
         register(new DistanceHeartRateStepConverter(), DistanceHeartRateStep.class);
+        register(new DistancePowerStepConverter(), DistancePowerStep.class);
         register(new TimeStepConverter(), TimeStep.class);
         register(new TimePaceStepConverter(), TimePaceStep.class);
         register(new TimeHeartRateStepConverter(), TimeHeartRateStep.class);
+        register(new TimePowerStepConverter(), TimePowerStep.class);
         register(new OpenStepConverter(), OpenStep.class);
         register(new OpenPaceStepConverter(), OpenPaceStep.class);
         register(new OpenHeartRateStepConverter(), OpenHeartRateStep.class);
+        register(new OpenPowerStepConverter(), OpenPowerStep.class);
         register(new RepeatingStepsConverter(), RepeatingSteps.class);
     }
 
