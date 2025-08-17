@@ -32,6 +32,8 @@ public class ExcelUtils {
             case "CARDIO" -> Sport.CARDIO;
             case "STRENGTH" -> Sport.STRENGTH;
             case "HIIT" -> Sport.HIIT;
+            case "PILATES" -> Sport.PILATES;
+            case "YOGA" -> Sport.YOGA;
             default -> Sport.RUNNING;
         };
     }

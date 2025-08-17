@@ -12,5 +12,7 @@ public enum Sport {
     OPEN_WATER_SWIMMING,
     CARDIO,
     STRENGTH,
-    HIIT
+    HIIT,
+    PILATES,
+    YOGA
 }
