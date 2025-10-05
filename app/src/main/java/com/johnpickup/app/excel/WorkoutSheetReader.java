@@ -17,6 +17,7 @@ import java.util.Optional;
  * Created by john on 10/01/2017.
  */
 public class WorkoutSheetReader {
+    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(WorkoutSheetReader.class);
     private int nameIndex = 0;
     private int descriptionIndex = 1;
     private Integer sportIndex = null;
@@ -30,12 +31,16 @@ public class WorkoutSheetReader {
 
         int rowIdx=0;
         for (Row row : sheet) {
+            log.debug("Reading row {}", rowIdx);
             if (rowIdx++==0) {
+                log.debug("Reading header row");
                 readHeaderRow(row);
             }
             else {
                 String name = readName(row);
+                log.debug("Read name {}", name);
                 Workout workout = readWorkout(row);
+                log.debug("Read workout {}", workout);
                 if (name != null && workout != null) {
                     Sport sport = readSport(row);
                     workout.setSport(sport);

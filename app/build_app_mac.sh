@@ -9,7 +9,7 @@
 # PROJECT_VERSION: version used in pom.xml, e.g. 1.0-SNAPSHOT
 # APP_VERSION: the application version, e.g. 1.0.0, shown in "about" dialog
 
-JAVA_VERSION=17
+JAVA_VERSION=23
 MAIN_JAR="app-$PROJECT_VERSION.jar"
 
 # Set desired installer type: "dmg", "pkg".

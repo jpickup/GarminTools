@@ -18,6 +18,7 @@ public class WorkoutConverter {
     private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(WorkoutConverter.class);
     private static final Map<com.johnpickup.garmin.parser.Sport, Sport> sportMap = new HashMap<>();
     static {
+        log.debug("Setting up sport map");
         sportMap.put(com.johnpickup.garmin.parser.Sport.RUNNING, Sport.RUNNING);
         sportMap.put(com.johnpickup.garmin.parser.Sport.ROAD_RUNNING, Sport.RUNNING);
         sportMap.put(com.johnpickup.garmin.parser.Sport.TRAIL_RUNNING, Sport.RUNNING);
@@ -30,12 +31,11 @@ public class WorkoutConverter {
         sportMap.put(com.johnpickup.garmin.parser.Sport.CARDIO, Sport.TRAINING);
         sportMap.put(com.johnpickup.garmin.parser.Sport.STRENGTH, Sport.TRAINING);
         sportMap.put(com.johnpickup.garmin.parser.Sport.HIIT, Sport.HIIT);
-        sportMap.put(com.johnpickup.garmin.parser.Sport.YOGA, Sport.TRAINING);
-        sportMap.put(com.johnpickup.garmin.parser.Sport.PILATES, Sport.FITNESS_EQUIPMENT);
     }
 
     private static final Map<com.johnpickup.garmin.parser.Sport, SubSport> subSportMap = new HashMap<>();
     static {
+        log.debug("Setting up sub-sport map");
         subSportMap.put(com.johnpickup.garmin.parser.Sport.ROAD_RUNNING, SubSport.ROAD);
         subSportMap.put(com.johnpickup.garmin.parser.Sport.TRAIL_RUNNING, SubSport.TRAIL);
         subSportMap.put(com.johnpickup.garmin.parser.Sport.ROAD_CYCLING, SubSport.ROAD);
@@ -46,8 +46,6 @@ public class WorkoutConverter {
         subSportMap.put(com.johnpickup.garmin.parser.Sport.CARDIO, SubSport.CARDIO_TRAINING);
         subSportMap.put(com.johnpickup.garmin.parser.Sport.STRENGTH, SubSport.STRENGTH_TRAINING);
         subSportMap.put(com.johnpickup.garmin.parser.Sport.HIIT, SubSport.HIIT);
-        subSportMap.put(com.johnpickup.garmin.parser.Sport.YOGA, SubSport.YOGA);
-        subSportMap.put(com.johnpickup.garmin.parser.Sport.PILATES, SubSport.PILATES);
     }
 
     public com.johnpickup.app.garmin.workout.Workout convert(Workout workout) {

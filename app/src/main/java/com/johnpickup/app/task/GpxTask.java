@@ -14,6 +14,7 @@ public class GpxTask extends UiTask {
         GarminRouteGenerator generator = new GarminRouteGenerator();
         boolean reverse = taskArguments.getOptions()!=null && taskArguments.getOptions().containsKey("reverse") && ((boolean) taskArguments.getOptions().get("reverse"));
         generator.convert(taskArguments.getInputFile(), taskArguments.getOutputDir(), reverse);
+        updateMessage("Completed converting " + taskArguments.getInputFile().getPath());
         return "OK";
     }
 }

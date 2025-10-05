@@ -13,6 +13,7 @@ public class ScheduleFitTask extends UiTask {
         updateMessage("Converting " + taskArguments.getInputFile().getPath() + " to FIT files in " + taskArguments.getOutputDir().getPath());
         GarminScheduleGenerator generator = new GarminScheduleGenerator();
         generator.generate(taskArguments.getInputFile(), taskArguments.getOutputDir());
+        updateMessage("Completed converting " + taskArguments.getInputFile().getPath());
         return "OK";
     }
 }

@@ -13,6 +13,7 @@ public class ScheduleIcalTask extends UiTask {
         updateMessage("Converting " + taskArguments.getInputFile().getPath() + " to iCal file in " + taskArguments.getOutputDir().getPath());
         CalendarScheduleGenerator generator = new CalendarScheduleGenerator();
         generator.generate(taskArguments.getInputFile(), taskArguments.getOutputDir());
+        updateMessage("Completed converting " + taskArguments.getInputFile().getPath());
         return "OK";
     }
 }

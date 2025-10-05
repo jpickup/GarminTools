@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.johnpickup.garmin</groupId>
         <artifactId>GarminTools</artifactId>
-        <version>1.2</version>
+        <version>1.3</version>
     </parent>
 
     <artifactId>common</artifactId>

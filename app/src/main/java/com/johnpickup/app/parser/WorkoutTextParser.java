@@ -30,7 +30,7 @@ public class WorkoutTextParser {
             parser.setErrorHandler(errorHandler);
             Workout result = parser.workout().w;
             if (errorHandler.isHadError()) {
-                log.debug("Parser error reading {} : {}", workoutInput, errorHandler.getErrorMessage());
+                log.error("Parser error reading {} : {}", workoutInput, errorHandler.getErrorMessage());
                 throw new RuntimeException("Error parsing " + workoutInput +
                         (errorHandler.getErrorMessage() == null ?
                                 "" :
