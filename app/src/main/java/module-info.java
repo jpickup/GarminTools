@@ -19,6 +19,7 @@ module com.johnpickup.app {
     requires com.johnpickup.common;
     requires com.johnpickup.gpx;
     requires com.johnpickup.parser;
+    requires org.apache.logging.log4j;
 
     opens com.johnpickup.app.javafx;
     exports com.johnpickup.app.javafx;

@@ -25,6 +25,10 @@ public class GarminScheduleGenerator {
     }
 
     public void generate(File inputFile, File outputDir) throws IOException {
+        generate(inputFile, outputDir, null);
+    }
+
+    public void generate(File inputFile, File outputDir, Integer maxSchedule) throws IOException {
         try {
             log.info("Converting {}", inputFile.getPath());
             log.info("Writing output to {}", outputDir.getPath());
@@ -35,7 +39,7 @@ public class GarminScheduleGenerator {
             WorkoutSchedule workoutSchedule = reader.read(inputFile);
 
             log.info("Converting workout schedule");
-            converter.convert(workoutSchedule);
+            converter.convert(workoutSchedule, maxSchedule);
 
             log.info("Saving workouts");
             for (Workout garminWorkout : converter.getGarminWorkouts()) {

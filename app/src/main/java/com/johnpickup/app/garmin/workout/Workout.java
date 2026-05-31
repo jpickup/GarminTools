@@ -34,6 +34,7 @@ public class Workout implements FitGenerator {
         this.subSport = subSport;
         this.steps = steps;
         this.poolLength = poolLength;
+        getSerialNo();
     }
 
     public String getName() {
@@ -51,10 +52,11 @@ public class Workout implements FitGenerator {
 
     @Override
     public String toString() {
-        return String.format("%s|%s: %s",
+        return String.format("%s|%s: %s (#%d)",
                 Optional.ofNullable(sport).map(Enum::toString).orElse("Default"),
                 Optional.ofNullable(subSport).map(Enum::toString).orElse("Default"),
-                getName());
+                getName(),
+                getSerialNo());
     }
 
     // Get a Garmin timestamp that is unique for the workout.
@@ -120,4 +122,15 @@ public class Workout implements FitGenerator {
         this.name = name;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Workout workout = (Workout) o;
+        return Objects.equals(name, workout.name) && Objects.equals(serialNo, workout.serialNo);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, serialNo);
+    }
 }

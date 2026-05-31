@@ -6,7 +6,7 @@ import java.util.*;
  * Class that contains all the elements required to build a series of workouts and schedule them
  */
 public class WorkoutSchedule {
-    private final Map<String, Workout> workouts = new HashMap<>();
+    private final Map<String, Workout> workouts = new TreeMap<>();
     private final Map<String, Pace> paces = new HashMap<>();
     private final List<ScheduledWorkout> schedule = new ArrayList<>();
 
@@ -40,6 +40,7 @@ public class WorkoutSchedule {
     }
 
     public List<ScheduledWorkout> getSchedule() {
-        return this.schedule;
+        this.schedule.sort(Comparator.comparing(ScheduledWorkout::getDate));
+        return schedule;
     }
 }

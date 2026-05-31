@@ -8,6 +8,7 @@ import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * Created by john on 31/12/2016.
@@ -42,5 +43,17 @@ public class ScheduledWorkout {
                 "workout=" + workout +
                 ", date=" + date +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        ScheduledWorkout that = (ScheduledWorkout) o;
+        return Objects.equals(workout, that.workout) && Objects.equals(date, that.date);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(workout, date);
     }
 }

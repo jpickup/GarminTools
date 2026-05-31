@@ -8,10 +8,12 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
+import org.apache.logging.log4j.util.Strings;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
-import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainFormController {
     private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(MainFormController.class);
@@ -34,6 +36,13 @@ public class MainFormController {
 
     @FXML
     CheckBox reverseRouteCheckbox;
+
+    @FXML
+    CheckBox limitScheduleCheckbox;
+
+    @FXML
+    TextField maxScheduleSize;
+
     @FXML
     TextArea outputText;
 
@@ -76,10 +85,15 @@ public class MainFormController {
         ConversionType selected = (ConversionType)conversionCombo.getValue();
         try {
             if (selected.getTask() != null) {
+
+                Map<String, Object> taskOptions = new HashMap<>();
+                taskOptions.put("reverse", reverseRouteCheckbox.isSelected());
+                if (limitScheduleCheckbox.isSelected()) taskOptions.put("maxScheduleSize",
+                        convertToInteger(maxScheduleSize.getText()));
                 TaskArguments args = TaskArguments.builder()
                         .inputFile(new File(inputFileName.getText()))
                         .outputDir(new File(outputDirName.getText()))
-                        .options(Collections.singletonMap("reverse", reverseRouteCheckbox.isSelected()))
+                        .options(taskOptions)
                         .build();
                 UiTask task = (UiTask) selected.getTask().getDeclaredConstructor(TaskArguments.class).newInstance(args);
                 task.messageProperty().addListener((w, o, n) -> log.info(n));
@@ -88,6 +102,15 @@ public class MainFormController {
         } catch (Exception e) {
             log.error("Unexpected error", e);
         }
+    }
+
+    private Integer convertToInteger(String text) {
+        return Strings.isNotBlank(text) ? Integer.parseInt(text) : null;
+    }
+
+    public void limitScheduleSizeClick(ActionEvent actionEvent) {
+        maxScheduleSize.setVisible(limitScheduleCheckbox.isSelected());
+        maxScheduleSize.setEditable(limitScheduleCheckbox.isSelected());
     }
 
     public void onConversionComboAction(ActionEvent actionEvent) {
@@ -106,8 +129,6 @@ public class MainFormController {
         root.addAppender(uiAppender);
         uiAppender.start();
 
-        Thread.setDefaultUncaughtExceptionHandler((thread, throwable) -> {
-            log.error(throwable.getMessage());
-        });
+        Thread.setDefaultUncaughtExceptionHandler((thread, throwable) -> log.error(throwable.getMessage()));
     }
 }

@@ -12,7 +12,8 @@ public class ScheduleFitTask extends UiTask {
     protected String call() throws Exception {
         updateMessage("Converting " + taskArguments.getInputFile().getPath() + " to FIT files in " + taskArguments.getOutputDir().getPath());
         GarminScheduleGenerator generator = new GarminScheduleGenerator();
-        generator.generate(taskArguments.getInputFile(), taskArguments.getOutputDir());
+        Integer maxSchedule = (Integer)(taskArguments.getOptions().get("maxScheduleSize"));
+        generator.generate(taskArguments.getInputFile(), taskArguments.getOutputDir(), maxSchedule);
         updateMessage("Completed converting " + taskArguments.getInputFile().getPath());
         return "OK";
     }
