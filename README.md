@@ -24,3 +24,17 @@ suitable.
 NOTE: 
 For Windows the most recent version is available in a ZIP file as I've been unable to get compatible versions of 
 the various tools required to build an MSI. 
+
+## Alternatives
+Keeping the various installers up-to-date and making sure they work has been a little more challenging than I anticipated. 
+As a result I created a different implementation of the same code packaged as a Java REST server and a Vue.js web UI, 
+meaning you no longer need to install anything on your local machine and can instead use a web page 
+for the conversion.
+
+The code for all this is under a different GitHub project: https://github.com/jpickup/garmin-tools-server 
+
+The service should be running here: https://garmin-tools.pickup-dev.uk/
+
+It's completely stateless with no persistence or storage. 
+
+
