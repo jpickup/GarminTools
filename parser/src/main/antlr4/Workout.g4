@@ -36,6 +36,8 @@ step returns [Step value]
    | distance_hr_intensity_step                 {$value = $distance_hr_intensity_step.value;}
    | distance_power_step                        {$value = $distance_power_step.value;}
    | distance_power_intensity_step              {$value = $distance_power_intensity_step.value;}
+   | distance_cadence_step                      {$value = $distance_cadence_step.value;}
+   | distance_cadence_intensity_step            {$value = $distance_cadence_intensity_step.value;}
    | time_step                                  {$value = $time_step.value;}
    | time_intensity_step                        {$value = $time_intensity_step.value;}
    | time_pace_step                             {$value = $time_pace_step.value;}
@@ -44,6 +46,8 @@ step returns [Step value]
    | time_hr_intensity_step                     {$value = $time_hr_intensity_step.value;}
    | time_power_step                            {$value = $time_power_step.value;}
    | time_power_intensity_step                  {$value = $time_power_intensity_step.value;}
+   | time_cadence_step                          {$value = $time_cadence_step.value;}
+   | time_cadence_intensity_step                {$value = $time_cadence_intensity_step.value;}
    | open_step                                  {$value = $open_step.value;}
    | open_intensity_step                        {$value = $open_intensity_step.value;}
    | open_pace_step                             {$value = $open_pace_step.value;}
@@ -52,6 +56,8 @@ step returns [Step value]
    | open_hr_intensity_step                     {$value = $open_hr_intensity_step.value;}
    | open_power_step                            {$value = $open_power_step.value;}
    | open_power_intensity_step                  {$value = $open_power_intensity_step.value;}
+   | open_cadence_step                          {$value = $open_cadence_step.value;}
+   | open_cadence_intensity_step                {$value = $open_cadence_intensity_step.value;}
    | repeating_steps                            {$value = $repeating_steps.value;}
    ;
    
@@ -95,6 +101,14 @@ distance_power_intensity_step returns [DistancePowerStep value]
    | distance '@' power_zone PIPE intensity        {$value = new DistancePowerStep($intensity.value, $distance.value, $power_zone.value);}
    ;
 
+distance_cadence_step returns [DistanceCadenceStep value]
+   : distance '@' cadence_range                    {$value = new DistanceCadenceStep($distance.value, $cadence_range.value);}
+   ;
+
+distance_cadence_intensity_step returns [DistanceCadenceStep value]
+   : distance '@' cadence_range PIPE intensity     {$value = new DistanceCadenceStep($intensity.value, $distance.value, $cadence_range.value);}
+   ;
+
 time_step returns [TimeStep value]
    : time                                       {$value = new TimeStep($time.value);}
    ;
@@ -133,6 +147,14 @@ time_power_step returns [TimePowerStep value]
 time_power_intensity_step returns [TimePowerStep value]
    : time '@' power_range PIPE intensity           {$value = new TimePowerStep($intensity.value, $time.value, $power_range.value);}
    | time '@' power_zone PIPE intensity            {$value = new TimePowerStep($intensity.value, $time.value, $power_zone.value);}
+   ;
+
+time_cadence_step returns [TimeCadenceStep value]
+   : time '@' cadence_range                        {$value = new TimeCadenceStep($time.value, $cadence_range.value);}
+   ;
+
+time_cadence_intensity_step returns [TimeCadenceStep value]
+   : time '@' cadence_range PIPE intensity         {$value = new TimeCadenceStep($intensity.value, $time.value, $cadence_range.value);}
    ;
 
 open_step returns [OpenStep value]
@@ -175,6 +197,14 @@ open_power_intensity_step returns [OpenPowerStep value]
    | open '@' power_zone PIPE intensity            {$value = new OpenPowerStep($intensity.value, $power_zone.value);}
    ;
 
+open_cadence_step returns [OpenCadenceStep value]
+   : open '@' cadence_range                        {$value = new OpenCadenceStep($cadence_range.value);}
+   ;
+
+open_cadence_intensity_step returns [OpenCadenceStep value]
+   : open '@' cadence_range PIPE intensity         {$value = new OpenCadenceStep($intensity.value, $cadence_range.value);}
+   ;
+
 repeating_steps returns [RepeatingSteps value]
    : '('
      s=stepList                                 {$value = new RepeatingSteps($s.steps);}
@@ -197,12 +227,12 @@ pace returns [PaceLimit value]
    ;
    
 pace_range returns [Pace value]
-   : t1=time '-' t2=time '/' distance_unit      {$value = new PaceRange($t1.value, $t2.value, PaceUnit.perDistanceUnit($distance_unit.value));}
+   : t1=time HYPHEN t2=time '/' distance_unit   {$value = new PaceRange($t1.value, $t2.value, PaceUnit.perDistanceUnit($distance_unit.value));}
    | name                                       {$value = new PaceName($text);}
    ;
 
 hr_range returns [HeartRate value]
-   : h1=cardinal '-' h2=cardinal hr_unit        {$value = new HeartRateRange($h1.value, $h2.value, $hr_unit.value);}
+   : h1=cardinal HYPHEN h2=cardinal hr_unit     {$value = new HeartRateRange($h1.value, $h2.value, $hr_unit.value);}
    ;
 
 hr_unit returns [HeartRateUnit value]
@@ -228,7 +258,7 @@ hr_zone returns [HeartRateZone value]
    ;
 
 power_range returns [Power value]
-   : p1=cardinal '-' p2=cardinal power_unit     {$value = new PowerRange($p1.value, $p2.value, $power_unit.value);}
+   : p1=cardinal HYPHEN p2=cardinal power_unit  {$value = new PowerRange($p1.value, $p2.value, $power_unit.value);}
    ;
 
 power_unit returns [PowerUnit value]
@@ -243,6 +273,14 @@ power_zone returns [PowerZone value]
    | 'PZ5'                                      {$value = PowerZone.PZ5;}
    | 'PZ6'                                      {$value = PowerZone.PZ6;}
    | 'PZ7'                                      {$value = PowerZone.PZ7;}
+   ;
+
+cadence_range returns [Cadence value]
+   : p1=cardinal HYPHEN p2=cardinal cadence_unit   {$value = new CadenceRange($p1.value, $p2.value, $cadence_unit.value);}
+   ;
+
+cadence_unit returns [CadenceUnit value]
+   : 'rpm'                                      {$value = CadenceUnit.RPM;}
    ;
 
 time returns [Time value]
@@ -305,6 +343,10 @@ COLON
 
 PIPE
    : '|'
+   ;
+
+HYPHEN
+   : '-'
    ;
 
 WS

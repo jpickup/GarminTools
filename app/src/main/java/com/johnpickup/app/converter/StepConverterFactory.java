@@ -17,14 +17,17 @@ public class StepConverterFactory {
         register(new DistancePaceStepConverter(), DistancePaceStep.class);
         register(new DistanceHeartRateStepConverter(), DistanceHeartRateStep.class);
         register(new DistancePowerStepConverter(), DistancePowerStep.class);
+        register(new DistanceCadenceStepConverter(), DistanceCadenceStep.class);
         register(new TimeStepConverter(), TimeStep.class);
         register(new TimePaceStepConverter(), TimePaceStep.class);
         register(new TimeHeartRateStepConverter(), TimeHeartRateStep.class);
         register(new TimePowerStepConverter(), TimePowerStep.class);
+        register(new TimeCadenceStepConverter(), TimeCadenceStep.class);
         register(new OpenStepConverter(), OpenStep.class);
         register(new OpenPaceStepConverter(), OpenPaceStep.class);
         register(new OpenHeartRateStepConverter(), OpenHeartRateStep.class);
         register(new OpenPowerStepConverter(), OpenPowerStep.class);
+        register(new OpenCadenceStepConverter(), OpenCadenceStep.class);
         register(new RepeatingStepsConverter(), RepeatingSteps.class);
     }
 
