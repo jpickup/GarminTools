@@ -40,6 +40,7 @@ such as a pace or a heart rate. Steps are written as text, for example:
 | `400m@160-180bpm`   | 400 metres wth a heart rate between 160 and 180 beats per minute              |
 | `30:00@PZ4`         | 30 minutes at power zone 4                                                    |
 | '20km@300-400W`     | 20km at a power between 300 and 400 watts                                     |
+| `20:00@80-90rpm`    | 20 minutes at a cadence between 80 and 90 revolutions per minute              |
 
 ### Sequences of Steps
 Steps can also be strung together with a `+` character, repeated using `*n` and grouped using brackets, for example:
@@ -109,6 +110,16 @@ Examples:
 |-------------|---------------------------|
 | 300-400W    | between 300 and 400 watts |
 | PZ4         | Power zone 4              |
+
+### Cadence ranges
+These set a target range for cadence, expressed in revolutions per minute (rpm). During a workout the watch
+alerts you if your cadence is too high or too low.
+
+Examples:
+
+| Cadence range | Description                                    |
+|---------------|------------------------------------------------|
+| 80-90rpm      | between 80 and 90 revolutions per minute       |
 
 ## Excel workbook
 The app expects the input workbook to have specific named sheets and specific column headers within these. Any additional 
