@@ -6,7 +6,7 @@
 
     <groupId>com.johnpickup.garmin</groupId>
     <artifactId>GarminTools</artifactId>
-    <version>1.5</version>
+    <version>1.6</version>
     <packaging>pom</packaging>
     <name>GarminTools</name>
     <modules>
@@ -28,8 +28,8 @@
         <jaxb.api.version>2.3.1</jaxb.api.version>
         <jaxb.runtime.version>2.3.1</jaxb.runtime.version>
         <antlr4.version>4.7.1</antlr4.version>
-        <apache.poi.version>5.2.2</apache.poi.version>
-        <logback.version>1.5.13</logback.version>
+        <apache.poi.version>5.5.1</apache.poi.version>
+        <logback.version>1.6.3</logback.version>
         <maven.deploy.skip>true</maven.deploy.skip>
     </properties>
 
