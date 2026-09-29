@@ -2,28 +2,37 @@ package com.johnpickup.app.garmin.workout;
 
 import com.garmin.fit.Intensity;
 import com.garmin.fit.WktStepDuration;
-import com.garmin.fit.WktStepTarget;
 import com.garmin.fit.WorkoutStepMesg;
 import com.johnpickup.garmin.common.unit.Distance;
+import com.johnpickup.garmin.common.unit.NoTarget;
+import com.johnpickup.garmin.common.unit.Target;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
 /**
- * Simple workout that lasts a specific distance, no pace targets
+ * A workout step that lasts a specific distance, with an optional target
+ * (pace, heart rate, power or cadence).
  */
 public class DistanceWorkoutStep extends WorkoutStep {
     private final Distance distance;
+    private final Target target;
 
     public DistanceWorkoutStep(Intensity intensity, Distance distance) {
+        this(intensity, distance, NoTarget.INSTANCE);
+    }
+
+    public DistanceWorkoutStep(Intensity intensity, Distance distance, Target target) {
         super(intensity);
         this.distance = distance;
+        this.target = target == null ? NoTarget.INSTANCE : target;
     }
 
     @Override
     public String getName() {
-        return distance.toString();
+        String targetName = target.toString();
+        return targetName.isEmpty() ? distance.toString() : distance + " " + targetName;
     }
 
     @Override
@@ -32,9 +41,11 @@ public class DistanceWorkoutStep extends WorkoutStep {
         step.setIntensity(intensity);
         step.setDurationType(WktStepDuration.DISTANCE);
         step.setDurationDistance(distance.toGarminDistance());
-        step.setTargetType(WktStepTarget.OPEN);
+        step.setTargetType(WktStepTargetMapper.toWktStepTarget(target.getTargetType()));
+        step.setTargetValue(target.getTargetValue());
         step.setMessageIndex(generateWorkoutStepIndex());
-        step.setTargetValue(0L);
+        step.setCustomTargetValueLow(target.getGarminLow());
+        step.setCustomTargetValueHigh(target.getGarminHigh());
         step.setNotes(nameWithIntensity());
 
         return Collections.singletonList(step);
@@ -45,16 +56,15 @@ public class DistanceWorkoutStep extends WorkoutStep {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         DistanceWorkoutStep that = (DistanceWorkoutStep) o;
-        return Objects.equals(distance, that.distance);
+        return Objects.equals(distance, that.distance) && Objects.equals(target, that.target);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(distance);
+        return Objects.hash(distance, target);
     }
 
     protected boolean canEqual(final Object other) {
         return other instanceof DistanceWorkoutStep;
     }
-
 }

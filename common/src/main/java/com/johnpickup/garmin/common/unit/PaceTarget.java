@@ -6,7 +6,7 @@ import java.util.Objects;
  * Pace target - a minimum and maximum pace; doesn't really care about which is which (min/max pace vs min/max speed)
  * and so returns the appropriate one in the Garmin Low and High methods
  */
-public class PaceTarget {
+public class PaceTarget implements Target {
     private final String name;
     private final Pace maxPace;
     private final Pace minPace;
@@ -24,6 +24,16 @@ public class PaceTarget {
     @Override
     public String toString() {
         return Objects.requireNonNullElseGet(name, () -> minPace.toValueString() + "-" + maxPace.toString());
+    }
+
+    @Override
+    public TargetType getTargetType() {
+        return TargetType.PACE;
+    }
+
+    @Override
+    public Long getTargetValue() {
+        return 0L;
     }
 
     public Long getGarminLow() {

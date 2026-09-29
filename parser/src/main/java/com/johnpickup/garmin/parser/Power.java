@@ -1,4 +1,4 @@
 package com.johnpickup.garmin.parser;
 
-public interface Power {
+public interface Power extends Target {
 }
