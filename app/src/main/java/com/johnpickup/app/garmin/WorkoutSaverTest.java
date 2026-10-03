@@ -37,7 +37,7 @@ public class WorkoutSaverTest {
         Workout testDistanceWorkout = new Workout(Sport.RUNNING, null, Collections.singletonList(testDistance));
         saver.save(testDistanceWorkout, "testDist.fit");
 
-        WorkoutStep testPace = new DistancePaceWorkoutStep(Intensity.ACTIVE, new Distance(2, DistanceUnit.MILE), new PaceTarget(null, 5, 6, PaceUnit.MIN_PER_MILE));
+        WorkoutStep testPace = new DistanceWorkoutStep(Intensity.ACTIVE, new Distance(2, DistanceUnit.MILE), new PaceTarget(null, 5, 6, PaceUnit.MIN_PER_MILE));
         Workout testPaceWorkout = new Workout(Sport.RUNNING, null, Collections.singletonList(testPace));
         saver.save(testPaceWorkout, "testPace.fit");
 

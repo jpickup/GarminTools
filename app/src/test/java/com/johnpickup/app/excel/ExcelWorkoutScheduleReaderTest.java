@@ -36,32 +36,32 @@ public class ExcelWorkoutScheduleReaderTest {
         expected.getPaces().put("Easy", new PaceRange(new Time(9,0), new Time(10,30), PaceUnit.MIN_PER_MILE));
         expected.getPaces().put("Slow", new PaceRange(new Time(10,0), new Time(15,0), PaceUnit.MIN_PER_MILE));
 
-        Workout oneMileHr = new Workout(Collections.singletonList(new DistanceHeartRateStep(
+        Workout oneMileHr = new Workout(Collections.singletonList(new DistanceStep(
                 new Distance(1, DistanceUnit.MILE),
                 new HeartRateRange(140, 170, HeartRateUnit.BPM))));
         expected.getWorkouts().put("1mi@140-170bpm", oneMileHr);
 
-        Workout fiveMileSlow = new Workout(Collections.singletonList(new DistancePaceStep(new Distance(5, DistanceUnit.MILE), new PaceName("Slow"))));
+        Workout fiveMileSlow = new Workout(Collections.singletonList(new DistanceStep(new Distance(5, DistanceUnit.MILE), new PaceName("Slow"))));
         expected.getWorkouts().put("5mi Slow", fiveMileSlow);
 
-        Workout oneMileHrZone = new Workout(Collections.singletonList(new DistanceHeartRateStep(
+        Workout oneMileHrZone = new Workout(Collections.singletonList(new DistanceStep(
                 new Distance(1, DistanceUnit.MILE), HeartRateZone.Z3)));
         expected.getWorkouts().put("1mi HRZ3", oneMileHrZone);
 
         List<Step> intervalSteps = new ArrayList<>();
         intervalSteps.add(new DistanceStep(new Distance(1, DistanceUnit.MILE)));
-        RepeatingSteps repeatingSteps = new RepeatingSteps(new DistancePaceStep(new Distance(1, DistanceUnit.MILE), new PaceName("Fast")));
-        repeatingSteps.addStep(new DistancePaceStep(new Distance(400, DistanceUnit.METRE), new PaceName("Easy")));
+        RepeatingSteps repeatingSteps = new RepeatingSteps(new DistanceStep(new Distance(1, DistanceUnit.MILE), new PaceName("Fast")));
+        repeatingSteps.addStep(new DistanceStep(new Distance(400, DistanceUnit.METRE), new PaceName("Easy")));
         repeatingSteps.setRepetitions(4);
         intervalSteps.add(repeatingSteps);
         intervalSteps.add(new DistanceStep(new Distance(1, DistanceUnit.MILE)));
         Workout intervalWorkout = new Workout(intervalSteps);
         expected.getWorkouts().put("4x1mi Interval", intervalWorkout);
-        Workout sixMileSteady = new Workout(Collections.singletonList(new DistancePaceStep(new Distance(6, DistanceUnit.MILE), new PaceName("Steady"))));
+        Workout sixMileSteady = new Workout(Collections.singletonList(new DistanceStep(new Distance(6, DistanceUnit.MILE), new PaceName("Steady"))));
         expected.getWorkouts().put("6mi Steady", sixMileSteady);
 
         Workout halfHour = new Workout(Collections.singletonList(new TimeStep(new Time(30,0))));
-        Workout fiveMinFast = new Workout(Collections.singletonList(new TimePaceStep(new Time(5,0), new PaceName("Fast"))));
+        Workout fiveMinFast = new Workout(Collections.singletonList(new TimeStep(new Time(5,0), new PaceName("Fast"))));
         expected.getWorkouts().put("30min",halfHour);
         expected.getWorkouts().put("5min Fast", fiveMinFast);
 
@@ -70,10 +70,10 @@ public class ExcelWorkoutScheduleReaderTest {
         expected.getSchedule().add(new ScheduledWorkout(LocalDate.of(2017,1,30), sixMileSteady,"6mi Steady", "6.0mi@Steady"));
         List<Step> onePlusFourSteps = new ArrayList<>();
         onePlusFourSteps.add(new DistanceStep(new Distance(1, DistanceUnit.MILE)));
-        onePlusFourSteps.add(new DistancePaceStep(new Distance(4, DistanceUnit.MILE), new PaceName("Brisk")));
+        onePlusFourSteps.add(new DistanceStep(new Distance(4, DistanceUnit.MILE), new PaceName("Brisk")));
         Workout onePlusFourMileBrisk = new Workout(onePlusFourSteps);
         expected.getSchedule().add(new ScheduledWorkout(LocalDate.of(2017,2,1), onePlusFourMileBrisk, "1mi+4mi@Brisk", "1.0mi + 4.0mi@Brisk"));
-        Workout threeMileExplicit = new Workout(Collections.singletonList(new DistancePaceStep(new Distance(3, DistanceUnit.MILE), new PaceRange(new Time(8,0), new Time(10,0), PaceUnit.MIN_PER_MILE))));
+        Workout threeMileExplicit = new Workout(Collections.singletonList(new DistanceStep(new Distance(3, DistanceUnit.MILE), new PaceRange(new Time(8,0), new Time(10,0), PaceUnit.MIN_PER_MILE))));
         expected.getSchedule().add(new ScheduledWorkout(LocalDate.of(2017,2,11), threeMileExplicit, "3mi@8:00-10:00/mi", "3.0mi@10:00-8:00/mi"));
 
 

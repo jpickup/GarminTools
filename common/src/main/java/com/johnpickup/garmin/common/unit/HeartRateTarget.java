@@ -3,7 +3,12 @@ package com.johnpickup.garmin.common.unit;
 /**
  * Heart Rate target - either a zone or a custom minimum and maximum HR (in subclasses)
  */
-public abstract class HeartRateTarget{
+public abstract class HeartRateTarget implements Target {
+
+    @Override
+    public TargetType getTargetType() {
+        return TargetType.HEART_RATE;
+    }
 
     public abstract Long getGarminLow();
 
