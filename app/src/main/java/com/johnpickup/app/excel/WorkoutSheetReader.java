@@ -3,6 +3,7 @@ package com.johnpickup.app.excel;
 import com.johnpickup.app.parser.WorkoutTextParser;
 import com.johnpickup.garmin.parser.Sport;
 import com.johnpickup.garmin.parser.Workout;
+import org.apache.logging.log4j.util.Strings;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
@@ -38,14 +39,21 @@ public class WorkoutSheetReader {
             }
             else {
                 String name = readName(row);
-                log.debug("Read name {}", name);
-                Workout workout = readWorkout(row);
-                log.debug("Read workout {}", workout);
-                if (name != null && workout != null) {
-                    Sport sport = readSport(row);
-                    workout.setSport(sport);
-                    workout.setPoolLength(readPoolLength(row));
-                    result.put(name, workout);
+                try {
+                    log.debug("Read name {}", name);
+                    Workout workout = readWorkout(row);
+                    log.debug("Read workout {}", workout);
+                    if (name != null && workout != null) {
+                        Sport sport = readSport(row);
+                        workout.setSport(sport);
+                        workout.setPoolLength(readPoolLength(row));
+                        result.put(name, workout);
+                    }
+                } catch (Exception ex) {
+                    throw new RuntimeException(String.format("Error reading workout row %d %s: %s",
+                            row.getRowNum(),
+                            Strings.isNotBlank(name) ? "(" + name + ")" : "",
+                            ex.getMessage()));
                 }
             }
         }

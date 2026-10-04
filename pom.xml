@@ -6,7 +6,7 @@
 
     <groupId>com.johnpickup.garmin</groupId>
     <artifactId>GarminTools</artifactId>
-    <version>1.6</version>
+    <version>1.6.1</version>
     <packaging>pom</packaging>
     <name>GarminTools</name>
     <modules>
